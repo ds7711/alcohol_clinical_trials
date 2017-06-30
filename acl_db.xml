@@ -1,0 +1,3899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<search_results count="61">
+  <query>college | Alcoholic OR alcoholism OR alcohol | United States</query>
+<!-- Additional study fields may be added over time -->
+  <study rank="1">
+    <nct_id>NCT02355470</nct_id>
+    <title>College Health Center-based Alcohol and Sexual Violence Intervention</title>
+    <recruitment open="N">Active, not recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Sexual Assault</condition>
+      <condition>Alcohol Consumption</condition>
+      <condition>Intimate Partner Violence</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">GIFTSS</intervention>
+      <intervention type="Behavioral">Brief alcohol use intervention</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Pittsburgh</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>24 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>2295</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: No masking</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>14110392</other_id>
+    </other_ids>
+    <first_received>January 30, 2015</first_received>
+    <start_date>August 2015</start_date>
+    <completion_date>May 2018</completion_date>
+    <last_updated>April 27, 2017</last_updated>
+    <last_verified>April 2017</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>GIFTSS</acronym>
+    <primary_completion_date>May 2018</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Change in recognition of alcohol-related sexual violence and sexual risk from baseline to follow up</outcome_measure>
+      <outcome_measure>Change in self-efficacy to use harm reduction strategies</outcome_measure>
+      <outcome_measure>Change in knowledge of sexual violence related services from baseline to follow up</outcome_measure>
+      <outcome_measure>Change in self-efficacy to use sexual violence related services</outcome_measure>
+      <outcome_measure>Change in intentions to intervene from baseline to follow up</outcome_measure>
+      <outcome_measure>Change in positive bystander behaviors from baseline to follow up</outcome_measure>
+      <outcome_measure>Change in recognition of sexual coercion from baseline to follow up</outcome_measure>
+      <outcome_measure>Change in self-efficacy to obtain sexual consent</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Pennsylvania</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02355470</url>
+  </study>
+  <study rank="2">
+    <nct_id>NCT02507115</nct_id>
+    <title>Text Messaging as a Novel Alcohol Intervention for Community College Students</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Use</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">TMAP</intervention>
+      <intervention type="Behavioral">Mojo Texts</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>The Miriam Hospital</lead_sponsor>
+      <collaborator>I Live Inspired LLC</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>28 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>65</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1R21AA021014-01A1</other_id>
+    </other_ids>
+    <first_received>July 22, 2015</first_received>
+    <start_date>July 2012</start_date>
+    <completion_date>June 2015</completion_date>
+    <last_updated>July 22, 2015</last_updated>
+    <last_verified>July 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>TMAP</acronym>
+    <primary_completion_date>July 2014</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Number of heavy drinking episodes at six weeks</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Rhode Island</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02507115</url>
+  </study>
+  <study rank="3">
+    <nct_id>NCT01057979</nct_id>
+    <title>Motivational Interventions for Lifestyle and Exercise in College Students</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">MET + CM for Exercise</intervention>
+      <intervention type="Behavioral">MET + Exercise Contracting</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Connecticut</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>26 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+    </phases>
+    <enrollment>72</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>H09-043</other_id>
+      <other_id>R21AA017717-01A1</other_id>
+    </other_ids>
+    <first_received>January 26, 2010</first_received>
+    <start_date>January 2010</start_date>
+    <completion_date>October 2011</completion_date>
+    <last_updated>May 8, 2012</last_updated>
+    <last_verified>May 2012</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>MILE</acronym>
+    <primary_completion_date>October 2011</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Exercise engagement</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Connecticut</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01057979</url>
+  </study>
+  <study rank="4">
+    <nct_id>NCT01382979</nct_id>
+    <title>Evaluation of AlcoholEdu for College</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Misuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">AlcoholEdu for College</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Pacific Institute for Research and Evaluation</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>9571</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Investigator)</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R01AA016584</other_id>
+    </other_ids>
+    <first_received>June 24, 2011</first_received>
+    <start_date>July 2007</start_date>
+    <completion_date>April 2011</completion_date>
+    <last_updated>June 24, 2011</last_updated>
+    <last_verified>June 2011</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>December 2010</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Binge drinking</outcome_measure>
+      <outcome_measure>Alcohol-related problems</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>California</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01382979</url>
+  </study>
+  <study rank="5">
+    <nct_id>NCT02829970</nct_id>
+    <title>Helping College Students With ADHD Lead Healthier Lifestyles</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Attention Deficit Hyperactivity Disorder</condition>
+      <condition>Alcohol-Related Disorders</condition>
+      <condition>Substance-Related Disorders</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">SUCCEEDS Program</intervention>
+      <intervention type="Behavioral">Living a Healthy College Lifestyle</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Maryland</lead_sponsor>
+      <collaborator>University of Memphis</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>24 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>80</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Participant)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1R34AA022133-01A1</other_id>
+    </other_ids>
+    <first_received>July 7, 2016</first_received>
+    <start_date>September 2015</start_date>
+    <completion_date>September 2018</completion_date>
+    <last_updated>July 11, 2016</last_updated>
+    <last_verified>July 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>June 2018</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Brief Young Adult Alcohol Consequences Questionnaire 30 Day</outcome_measure>
+      <outcome_measure>Barkley Functional Impairment Scale-Self Report</outcome_measure>
+      <outcome_measure>Alcohol Use Disorders Identification Test</outcome_measure>
+      <outcome_measure>Beck Depression Inventory-II</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Maryland</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02829970</url>
+  </study>
+  <study rank="6">
+    <nct_id>NCT00183131</nct_id>
+    <title>The iHealth Study in College Students</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+      <condition>Alcohol Dependence</condition>
+      <condition>Unhealthy Alcohol Use</condition>
+      <condition>Risky Alcohol Consumption Amounts</condition>
+      <condition>Hazardous Alcohol Use</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Brief Personalized Feedback</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Boston Medical Center</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+      <collaborator>Boston University</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>4300</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAASAI013759</other_id>
+      <other_id>P60AA013759</other_id>
+      <other_id>NIH P60 AA013759</other_id>
+    </other_ids>
+    <first_received>September 9, 2005</first_received>
+    <start_date>October 2004</start_date>
+    <completion_date>November 2004</completion_date>
+    <last_updated>May 5, 2010</last_updated>
+    <last_verified>December 2007</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <outcome_measures>
+      <outcome_measure>Change in the number of times a subject exceeded per occasion limits</outcome_measure>
+      <outcome_measure>Drinking risky amounts</outcome_measure>
+      <outcome_measure>Heavy episodic drinking</outcome_measure>
+      <outcome_measure>Drinks per day</outcome_measure>
+      <outcome_measure>Hazardous drinking</outcome_measure>
+      <outcome_measure>Abstinence</outcome_measure>
+      <outcome_measure>Readiness to change alcohol use</outcome_measure>
+      <outcome_measure>Help-seeking</outcome_measure>
+      <outcome_measure>Alcohol consequences</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Massachusetts</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00183131</url>
+  </study>
+  <study rank="7">
+    <nct_id>NCT01757353</nct_id>
+    <title>Detroit Area Study of College Student Lifestyles</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Excessive Alcohol Consumption</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">BASICS motivational interview</intervention>
+      <intervention type="Behavioral">BASICS plus normative enhancement motivational interview</intervention>
+      <intervention type="Behavioral">Self-directed: Information only</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Wayne State University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>23 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>181</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Participant)</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R00AA017877</other_id>
+    </other_ids>
+    <first_received>December 18, 2012</first_received>
+    <start_date>December 2012</start_date>
+    <completion_date>July 2014</completion_date>
+    <last_updated>February 26, 2015</last_updated>
+    <last_verified>February 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>July 2014</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Past 30-day typical weekly alcohol consumption, as well as peak alcohol drinking episodes. From this information, past 30-day typical and peak blood alcohol content can be calculated.</outcome_measure>
+      <outcome_measure>Young adult alcohol consequences questionnaire</outcome_measure>
+      <outcome_measure>Hypothetical role-based decisions-to-drink questionnaire</outcome_measure>
+      <outcome_measure>Subjective college student role investment questionnaire</outcome_measure>
+      <outcome_measure>Trait self-control questionnaire</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Michigan</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01757353</url>
+  </study>
+  <study rank="8">
+    <nct_id>NCT00374153</nct_id>
+    <title>Southern Methodist Alcohol Research Trial (SMART)</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Feedback</intervention>
+      <intervention type="Behavioral">Motivational Interview with Feedback</intervention>
+      <intervention type="Behavioral">Motivational Interview</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>The University of Texas Health Science Center, Houston</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>363</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>HSC-SPH-06-0310</other_id>
+      <other_id>NIAAA, 1 R01 AA016005-01</other_id>
+    </other_ids>
+    <first_received>September 6, 2006</first_received>
+    <start_date>September 2006</start_date>
+    <completion_date>January 2009</completion_date>
+    <last_updated>March 9, 2010</last_updated>
+    <last_verified>March 2010</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>June 2008</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Drinks per week</outcome_measure>
+      <outcome_measure>Peak BAC</outcome_measure>
+      <outcome_measure>Alcohol Related Consequences (RAPI)</outcome_measure>
+      <outcome_measure>Interpersonal Violence (CADRI)</outcome_measure>
+      <outcome_measure>Readiness to Change (RTCQ)</outcome_measure>
+      <outcome_measure>Protective Behaviors (PBQ)</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Texas</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00374153</url>
+  </study>
+  <study rank="9">
+    <nct_id>NCT00872118</nct_id>
+    <title>Brief Intervention for Socially Anxious College Drinkers</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+      <condition>Alcohol Negative Consequences</condition>
+      <condition>Social Anxiety</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Brief Intervention for Socially Anxious Drinkers (BISAD)</intervention>
+      <intervention type="Behavioral">Enhanced Alcohol Skills Building and Education Program</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Cincinnati</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>26 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+    </phases>
+    <enrollment>53</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAA-Tran-AA014014</other_id>
+      <other_id>R21AA017291</other_id>
+      <other_id>NIH Grant R21AA014014</other_id>
+    </other_ids>
+    <first_received>March 27, 2009</first_received>
+    <start_date>April 2004</start_date>
+    <completion_date>March 2008</completion_date>
+    <last_updated>September 15, 2010</last_updated>
+    <last_verified>September 2010</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>BISAD</acronym>
+    <primary_completion_date>April 2007</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>heavy drinking days</outcome_measure>
+      <outcome_measure>total alcohol consumption</outcome_measure>
+      <outcome_measure>drinking-related negative consequences</outcome_measure>
+      <outcome_measure>social (interactional) anxiety</outcome_measure>
+      <outcome_measure>alcohol expectancies of social evaluative situations</outcome_measure>
+      <outcome_measure>drink refusal self-efficacy in social situations</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Ohio</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00872118</url>
+  </study>
+  <study rank="10">
+    <nct_id>NCT02390908</nct_id>
+    <title>Improving HIV and Alcohol-Related Outcomes Among HIV+ Persons in Clinic Settings</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>HIV</condition>
+      <condition>Alcohol Use</condition>
+      <condition>Medication Adherence</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">PLUS intervention</intervention>
+      <intervention type="Behavioral">Enhanced treatment as usual (eTAU) wait-list condition</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Hunter College of City University of New York</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>240</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R01AA022302</other_id>
+    </other_ids>
+    <first_received>March 6, 2015</first_received>
+    <start_date>August 2013</start_date>
+    <completion_date>April 2018</completion_date>
+    <last_updated>October 3, 2016</last_updated>
+    <last_verified>October 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>PLUS</acronym>
+    <primary_completion_date>April 2017</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Viral load</outcome_measure>
+      <outcome_measure>CD4 count</outcome_measure>
+      <outcome_measure>Art Adherence (Percent of doses missed)</outcome_measure>
+      <outcome_measure>Alcohol Use (as measured by the AUDIT)</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>New York</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02390908</url>
+  </study>
+  <study rank="11">
+    <nct_id>NCT00247182</nct_id>
+    <title>Stepped Care for Mandated College Students</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Use</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Step 1: Minimal Intervention</intervention>
+      <intervention type="Behavioral">Step 2: Brief Motivational Intervention</intervention>
+      <intervention type="Behavioral">Alcohol Assessment</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+    </phases>
+    <enrollment>598</enrollment>
+    <funded_bys>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAABOR015518</other_id>
+      <other_id>NIH Grant R01 AA015518-01</other_id>
+    </other_ids>
+    <first_received>October 28, 2005</first_received>
+    <start_date>October 2006</start_date>
+    <completion_date>June 2011</completion_date>
+    <last_updated>September 20, 2016</last_updated>
+    <last_verified>September 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>April 2010</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Alcohol consumption</outcome_measure>
+      <outcome_measure>Alcohol-related consequences</outcome_measure>
+      <outcome_measure>Predictors of response to treatment</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Rhode Island</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00247182</url>
+  </study>
+  <study rank="12">
+    <nct_id>NCT02952872</nct_id>
+    <title>Brief Alcohol E-Interventions Study</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Drinking in College</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Brief Tablet-based Intervention to Address Heavy Alcohol Use</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Wayne State University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>34 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>352</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Single Blind (Participant)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R21AA023660</other_id>
+    </other_ids>
+    <first_received>October 31, 2016</first_received>
+    <start_date>December 2016</start_date>
+    <completion_date>March 2018</completion_date>
+    <last_updated>January 9, 2017</last_updated>
+    <last_verified>January 2017</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>January 2018</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Mean drinks per day</outcome_measure>
+      <outcome_measure>Number of heavy drinking days</outcome_measure>
+      <outcome_measure>Report of Alcohol Related Consequences</outcome_measure>
+      <outcome_measure>Intention to reduce alcohol use</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Michigan</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02952872</url>
+  </study>
+  <study rank="13">
+    <nct_id>NCT01632319</nct_id>
+    <title>Therapy for Undergraduate College Students Who Binge Drink and Are Depressed</title>
+    <recruitment open="N">Unknown status</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Depression</condition>
+      <condition>Alcohol Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Combined Motivational Interviewing and Cognitive Behavioral Therapy</intervention>
+      <intervention type="Behavioral">Cognitive Behavioral Therapy</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Massachusetts General Hospital</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>24 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>100</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Participant)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>2008P001357</other_id>
+    </other_ids>
+    <first_received>June 28, 2012</first_received>
+    <start_date>May 2012</start_date>
+    <completion_date>July 2015</completion_date>
+    <last_updated>June 29, 2012</last_updated>
+    <last_verified>June 2012</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>TREADS</acronym>
+    <primary_completion_date>July 2015</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Daily Drinking Questionnaire</outcome_measure>
+      <outcome_measure>Beck Depression Inventory</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Massachusetts</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01632319</url>
+  </study>
+  <study rank="14">
+    <nct_id>NCT01204229</nct_id>
+    <title>Motivational and Cognitive Intervention for College Drinkers</title>
+    <recruitment open="N">Unknown status</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+      <condition>Anxiety</condition>
+      <condition>Depression</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Motivational and Cognitive Intervention for Drinkers (MCID)</intervention>
+      <intervention type="Behavioral">Brief Motivational Intervention (BMI)</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Cincinnati</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+    </phases>
+    <enrollment>100</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R21AA1AA017291A1</other_id>
+    </other_ids>
+    <first_received>September 15, 2010</first_received>
+    <start_date>May 2010</start_date>
+    <last_updated>April 21, 2011</last_updated>
+    <last_verified>April 2011</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>MCID</acronym>
+    <primary_completion_date>May 2012</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Alcohol Consumption and Drinking-Related Negative Consequences</outcome_measure>
+      <outcome_measure>Anxiety</outcome_measure>
+      <outcome_measure>Depression</outcome_measure>
+      <outcome_measure>Cost efficacy data</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Ohio</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01204229</url>
+  </study>
+  <study rank="15">
+    <nct_id>NCT02834949</nct_id>
+    <title>Improving Brief Alcohol Interventions With a Behavioral Economic Supplement</title>
+    <recruitment open="N">Active, not recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Brief Motivational Intervention (BMI)</intervention>
+      <intervention type="Behavioral">Substance-Free Activity Session (SFAS)</intervention>
+      <intervention type="Behavioral">Relaxation Session</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Memphis</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>27 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>393</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>5R01AA020829-03</other_id>
+    </other_ids>
+    <first_received>July 8, 2016</first_received>
+    <start_date>July 2012</start_date>
+    <completion_date>July 2017</completion_date>
+    <last_updated>July 12, 2016</last_updated>
+    <last_verified>July 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>July 2017</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Change in Alcohol Use from baseline to follow-up (4 timepoints)</outcome_measure>
+      <outcome_measure>Change in Alcohol-related Problems from baseline to follow-up (4 timepoints)</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Missouri</state>
+      <state>Tennessee</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02834949</url>
+  </study>
+  <study rank="16">
+    <nct_id>NCT03124446</nct_id>
+    <title>Mindfulness-Based College: Pilot RCT</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Diet Habit</condition>
+      <condition>Physical Activity</condition>
+      <condition>Sleep</condition>
+      <condition>Loneliness</condition>
+      <condition>Emotion Regulation</condition>
+      <condition>Alcohol Drinking</condition>
+      <condition>Adiposity</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Mindfulness-Based College</intervention>
+      <intervention type="Behavioral">Health education wait list control</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Brown University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>28 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>60</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Investigator, Outcomes Assessor</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1608001570</other_id>
+    </other_ids>
+    <first_received>April 14, 2017</first_received>
+    <start_date>September 1, 2016</start_date>
+    <completion_date>May 31, 2018</completion_date>
+    <last_updated>April 20, 2017</last_updated>
+    <last_verified>April 2017</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>MB-College</acronym>
+    <primary_completion_date>May 31, 2018</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Change in College Health Summary Score</outcome_measure>
+      <outcome_measure>Change in Self Awareness</outcome_measure>
+      <outcome_measure>Change in Attention Control - Sustained Attention to Response Task</outcome_measure>
+      <outcome_measure>Change in Attention Control - Mindful Attention Awareness Scale</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Rhode Island</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT03124446</url>
+  </study>
+  <study rank="17">
+    <nct_id>NCT00890149</nct_id>
+    <title>Ondansetron for the Treatment of Heavy Drinking Among Emerging Adults</title>
+    <recruitment open="N">Active, not recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+      <condition>Alcoholism</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Ondansetron + BASICS Plus</intervention>
+      <intervention type="Drug">Placebo + BASICS Plus</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Bankole A. Johnson</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+      <collaborator>University of Maryland</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>300</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Care Provider, Investigator, Outcomes Assessor)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>13610</other_id>
+      <other_id>2R01AA010522-13</other_id>
+    </other_ids>
+    <first_received>April 27, 2009</first_received>
+    <start_date>September 2015</start_date>
+    <completion_date>December 2015</completion_date>
+    <last_updated>December 3, 2015</last_updated>
+    <last_verified>December 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>December 2015</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Ondansetron + BASICS Plus shall be more effective at reducing severe or binge drinking among emerging adults. The treatment effect of ondansetron on reduction in severe or binge drinking shall be greatest in LL individuals.</outcome_measure>
+      <outcome_measure>Ondansetron adds to the therapeutic benefit of BASICS Plus, even in those with lower readiness for change</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Maryland</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00890149</url>
+  </study>
+  <study rank="18">
+    <nct_id>NCT02435381</nct_id>
+    <title>Carisbamate as a Potential Treatment for Alcohol Dependence</title>
+    <recruitment open="N">Active, not recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Dependence</condition>
+      <condition>Alcohol Abuse</condition>
+      <condition>Substance Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Carisbamate</intervention>
+      <intervention type="Drug">Placebo</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Baylor College of Medicine</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>55 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>26</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Care Provider, Investigator, Outcomes Assessor)</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>H-30334</other_id>
+    </other_ids>
+    <first_received>September 7, 2013</first_received>
+    <start_date>February 2013</start_date>
+    <completion_date>December 2016</completion_date>
+    <last_updated>September 27, 2016</last_updated>
+    <last_verified>September 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>December 2016</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Effects of carisbamate on the positive subjective effects of alcohol</outcome_measure>
+      <outcome_measure>physiologic effects of carisbamate</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Texas</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02435381</url>
+  </study>
+  <study rank="19">
+    <nct_id>NCT00852033</nct_id>
+    <title>Alcohol Early Intervention for Freshmen</title>
+    <recruitment open="N">Unknown status</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Brief Motivational Intervention (BMI)</intervention>
+      <intervention type="Behavioral">Parent Based Intervention plus booster</intervention>
+      <intervention type="Behavioral">Combined brief motivational intervention and parent based intervention plus boosters for both interventions</intervention>
+      <intervention type="Other">Assessment only</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>17 Years</min_age>
+    <max_age>20 Years</max_age>
+    <age_groups>
+      <age_group>Child</age_group>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>1014</enrollment>
+    <funded_bys>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAA-Wood-AA013919</other_id>
+      <other_id>NIH Grant 5R01AA013919-04</other_id>
+    </other_ids>
+    <first_received>February 24, 2009</first_received>
+    <start_date>January 2004</start_date>
+    <completion_date>July 2009</completion_date>
+    <last_updated>February 24, 2009</last_updated>
+    <last_verified>February 2009</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>Transitions</acronym>
+    <primary_completion_date>June 2007</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Daily Drinking Questionnaire</outcome_measure>
+      <outcome_measure>Young Adult Problems Screening Test &quot;YAAPST&quot;</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Rhode Island</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00852033</url>
+  </study>
+  <study rank="20">
+    <nct_id>NCT00289965</nct_id>
+    <title>Substance Use Risk Education (SURE) Project</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+      <condition>Alcohol Drinking</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Counselor-administered Brief Motivational Intervention (BMI)</intervention>
+      <intervention type="Behavioral">Alcohol 101 Plus (interactive CD-ROM)</intervention>
+      <intervention type="Behavioral">AlcoholEdu (Internet-based tutorial)</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Syracuse University</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>703</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAACAR012518-06</other_id>
+      <other_id>R01AA012518</other_id>
+      <other_id>NIH Grant 2R01AA012518-06</other_id>
+    </other_ids>
+    <first_received>February 8, 2006</first_received>
+    <start_date>September 2005</start_date>
+    <completion_date>June 2009</completion_date>
+    <last_updated>July 25, 2011</last_updated>
+    <last_verified>July 2011</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>June 2009</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>mean number of drinks per week</outcome_measure>
+      <outcome_measure>drinks per drinking day</outcome_measure>
+      <outcome_measure>frequency of heavy drinking episodes</outcome_measure>
+      <outcome_measure>peak blood alcohol concentration (BAC)</outcome_measure>
+      <outcome_measure>Rutgers Alcohol Problems Index (RAPI) score</outcome_measure>
+      <outcome_measure>readiness to change</outcome_measure>
+      <outcome_measure>decisional balance</outcome_measure>
+      <outcome_measure>client satisfaction</outcome_measure>
+      <outcome_measure>norms perception</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>New York</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00289965</url>
+  </study>
+  <study rank="21">
+    <nct_id>NCT01694082</nct_id>
+    <title>Brief Web-Based Alcohol Reduction Intervention for Undergraduates</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Use</condition>
+      <condition>Heavy Drinking</condition>
+      <condition>Negative Consequences of Alcohol Use</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">THRIVE</intervention>
+      <intervention type="Behavioral">Brief brochure and assessment control</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Yale University</lead_sponsor>
+      <collaborator>Alcoholic Beverage Medical Research Foundation</collaborator>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>24 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>207</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Participant)</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1207010596</other_id>
+      <other_id>K01AA019694</other_id>
+    </other_ids>
+    <first_received>September 20, 2012</first_received>
+    <start_date>October 2012</start_date>
+    <completion_date>June 2014</completion_date>
+    <last_updated>June 12, 2014</last_updated>
+    <last_verified>June 2014</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>November 2013</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Frequency of alcohol use</outcome_measure>
+      <outcome_measure>Protective behavioral strategy use</outcome_measure>
+      <outcome_measure>Overall Weekly Alcohol Consumption</outcome_measure>
+      <outcome_measure>Frequency of heavy drinking days</outcome_measure>
+      <outcome_measure>Overall weekly alcohol consumption</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Connecticut</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01694082</url>
+  </study>
+  <study rank="22">
+    <nct_id>NCT01168726</nct_id>
+    <title>Protective Behavioral Strategies and Brief Alcohol Interventions</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Protective Behavioral Strategies</intervention>
+      <intervention type="Behavioral">Personalized Normative Feedback</intervention>
+      <intervention type="Behavioral">Alcohol Education</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Missouri-Columbia</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>24 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>365</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Participant)</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>Protective Behaviors</other_id>
+      <other_id>1R21AA016779-01A2</other_id>
+    </other_ids>
+    <first_received>July 20, 2010</first_received>
+    <start_date>January 2010</start_date>
+    <completion_date>September 2010</completion_date>
+    <last_updated>October 5, 2016</last_updated>
+    <last_verified>October 2016</last_verified>
+    <firstreceived_results_date>May 26, 2015</firstreceived_results_date>
+    <primary_completion_date>September 2010</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Drinks Per Week</outcome_measure>
+      <outcome_measure>Rutgers Alcohol Problems Index (RAPI)</outcome_measure>
+      <outcome_measure>Drinking Norms Rating Form</outcome_measure>
+      <outcome_measure>Protective Behavioral Strategies Scale.</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Missouri</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01168726</url>
+  </study>
+  <study rank="23">
+    <nct_id>NCT01126151</nct_id>
+    <title>Parent Interventions to Prevent Student Drinking</title>
+    <recruitment open="N">Unknown status</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">parent handbook</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Penn State University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>1200</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R01AA015737</other_id>
+    </other_ids>
+    <first_received>May 17, 2010</first_received>
+    <start_date>July 2006</start_date>
+    <completion_date>July 2011</completion_date>
+    <last_updated>May 18, 2010</last_updated>
+    <last_verified>April 2010</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>ACT</acronym>
+    <primary_completion_date>October 2010</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>heavy episodic drinking</outcome_measure>
+      <outcome_measure>drinking related consequences</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Pennsylvania</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01126151</url>
+  </study>
+  <study rank="24">
+    <nct_id>NCT00607620</nct_id>
+    <title>Disseminating Organizational SBI Services at Trauma Centers</title>
+    <recruitment open="N">Unknown status</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+      <condition>Alcohol Dependence</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Brief Intervention</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</lead_sponsor>
+      <collaborator>University of Washington</collaborator>
+      <collaborator>Harborview Injury Prevention and Research Center</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>1100</enrollment>
+    <funded_bys>
+      <funded_by>NIH</funded_by>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Outcomes Assessor)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAA-ZATZICK_AA016102</other_id>
+      <other_id>1R01AA016102-01</other_id>
+    </other_ids>
+    <first_received>January 29, 2008</first_received>
+    <start_date>September 2008</start_date>
+    <completion_date>July 2012</completion_date>
+    <last_updated>November 20, 2009</last_updated>
+    <last_verified>November 2009</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>DO-SBIS</acronym>
+    <primary_completion_date>July 2012</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Whether the training provided by the study impacts the ability of providers to give effective care.</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Washington</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00607620</url>
+  </study>
+  <study rank="25">
+    <nct_id>NCT00818636</nct_id>
+    <title>Expressive Writing for Co-Occurring Depression and Alcohol Misuse</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Depression</condition>
+      <condition>Alcohol, Drinking</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Expressive writing (in addition to group therapy as usual).</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Baylor College of Medicine</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>89</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1R03AA016819-01A1</other_id>
+    </other_ids>
+    <first_received>January 6, 2009</first_received>
+    <start_date>August 2008</start_date>
+    <completion_date>December 2011</completion_date>
+    <last_updated>January 26, 2015</last_updated>
+    <last_verified>January 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>March 2010</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Beck Depression Inventory, Second Edition</outcome_measure>
+      <outcome_measure>Number of Alcoholic Drinks Consumed</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Texas</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00818636</url>
+  </study>
+  <study rank="26">
+    <nct_id>NCT00865774</nct_id>
+    <title>The Teachable Moment: Screening and Brief Intervention for Admitted Trauma Patients</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcoholism</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Quantity Frequency Model</intervention>
+      <intervention type="Behavioral">Targets Subjective Drunkenness</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Wake Forest University Health Sciences</lead_sponsor>
+      <collaborator>Robert Wood Johnson Foundation</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>333</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Participant</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>IRB00006734</other_id>
+    </other_ids>
+    <first_received>March 17, 2009</first_received>
+    <start_date>January 2009</start_date>
+    <completion_date>December 2011</completion_date>
+    <last_updated>March 10, 2017</last_updated>
+    <last_verified>June 2012</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>TM</acronym>
+    <primary_completion_date>June 2011</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Trauma recidivism after discharge as measured by a review of computerized ED records,NC Trauma database,the Forsyth County EMS registry,NC EMS registry and self-reports at a 6-month telephone follow-up of alcohol-related injuries and changes in alcohol</outcome_measure>
+      <outcome_measure>Patient satisfaction ratings of the BI,the response to the BI as rated by the interviewer,reported citations for driving under the influence(to be obtained from the NC State Department of Motor Vehicles) and 3 surveys of trauma service staff</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>North Carolina</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00865774</url>
+  </study>
+  <study rank="27">
+    <nct_id>NCT00262223</nct_id>
+    <title>Combined Treatment for Alcohol-Dependent Individuals With PTSD</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Stress Disorders, Post-Traumatic</condition>
+      <condition>Alcohol Abuse</condition>
+      <condition>Substance-Related Disorders</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Seeking Safety</intervention>
+      <intervention type="Drug">Sertraline</intervention>
+      <intervention type="Drug">Pill placebo</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>New York State Psychiatric Institute</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>65 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>69</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Care Provider)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>#6266R-NIAAAHIE014341</other_id>
+      <other_id>R01AA014341-06</other_id>
+    </other_ids>
+    <first_received>December 5, 2005</first_received>
+    <start_date>May 2006</start_date>
+    <completion_date>July 2013</completion_date>
+    <last_updated>September 3, 2014</last_updated>
+    <last_verified>November 2013</last_verified>
+    <firstreceived_results_date>August 14, 2014</firstreceived_results_date>
+    <primary_completion_date>July 2013</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Heavy Drinking Days</outcome_measure>
+      <outcome_measure>PTSD Symptom Severity / Clinician Administered PTSD Scale</outcome_measure>
+      <outcome_measure>Alcohol Subtypes Based on Pre-morbid Risk Factors</outcome_measure>
+      <outcome_measure>Trajectory and Trends of Changes in Substance Use and PTSD Symptoms</outcome_measure>
+      <outcome_measure>Retention Rates in Alcohol Treatment</outcome_measure>
+      <outcome_measure>Global Psychiatric Severity</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>New York</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00262223</url>
+  </study>
+  <study rank="28">
+    <nct_id>NCT01585168</nct_id>
+    <title>Functional Neuroimaging of Alcoholism Vulnerability (PIT)</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Healthy</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Memantine</intervention>
+      <intervention type="Drug">Placebo</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Yale University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>35 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>11</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Crossover Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Care Provider)</study_design>
+      <study_design>Primary Purpose: Basic Science</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1106008650</other_id>
+    </other_ids>
+    <first_received>April 23, 2012</first_received>
+    <start_date>December 2011</start_date>
+    <completion_date>May 2016</completion_date>
+    <last_updated>June 20, 2016</last_updated>
+    <last_verified>June 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>CTNA</acronym>
+    <primary_completion_date>May 2016</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Monetary Incentive Delay (MID) Task</outcome_measure>
+      <outcome_measure>Impulsivity</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Connecticut</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01585168</url>
+  </study>
+  <study rank="29">
+    <nct_id>NCT02141880</nct_id>
+    <title>The Tailgate Study: A Pilot Study Measuring the Impact of Acute Alcohol Intake on Intrahepatic Lipid</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Obesity</condition>
+    </conditions>
+    <interventions/>
+    <sponsors>
+      <lead_sponsor>University of Missouri-Columbia</lead_sponsor>
+    </sponsors>
+    <gender>Male</gender>
+    <min_age>21 Years</min_age>
+    <max_age>40 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>50</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Observational</study_types>
+    <study_designs>
+      <study_design>Observational Model: Cohort</study_design>
+      <study_design>Time Perspective: Prospective</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1211233</other_id>
+    </other_ids>
+    <first_received>May 14, 2014</first_received>
+    <start_date>June 2014</start_date>
+    <completion_date>June 2017</completion_date>
+    <last_updated>November 17, 2016</last_updated>
+    <last_verified>November 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>June 2017</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Liver triglycerides</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Missouri</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02141880</url>
+  </study>
+  <study rank="30">
+    <nct_id>NCT02897804</nct_id>
+    <title>Engineering an Online STI Prevention Program</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Sexual Behavior</condition>
+      <condition>Alcohol Consumption</condition>
+      <condition>Sexually Transmitted Diseases</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Knowledge alone</intervention>
+      <intervention type="Behavioral">Self-efficacy alone</intervention>
+      <intervention type="Behavioral">Perceived benefits alone</intervention>
+      <intervention type="Behavioral">Perceived benefits and self-efficacy</intervention>
+      <intervention type="Behavioral">Injunctive norms</intervention>
+      <intervention type="Behavioral">Injunctive norms and self-efficacy</intervention>
+      <intervention type="Behavioral">Injunctive norms and perceived benefits</intervention>
+      <intervention type="Behavioral">Injunctive norms, perceived benefits, and self-efficacy</intervention>
+      <intervention type="Behavioral">Descriptive norms alone</intervention>
+      <intervention type="Behavioral">Descriptive norms and self-efficacy</intervention>
+      <intervention type="Behavioral">Descriptive norms and perceived benefits</intervention>
+      <intervention type="Behavioral">Descriptive norms,perceived benefits,self-efficacy</intervention>
+      <intervention type="Behavioral">Descriptive and injunctive norms</intervention>
+      <intervention type="Behavioral">Descriptive norms, injunctive norms,self-efficacy</intervention>
+      <intervention type="Behavioral">Descriptive and injunctive norms, benefits</intervention>
+      <intervention type="Behavioral">Descriptive and injunctive norms, benefits,efficacy</intervention>
+      <intervention type="Behavioral">Expectancies alone</intervention>
+      <intervention type="Behavioral">Expectancies and self-efficacy</intervention>
+      <intervention type="Behavioral">Expectancies and Perceived Benefits</intervention>
+      <intervention type="Behavioral">Expectancies, perceived benefits, self-efficacy</intervention>
+      <intervention type="Behavioral">Expectancies and injunctive norms</intervention>
+      <intervention type="Behavioral">Expectancies, injunctive norms, and self-efficacy</intervention>
+      <intervention type="Behavioral">Expectancies, injunctive norms, benefits</intervention>
+      <intervention type="Behavioral">Expectancies, injunctive norms, benefits, efficacy</intervention>
+      <intervention type="Behavioral">Expectancies and descriptive norms</intervention>
+      <intervention type="Behavioral">Expectancies, descriptive norms, and self-efficacy</intervention>
+      <intervention type="Behavioral">Expectancies, descriptive norms, and benefits</intervention>
+      <intervention type="Behavioral">Expectancies,descriptive norms, benefits, efficacy</intervention>
+      <intervention type="Behavioral">Expectancies, descriptive and injunctive norms</intervention>
+      <intervention type="Behavioral">Expectancies, descr&amp; injun norms, efficacy</intervention>
+      <intervention type="Behavioral">Expectancies, desc &amp; injun norms, benefits</intervention>
+      <intervention type="Behavioral">Expectancies,desc &amp; injun norms,benefits,efficacy</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Penn State University</lead_sponsor>
+      <collaborator>University of North Carolina, Greensboro</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>30 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>13773</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: No masking</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R01AA022931</other_id>
+    </other_ids>
+    <first_received>August 22, 2016</first_received>
+    <start_date>August 2016</start_date>
+    <completion_date>June 2017</completion_date>
+    <last_updated>March 23, 2017</last_updated>
+    <last_verified>March 2017</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>November 2016</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Descriptive norms about the intersection of alcohol and sex collected via an online questionnaire.</outcome_measure>
+      <outcome_measure>Injunctive norms about the intersection of alcohol and sex collected via an online questionnaire.</outcome_measure>
+      <outcome_measure>Expectancies about the intersection of alcohol use and sex collected via an online questionnaire.</outcome_measure>
+      <outcome_measure>Perceived benefits about using protective behavioral strategies collected via an online questionnaire.</outcome_measure>
+      <outcome_measure>Self-efficacy to use protective behavioral strategies collected via an online questionnaire.</outcome_measure>
+      <outcome_measure>Binge drinking behavior collected via an online questionnaire</outcome_measure>
+      <outcome_measure>Unprotected sex behavior at most recent sex collected via an online questionnaire</outcome_measure>
+      <outcome_measure>Penetrative sex at most recent hookup collected via an online questionnaire</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>California</state>
+      <state>Illinois</state>
+      <state>North Carolina</state>
+      <state>North Dakota</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02897804</url>
+  </study>
+  <study rank="31">
+    <nct_id>NCT00615862</nct_id>
+    <title>Relationship Between Alcohol Use Disorders and Cortisol Levels in Patients With Sepsis</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Sepsis</condition>
+      <condition>Alcoholism</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Other">Observational study; no interventions</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Virginia Commonwealth University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>40</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Observational</study_types>
+    <study_designs>
+      <study_design>Observational Model: Cohort</study_design>
+      <study_design>Time Perspective: Prospective</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>HM11399</other_id>
+    </other_ids>
+    <first_received>February 1, 2008</first_received>
+    <start_date>March 2008</start_date>
+    <completion_date>May 2009</completion_date>
+    <last_updated>February 21, 2012</last_updated>
+    <last_verified>June 2009</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>May 2009</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>The primary outcome of this study evaluating patients with sepsis is to ascertain differences in cortisol levels between patients with alcohol use disorders and those without alcohol use disorders.</outcome_measure>
+      <outcome_measure>A secondary outcome in this study evaluating patients with sepsis is to determine differences in immune function between patients with alcohol use disorders and those without alcohol use disorders.</outcome_measure>
+      <outcome_measure>Another secondary aim of this study evaluating patients with sepsis is to determined if higher cortisol levels are associated with increased risk of developing delirium.</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Virginia</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00615862</url>
+  </study>
+  <study rank="32">
+    <nct_id>NCT00595478</nct_id>
+    <title>Family Based Contingency Management for Adolescent Alcohol Abuse</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Motivational Enhancement Therapy (MET)/CBT+CM</intervention>
+      <intervention type="Behavioral">Motivational Enhancement Therapy (MET)/CBT</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Dartmouth-Hitchcock Medical Center</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>12 Years</min_age>
+    <max_age>18 Years</max_age>
+    <age_groups>
+      <age_group>Child</age_group>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>120</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>85846</other_id>
+      <other_id>1R01AA016917-01</other_id>
+      <other_id>1R01AA016917-02</other_id>
+      <other_id>1R01AA016917-03</other_id>
+    </other_ids>
+    <first_received>January 7, 2008</first_received>
+    <start_date>August 2007</start_date>
+    <completion_date>May 2014</completion_date>
+    <last_updated>August 18, 2014</last_updated>
+    <last_verified>August 2014</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>May 2014</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Alcohol abstinence</outcome_measure>
+      <outcome_measure>Days of alcohol use</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>New Hampshire</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00595478</url>
+  </study>
+  <study rank="33">
+    <nct_id>NCT02963818</nct_id>
+    <title>Smartphone Technology: Young Adult Drinking</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Use</condition>
+      <condition>Alcohol Drinking</condition>
+      <condition>Drinking Behavior</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Other">Smartphone breathalyzer device/app use</intervention>
+      <intervention type="Other">BAC estimator app use</intervention>
+      <intervention type="Other">Text messaging procedure</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Florida</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>21 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>99</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Basic Science</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>IRB201600614</other_id>
+      <other_id>R21AA023368</other_id>
+    </other_ids>
+    <first_received>November 8, 2016</first_received>
+    <start_date>November 2016</start_date>
+    <completion_date>February 2018</completion_date>
+    <last_updated>December 16, 2016</last_updated>
+    <last_verified>December 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>STEADY</acronym>
+    <primary_completion_date>February 2018</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Quantity of alcohol consumption</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Florida</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02963818</url>
+  </study>
+  <study rank="34">
+    <nct_id>NCT01126164</nct_id>
+    <title>Parent Intervention to Reduce Binge Drinking</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Parent Handbook and Peer Basics</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Penn State University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>800</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R01AA012529</other_id>
+    </other_ids>
+    <first_received>May 17, 2010</first_received>
+    <start_date>September 2005</start_date>
+    <completion_date>July 2009</completion_date>
+    <last_updated>May 18, 2010</last_updated>
+    <last_verified>April 2010</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>GOALS</acronym>
+    <primary_completion_date>July 2009</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>heavy episodic drinking</outcome_measure>
+      <outcome_measure>heavy episodic peak drinking</outcome_measure>
+      <outcome_measure>drinking consequences</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Pennsylvania</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01126164</url>
+  </study>
+  <study rank="35">
+    <nct_id>NCT00515294</nct_id>
+    <title>Acute and Residual Effects of Caffeinated Beer</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Neurobehavioral Manifestations</condition>
+      <condition>Drug Related Sleep Disturbance</condition>
+      <condition>Alcohol Intoxication</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Caffeinated Alcoholic Beer</intervention>
+      <intervention type="Other">Non-Caffeinated Alcoholic Beer</intervention>
+      <intervention type="Drug">Caffeinated Non-Alcoholic Beer</intervention>
+      <intervention type="Other">Non-Caffeinated, Non-Alcoholic Beer</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Boston University</lead_sponsor>
+      <collaborator>Brown University</collaborator>
+      <collaborator>University of Michigan</collaborator>
+      <collaborator>Centers for Disease Control and Prevention</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>21 Years</min_age>
+    <max_age>30 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>154</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>U.S. Fed</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Participant, Care Provider, Investigator</study_design>
+      <study_design>Primary Purpose: Other</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>H-26002</other_id>
+      <other_id>R49CE000946</other_id>
+    </other_ids>
+    <first_received>August 9, 2007</first_received>
+    <start_date>October 2006</start_date>
+    <completion_date>October 2009</completion_date>
+    <last_updated>May 26, 2017</last_updated>
+    <last_verified>May 2017</last_verified>
+    <firstreceived_results_date>March 6, 2017</firstreceived_results_date>
+    <primary_completion_date>October 2009</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Lane Position Deviation</outcome_measure>
+      <outcome_measure>Psycho-motor Vigilance Test (PVT)</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Massachusetts</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00515294</url>
+  </study>
+  <study rank="36">
+    <nct_id>NCT00568958</nct_id>
+    <title>Naltrexone for Heavy Drinking in Young Adults</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+      <condition>Alcoholic Intoxication</condition>
+      <condition>Alcoholism</condition>
+      <condition>Alcohol-induced Disorders</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">BASICS counseling</intervention>
+      <intervention type="Drug">naltrexone</intervention>
+      <intervention type="Drug">placebo naltrexone</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Yale University</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 4</phase>
+    </phases>
+    <enrollment>140</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Care Provider, Investigator)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAA_OMALLEY-AA016621</other_id>
+      <other_id>R01AA016621</other_id>
+      <other_id>NIH grant AA016621-01</other_id>
+    </other_ids>
+    <first_received>December 4, 2007</first_received>
+    <start_date>February 2008</start_date>
+    <completion_date>December 2012</completion_date>
+    <last_updated>July 22, 2014</last_updated>
+    <last_verified>July 2014</last_verified>
+    <firstreceived_results_date>March 4, 2014</firstreceived_results_date>
+    <primary_completion_date>December 2012</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Frequency of Heavy Episodic Drinking</outcome_measure>
+      <outcome_measure>Percent Days Abstinent From Drinking</outcome_measure>
+      <outcome_measure>Number of Drinks Per Drinking Day</outcome_measure>
+      <outcome_measure>Percentage of Drinking to an Estimated Blood Alcohol Concentration (BAC) of .08 or Higher</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Connecticut</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00568958</url>
+  </study>
+  <study rank="37">
+    <nct_id>NCT01620177</nct_id>
+    <title>Effects of Inhaled Cannabis on Driving Performance</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Alcohol Drinking</condition>
+      <condition>Cannabis</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Alcohol(oral) and placebo</intervention>
+      <intervention type="Drug">Cannabis(THC)(Inhaled) and Placebo</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Iowa</lead_sponsor>
+      <collaborator>NHTSA</collaborator>
+      <collaborator>National Institute on Drug Abuse (NIDA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>21 Years</min_age>
+    <max_age>55 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>98</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Crossover Assignment</study_design>
+      <study_design>Masking: Participant, Investigator, Outcomes Assessor</study_design>
+      <study_design>Primary Purpose: Basic Science</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>201109850</other_id>
+    </other_ids>
+    <first_received>June 4, 2012</first_received>
+    <start_date>July 2012</start_date>
+    <completion_date>March 2014</completion_date>
+    <last_updated>May 31, 2017</last_updated>
+    <last_verified>May 2017</last_verified>
+    <firstreceived_results_date>April 17, 2017</firstreceived_results_date>
+    <primary_completion_date>March 2014</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Driving Performance</outcome_measure>
+      <outcome_measure>THC Concentration in Plasma Sample</outcome_measure>
+      <outcome_measure>THC Concentration Levels in Whole Blood</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Iowa</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01620177</url>
+  </study>
+  <study rank="38">
+    <nct_id>NCT00330174</nct_id>
+    <title>Acamprosate in Alcoholics With Comorbid Anxiety or Depression</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Alcohol Dependence</condition>
+      <condition>Major Depression</condition>
+      <condition>Social Anxiety Disorder</condition>
+      <condition>Generalized Anxiety Disorder</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Acamprosate</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Medical University of South Carolina</lead_sponsor>
+      <collaborator>Mclean Hospital</collaborator>
+      <collaborator>Columbia University</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>60 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 4</phase>
+    </phases>
+    <enrollment>90</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Investigator)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>CMP-MD-04</other_id>
+    </other_ids>
+    <first_received>May 25, 2006</first_received>
+    <start_date>April 2006</start_date>
+    <completion_date>September 2010</completion_date>
+    <last_updated>April 10, 2015</last_updated>
+    <last_verified>April 2015</last_verified>
+    <firstreceived_results_date>May 29, 2013</firstreceived_results_date>
+    <primary_completion_date>September 2010</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Percent Days Drinking</outcome_measure>
+      <outcome_measure>Montgomery-Asberg Depression Rating Scale (MADRS)</outcome_measure>
+      <outcome_measure>Liebowitz Social Anxiety Scale</outcome_measure>
+      <outcome_measure>Hospital Anxiety and Depression Scale</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Massachusetts</state>
+      <state>New York</state>
+      <state>South Carolina</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00330174</url>
+  </study>
+  <study rank="39">
+    <nct_id>NCT02841735</nct_id>
+    <title>Young Adult Naturalistic Alcohol Study (YANAS) Using Smartphone Technology in a Simulated Laboratory Environment</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Use</condition>
+      <condition>Alcohol Drinking</condition>
+      <condition>Drinking Behavior</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Device">Smartphone breathalyzer device/app use</intervention>
+      <intervention type="Device">BAC estimator app use</intervention>
+      <intervention type="Device">Text messaging procedure</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Florida</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>21 Years</min_age>
+    <max_age>25 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>129</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Observational</study_types>
+    <study_designs>
+      <study_design>Observational Model: Cohort</study_design>
+      <study_design>Time Perspective: Prospective</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>IRB201500990</other_id>
+      <other_id>ID00004419</other_id>
+    </other_ids>
+    <first_received>July 20, 2016</first_received>
+    <start_date>July 2016</start_date>
+    <completion_date>December 2017</completion_date>
+    <last_updated>December 12, 2016</last_updated>
+    <last_verified>December 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>December 2017</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Quantity of alcohol consumption</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Florida</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02841735</url>
+  </study>
+  <study rank="40">
+    <nct_id>NCT01812187</nct_id>
+    <title>Designing a Mobile App for Veterans With Substance Use Problems</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Substance Abuse Problem</condition>
+      <condition>Alcohol Abuse</condition>
+      <condition>Alcohol Dependence</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">SHIFT Cognitive Behavioral Therapy</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Michael Debakey Veterans Affairs Medical Center</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>64 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>20</enrollment>
+    <funded_bys>
+      <funded_by>U.S. Fed</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>H-30374</other_id>
+    </other_ids>
+    <first_received>March 4, 2013</first_received>
+    <start_date>April 2015</start_date>
+    <completion_date>May 2017</completion_date>
+    <last_updated>September 21, 2015</last_updated>
+    <last_verified>September 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>May 2017</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Change</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Texas</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01812187</url>
+  </study>
+  <study rank="41">
+    <nct_id>NCT00579267</nct_id>
+    <title>Reliability and Validity of the MINI International Neuropsychiatric Interview for Children and Adolescents (MINI-KID)</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Major Depression</condition>
+      <condition>Mania</condition>
+      <condition>Anxiety Disorders</condition>
+      <condition>Psychotic Disorder</condition>
+      <condition>Alcohol Dependence</condition>
+      <condition>Drug Dependence</condition>
+      <condition>Eating Disorders</condition>
+      <condition>Suicidality</condition>
+      <condition>Dysthymia</condition>
+      <condition>ADHD</condition>
+      <condition>Tourettes Disorder</condition>
+      <condition>Conduct Disorder</condition>
+      <condition>Oppositional Defiant Disorder</condition>
+      <condition>Pervasive Developmental Disorder</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Other">MINI-KID</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of South Florida</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>6 Years</min_age>
+    <max_age>17 Years</max_age>
+    <age_groups>
+      <age_group>Child</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>230</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Observational</study_types>
+    <study_designs>
+      <study_design>Observational Model: Case-Only</study_design>
+      <study_design>Time Perspective: Cross-Sectional</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>MINI-KID Validation Study</other_id>
+    </other_ids>
+    <first_received>December 18, 2007</first_received>
+    <start_date>February 2004</start_date>
+    <completion_date>January 2008</completion_date>
+    <last_updated>February 13, 2009</last_updated>
+    <last_verified>December 2007</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>January 2008</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Kappa scores between MINI Kid and K-SADS</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Florida</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00579267</url>
+  </study>
+  <study rank="42">
+    <nct_id>NCT00871039</nct_id>
+    <title>Pilot Study Evaluating Stress Response and Immune Function in Mechanically Ventilated Patients With Alcohol Use Disorders Treated With Propofol or Midazolam</title>
+    <recruitment open="N">Withdrawn</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcoholism</condition>
+      <condition>Respiration, Artificial</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Propofol</intervention>
+      <intervention type="Drug">Midazolam</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Virginia Commonwealth University</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 4</phase>
+    </phases>
+    <enrollment>0</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Outcomes Assessor)</study_design>
+      <study_design>Primary Purpose: Supportive Care</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>VCU IRB HM12035</other_id>
+    </other_ids>
+    <first_received>March 26, 2009</first_received>
+    <start_date>March 2009</start_date>
+    <completion_date>March 2009</completion_date>
+    <last_updated>February 29, 2016</last_updated>
+    <last_verified>February 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>March 2009</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Stress response and immune function.</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Virginia</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00871039</url>
+  </study>
+  <study rank="43">
+    <nct_id>NCT02527720</nct_id>
+    <title>Changing Impulsivity With Mindful Breathing Therapy to Reduce Problem Drinking</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Problem Drinking</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Mindfulness Therapy</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Maryland</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>30 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>10</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>R34AA022213-01A1</other_id>
+    </other_ids>
+    <first_received>August 12, 2015</first_received>
+    <start_date>June 2015</start_date>
+    <completion_date>August 2016</completion_date>
+    <last_updated>February 23, 2016</last_updated>
+    <last_verified>February 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>BBMT</acronym>
+    <primary_completion_date>August 2016</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Changes in substance use utilizing the Timeline Follow Back from the baseline to 3 months</outcome_measure>
+      <outcome_measure>Audit</outcome_measure>
+      <outcome_measure>Readiness to Change</outcome_measure>
+      <outcome_measure>Customary Drinking and Drug Use Record</outcome_measure>
+      <outcome_measure>Barratt Impulsiveness Scale</outcome_measure>
+      <outcome_measure>UPPS Impulsive Behavioral Scale</outcome_measure>
+      <outcome_measure>Delay Discounting of Hypothetical Money Gains</outcome_measure>
+      <outcome_measure>Stop-Signal Task (SST)</outcome_measure>
+      <outcome_measure>Spielberger State-Trait Anxiety Inventory (STAI):</outcome_measure>
+      <outcome_measure>The Center for Epidemiological Studies Depression Scale (CES-D)</outcome_measure>
+      <outcome_measure>Perceived Stress Scale</outcome_measure>
+      <outcome_measure>Difficulties in Emotion Regulation Scale (DERS; Gratz &amp; Roemer, 2004)</outcome_measure>
+      <outcome_measure>Five-Facet Mindfulness Questionnaire</outcome_measure>
+      <outcome_measure>Perceived Quality of Life Measure</outcome_measure>
+      <outcome_measure>Therapist adherence and competence</outcome_measure>
+      <outcome_measure>The Program Evaluation Form</outcome_measure>
+      <outcome_measure>Working Alliance Inventory (WAI)</outcome_measure>
+      <outcome_measure>RFB or MM Feedback and Quality Assessment</outcome_measure>
+      <outcome_measure>Treatment Progress/Completion</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Maryland</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02527720</url>
+  </study>
+  <study rank="44">
+    <nct_id>NCT02598518</nct_id>
+    <title>Integrating Combined Therapies for Persons With Co-occurring Disorders</title>
+    <recruitment open="N">Enrolling by invitation</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Use Disorder</condition>
+      <condition>Mental Health Disorder</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Integrating Combined Therapies</intervention>
+      <intervention type="Behavioral">Standard Care</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Dartmouth-Hitchcock Medical Center</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>76</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1R21AA023001-01A1</other_id>
+    </other_ids>
+    <first_received>October 27, 2015</first_received>
+    <start_date>July 2015</start_date>
+    <completion_date>March 2017</completion_date>
+    <last_updated>November 4, 2015</last_updated>
+    <last_verified>November 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>ICT</acronym>
+    <primary_completion_date>March 2017</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Decrease from baseline in alcohol use (90-day Timeline Follow Back (TLFB) at 4-months and at 7-months</outcome_measure>
+      <outcome_measure>Decrease from baseline in alcohol use severity (ASI; alcohol severity composite) at 4-months and at 7-months</outcome_measure>
+      <outcome_measure>Decrease from baseline in alcohol use severity (Short Inventory of Problems (SIP)) at 4-months and at 7-months</outcome_measure>
+      <outcome_measure>Decrease from baseline in psychiatric symptom severity (ASI; Psychiactric Severity Composite) at 4-months and at 7-months</outcome_measure>
+      <outcome_measure>Decrease in psychiatric symptom severity (Brief Symptom Inventory (BSI)) at 4-months and 7-months</outcome_measure>
+      <outcome_measure>Decrease from baseline in drug use (90-day TLFB) at 4-months and at 7-months</outcome_measure>
+      <outcome_measure>Decrease from baseline in positive toxicology screen (urine drug screen) at 4-months and at 7-months</outcome_measure>
+      <outcome_measure>Decrease from baseline in drug use severity (ASI; Drug Severity Composite) at 4-months and 7-months</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Vermont</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02598518</url>
+  </study>
+  <study rank="45">
+    <nct_id>NCT00219336</nct_id>
+    <title>A Media Based Motivational Intervention to Prevent Alcohol Exposed Pregnancies (AEPs)</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Consumption</condition>
+      <condition>Fetal Alcohol Syndrome Disorders</condition>
+      <condition>Students</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Self-guided Motivational Intervention</intervention>
+      <intervention type="Behavioral">Informational Only</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Nova Southeastern University</lead_sponsor>
+      <collaborator>Centers for Disease Control and Prevention</collaborator>
+    </sponsors>
+    <gender>Female</gender>
+    <min_age>18 Years</min_age>
+    <max_age>44 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>354</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>U.S. Fed</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>U50/CCU300860</other_id>
+    </other_ids>
+    <first_received>September 14, 2005</first_received>
+    <start_date>November 2005</start_date>
+    <completion_date>March 2009</completion_date>
+    <last_updated>September 29, 2016</last_updated>
+    <last_verified>September 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>July 2008</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>AEP reduced risk through reduced drinking and effective contraception, or both</outcome_measure>
+      <outcome_measure>AEP reduced risk through reduced drinking only</outcome_measure>
+      <outcome_measure>AEP reduced risk through effective contraception only</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Florida</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00219336</url>
+  </study>
+  <study rank="46">
+    <nct_id>NCT00127699</nct_id>
+    <title>Triple Dye Plus Alcohol Versus Triple Dye Alone for Newborn Umbilical Cord Care</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Umbilical Cord</condition>
+      <condition>Infection</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Procedure">Alcohol swab of umbilical cord</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Penn State University</lead_sponsor>
+      <collaborator>Children's Miracle Network</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <age_groups>
+      <age_group>Child</age_group>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 1</phase>
+    </phases>
+    <enrollment>400</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>21353EP</other_id>
+    </other_ids>
+    <first_received>August 5, 2005</first_received>
+    <start_date>August 2005</start_date>
+    <completion_date>August 2007</completion_date>
+    <last_updated>November 30, 2007</last_updated>
+    <last_verified>November 2007</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <outcome_measures>
+      <outcome_measure>Determine which of two common methods of caring for newborn umbilical cords is superior, triple dye followed by application of rubbing alcohol or triple dye alone</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Pennsylvania</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00127699</url>
+  </study>
+  <study rank="47">
+    <nct_id>NCT00107562</nct_id>
+    <title>Adolescent Safer Sex Social Network Intervention</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Sexual Behavior</condition>
+      <condition>Alcohol Drinking</condition>
+      <condition>Marijuana Smoking</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Adolescent Safer Sex Social Network Intervention</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of North Carolina, Chapel Hill</lead_sponsor>
+      <collaborator>National Institute on Drug Abuse (NIDA)</collaborator>
+      <collaborator>National Institute of Mental Health (NIMH)</collaborator>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>16 Years</min_age>
+    <max_age>19 Years</max_age>
+    <age_groups>
+      <age_group>Child</age_group>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>200</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Non-Randomized</study_design>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: No masking</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>ATN 032</other_id>
+    </other_ids>
+    <first_received>April 5, 2005</first_received>
+    <start_date>February 2005</start_date>
+    <completion_date>March 2006</completion_date>
+    <last_updated>February 27, 2017</last_updated>
+    <last_verified>February 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>March 2006</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Test the feasibility, acceptability and preliminary effectiveness intervention</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Florida</state>
+      <state>Massachusetts</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00107562</url>
+  </study>
+  <study rank="48">
+    <nct_id>NCT02274688</nct_id>
+    <title>A Comparative Effectiveness Trial of Optimal Patient-Centered Care</title>
+    <recruitment open="N">Active, not recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Post Traumatic Concerns</condition>
+      <condition>Post Traumatic Stress Disorder</condition>
+      <condition>Depression and Suicide Ideation</condition>
+      <condition>Alcohol and Drug Use</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Stepped Care Management</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of Washington</lead_sponsor>
+      <collaborator>National Institute of Mental Health (NIMH)</collaborator>
+      <collaborator>Patient-Centered Outcomes Research Institute</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>14 Years</min_age>
+    <age_groups>
+      <age_group>Child</age_group>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>120</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Outcomes Assessor)</study_design>
+      <study_design>Primary Purpose: Health Services Research</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>IH-1304-6319</other_id>
+      <other_id>K24MH086814-01A1</other_id>
+    </other_ids>
+    <first_received>December 17, 2013</first_received>
+    <start_date>March 2014</start_date>
+    <completion_date>September 2016</completion_date>
+    <last_updated>May 18, 2016</last_updated>
+    <last_verified>May 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>TSOS 5</acronym>
+    <primary_completion_date>September 2016</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Change in Post Traumatic Concerns Over the Course of the Six Months After Injury</outcome_measure>
+      <outcome_measure>Change in Post traumatic Stress Disorder (PTSD) Symptoms Over the Course of the Six Months After Injury</outcome_measure>
+      <outcome_measure>Change in Depression Symptoms Over the Course of the Six Months After Injury</outcome_measure>
+      <outcome_measure>Alcohol Use Problems</outcome_measure>
+      <outcome_measure>Functional Status</outcome_measure>
+      <outcome_measure>Suicide Ideation</outcome_measure>
+      <outcome_measure>Gun Violence and Weapon Safety</outcome_measure>
+      <outcome_measure>Health Service Utilization</outcome_measure>
+      <outcome_measure>Drug Use Problems</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Washington</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02274688</url>
+  </study>
+  <study rank="49">
+    <nct_id>NCT00290290</nct_id>
+    <title>Efficacy Study of Antiseptic Preoperative Scrubs in Prevention of Postoperative Infections</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Postoperative Wound Infection</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">chlorhexidine-alcohol</intervention>
+      <intervention type="Drug">Povidone-Iodine</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Baylor College of Medicine</lead_sponsor>
+      <collaborator>Michael Debakey Veterans Affairs Medical Center</collaborator>
+      <collaborator>Medical College of Wisconsin</collaborator>
+      <collaborator>VA Office of Research and Development</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 3</phase>
+    </phases>
+    <enrollment>849</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>U.S. Fed</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Outcomes Assessor)</study_design>
+      <study_design>Primary Purpose: Prevention</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>H-14542</other_id>
+    </other_ids>
+    <first_received>February 9, 2006</first_received>
+    <start_date>September 2003</start_date>
+    <completion_date>May 2008</completion_date>
+    <last_updated>September 10, 2014</last_updated>
+    <last_verified>September 2014</last_verified>
+    <firstreceived_results_date>November 15, 2012</firstreceived_results_date>
+    <primary_completion_date>May 2008</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>The Primary Objective of This Trial is to Compare the Impact of Disinfecting the Skin With Chloraprep vs. Betadine on the Rates of Infection of Clean-contaminated Surgical Wounds.</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Massachusetts</state>
+      <state>North Carolina</state>
+      <state>Texas</state>
+      <state>Wisconsin</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00290290</url>
+  </study>
+  <study rank="50">
+    <nct_id>NCT02075918</nct_id>
+    <title>Integrated Approaches for Identifying Molecular Targets in Alcoholic Hepatitis</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcoholic Hepatitis</condition>
+    </conditions>
+    <interventions/>
+    <sponsors>
+      <lead_sponsor>University of North Carolina, Chapel Hill</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+      <collaborator>University of Wisconsin, Madison</collaborator>
+      <collaborator>King's College London</collaborator>
+      <collaborator>Veterans Medical Research Foundation</collaborator>
+      <collaborator>Universidad Autonoma de Nuevo Leon</collaborator>
+      <collaborator>Hospital Vall d'Hebron</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>70 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>700</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Observational</study_types>
+    <study_designs>
+      <study_design>Observational Model: Case-Only</study_design>
+      <study_design>Time Perspective: Prospective</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>12-2016</other_id>
+      <other_id>1U01AA021908-01</other_id>
+    </other_ids>
+    <first_received>February 27, 2014</first_received>
+    <start_date>May 2014</start_date>
+    <completion_date>May 2018</completion_date>
+    <last_updated>September 12, 2016</last_updated>
+    <last_verified>September 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <acronym>InTeam</acronym>
+    <primary_completion_date>May 2018</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Diagnosis and Severity of Alcoholic Hepatitis</outcome_measure>
+      <outcome_measure>Major Liver Complications</outcome_measure>
+      <outcome_measure>Death/Transplantation</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>North Carolina</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02075918</url>
+  </study>
+  <study rank="51">
+    <nct_id>NCT00130923</nct_id>
+    <title>Risperidone Long-acting Versus Oral Risperidone in Patients With Schizophrenia and Alcohol Use Disorder</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Schizophrenia</condition>
+      <condition>Psychotic Disorders</condition>
+      <condition>Substance Abuse</condition>
+      <condition>Alcohol Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Risperidone Long Acting</intervention>
+      <intervention type="Drug">oral risperidone</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Dartmouth-Hitchcock Medical Center</lead_sponsor>
+      <collaborator>Janssen, LP</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>65 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 4</phase>
+    </phases>
+    <enrollment>95</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>Industry</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>17359</other_id>
+      <other_id>RIS-EMR-4032</other_id>
+    </other_ids>
+    <first_received>August 15, 2005</first_received>
+    <start_date>September 2005</start_date>
+    <completion_date>July 2010</completion_date>
+    <last_updated>August 3, 2015</last_updated>
+    <last_verified>August 2015</last_verified>
+    <firstreceived_results_date>July 23, 2012</firstreceived_results_date>
+    <primary_completion_date>June 2009</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Mean Heavy Drinking Days Per Week</outcome_measure>
+      <outcome_measure>Other Substance Use as Assessed by the Timeline Followback Scale</outcome_measure>
+      <outcome_measure>Clinical Symptoms, Global Functioning, Cognition, and Extrapyramidal System Effects</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Florida</state>
+      <state>Missouri</state>
+      <state>New Hampshire</state>
+      <state>South Carolina</state>
+      <state>Vermont</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00130923</url>
+  </study>
+  <study rank="52">
+    <nct_id>NCT01690026</nct_id>
+    <title>Facilitating Adolescent Self-Change for Alcohol Problems</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Test the BI for Adolescents With Drinking Experience in 3 Cities at 6 Schools.</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Motivation interviewing based brief intervention</intervention>
+      <intervention type="Behavioral">Standard Intervention</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>University of California, San Diego</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>14 Years</min_age>
+    <max_age>19 Years</max_age>
+    <age_groups>
+      <age_group>Child</age_group>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 3</phase>
+    </phases>
+    <enrollment>9400</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Factorial Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Outcomes Assessor)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>Project Options</other_id>
+    </other_ids>
+    <first_received>September 12, 2012</first_received>
+    <start_date>October 2012</start_date>
+    <completion_date>September 2017</completion_date>
+    <last_updated>May 27, 2015</last_updated>
+    <last_verified>May 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>September 2016</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Alcohol use and problems</outcome_measure>
+      <outcome_measure>Cognitive mediators</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Florida</state>
+      <state>Minnesota</state>
+      <state>Oregon</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01690026</url>
+  </study>
+  <study rank="53">
+    <nct_id>NCT01365247</nct_id>
+    <title>Concurrent Treatment for Substance Dependent Individuals With Post-Traumatic Stress Disorder (PTSD)</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Stress Disorders, Post-Traumatic</condition>
+      <condition>Substance-Related Disorders</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Concurrent Treatment of PTSD and Substance Use Disorders Using Prolonged Exposure</intervention>
+      <intervention type="Behavioral">Relapse Prevention Treatment</intervention>
+      <intervention type="Behavioral">Active Monitoring Control Group</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>The City College of New York</lead_sponsor>
+      <collaborator>Medical University of South Carolina</collaborator>
+      <collaborator>National Institute on Drug Abuse (NIDA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>65 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>110</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Single Blind (Outcomes Assessor)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>1R01DA023187-01A1</other_id>
+    </other_ids>
+    <first_received>June 1, 2011</first_received>
+    <start_date>September 2008</start_date>
+    <completion_date>December 2014</completion_date>
+    <last_updated>May 13, 2015</last_updated>
+    <last_verified>May 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>December 2014</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>PTSD Symptom Severity</outcome_measure>
+      <outcome_measure>Substance Use severity</outcome_measure>
+      <outcome_measure>Global psychiatric symptom severity</outcome_measure>
+      <outcome_measure>Treatment retention and compliance</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>New York</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01365247</url>
+  </study>
+  <study rank="54">
+    <nct_id>NCT01471028</nct_id>
+    <title>Assess Safety and Efficacy of ELAD (Extracorporeal Liver Assist System) in Subjects With Alcohol-Induced Liver Failure</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Acute Alcoholic Hepatitis</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Biological">ELAD treatment</intervention>
+      <intervention type="Other">Standard of care (Control)</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Vital Therapies, Inc.</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 3</phase>
+    </phases>
+    <enrollment>203</enrollment>
+    <funded_bys>
+      <funded_by>Industry</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>VTI-208</other_id>
+    </other_ids>
+    <first_received>November 7, 2011</first_received>
+    <start_date>February 2013</start_date>
+    <completion_date>August 2015</completion_date>
+    <last_updated>September 22, 2015</last_updated>
+    <last_verified>September 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>January 2015</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Overall survival</outcome_measure>
+      <outcome_measure>Overall survival at Study Days 28 and 91</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+      <country>Australia</country>
+      <country>Spain</country>
+      <country>United Kingdom</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Arizona</state>
+      <state>Arkansas</state>
+      <state>California</state>
+      <state>District of Columbia</state>
+      <state>Florida</state>
+      <state>Georgia</state>
+      <state>Illinois</state>
+      <state>Massachusetts</state>
+      <state>Minnesota</state>
+      <state>Mississippi</state>
+      <state>New Jersey</state>
+      <state>New York</state>
+      <state>Ohio</state>
+      <state>Pennsylvania</state>
+      <state>Texas</state>
+      <state>Utah</state>
+      <state>Washington</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01471028</url>
+  </study>
+  <study rank="55">
+    <nct_id>NCT01829347</nct_id>
+    <title>Study to Assess Safety and Efficacy of ELAD in Subjects With Severe Acute Alcoholic Hepatitis (sAAH) and Lille Score Failure</title>
+    <recruitment open="N">Terminated</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Severe Acute Alcoholic Hepatitis</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Biological">ELAD</intervention>
+      <intervention type="Other">Standard of Care treatment</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Vital Therapies, Inc.</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 3</phase>
+    </phases>
+    <enrollment>18</enrollment>
+    <funded_bys>
+      <funded_by>Industry</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>VTI-210</other_id>
+    </other_ids>
+    <first_received>April 8, 2013</first_received>
+    <start_date>April 2014</start_date>
+    <completion_date>October 2015</completion_date>
+    <last_updated>October 20, 2015</last_updated>
+    <last_verified>October 2015</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>October 2015</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Overall survival of sAAH subjects</outcome_measure>
+      <outcome_measure>To evaluate the proportion of survivors at End of Study Days 28 and 91.</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+      <country>Germany</country>
+      <country>Spain</country>
+      <country>United Kingdom</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Arkansas</state>
+      <state>California</state>
+      <state>District of Columbia</state>
+      <state>Florida</state>
+      <state>Georgia</state>
+      <state>Maryland</state>
+      <state>Massachusetts</state>
+      <state>Minnesota</state>
+      <state>Nebraska</state>
+      <state>New Jersey</state>
+      <state>New York</state>
+      <state>North Carolina</state>
+      <state>Ohio</state>
+      <state>Pennsylvania</state>
+      <state>Texas</state>
+      <state>Washington</state>
+      <state>Wisconsin</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01829347</url>
+  </study>
+  <study rank="56">
+    <nct_id>NCT00156715</nct_id>
+    <title>Efficacy of Quetiapine in the Treatment of Patients With Schizophrenia and a Comorbid Substance Use Disorder</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Schizophrenia</condition>
+      <condition>Schizoaffective Disorder</condition>
+      <condition>Psychotic Disorder</condition>
+      <condition>Substance Abuse</condition>
+      <condition>Alcohol Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Quetiapine</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Dartmouth-Hitchcock Medical Center</lead_sponsor>
+      <collaborator>Augusta University</collaborator>
+      <collaborator>AstraZeneca</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>65 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 4</phase>
+    </phases>
+    <enrollment>23</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>Industry</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Non-Randomized</study_design>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: Open Label</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>16563</other_id>
+      <other_id>IRUSQUET0063</other_id>
+    </other_ids>
+    <first_received>September 6, 2005</first_received>
+    <start_date>March 2004</start_date>
+    <completion_date>October 2008</completion_date>
+    <last_updated>February 16, 2012</last_updated>
+    <last_verified>February 2012</last_verified>
+    <firstreceived_results_date>November 19, 2010</firstreceived_results_date>
+    <primary_completion_date>September 2006</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Mean Number of Drinking Days Per Week</outcome_measure>
+      <outcome_measure>Clinical Symptoms</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Georgia</state>
+      <state>New Hampshire</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00156715</url>
+  </study>
+  <study rank="57">
+    <nct_id>NCT00682318</nct_id>
+    <title>Effects of Fish Oil and Red Wine on Oxidative Stress Biomarkers</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Healthy</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Fish Oil</intervention>
+      <intervention type="Dietary Supplement">Safflower Oil</intervention>
+      <intervention type="Dietary Supplement">Ethanol</intervention>
+      <intervention type="Dietary Supplement">Omega-3 polyunsaturated fatty acids</intervention>
+      <intervention type="Dietary Supplement">Omega-6 polyunsaturated fatty acid</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Carsten Skarke</lead_sponsor>
+      <collaborator>American Heart Association</collaborator>
+      <collaborator>University of Pennsylvania</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>21 Years</min_age>
+    <max_age>60 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+    </age_groups>
+    <phases/>
+    <enrollment>40</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Participant, Investigator</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>807069</other_id>
+    </other_ids>
+    <first_received>May 16, 2008</first_received>
+    <start_date>May 2008</start_date>
+    <last_updated>May 1, 2017</last_updated>
+    <last_verified>May 2017</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>November 2017</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Urinary isoprostane concentrations</outcome_measure>
+      <outcome_measure>Urinary eicosanoid concentrations</outcome_measure>
+      <outcome_measure>Plasma eicosanoid concentrations</outcome_measure>
+      <outcome_measure>Blood alcohol concentrations</outcome_measure>
+      <outcome_measure>Blood fatty acid composition</outcome_measure>
+      <outcome_measure>Compositional Changes in the Intestinal Microbiome</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Pennsylvania</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00682318</url>
+  </study>
+  <study rank="58">
+    <nct_id>NCT02854631</nct_id>
+    <title>Selonsertib in Combination With Prednisolone Versus Prednisolone Alone in Participants With Severe Alcoholic Hepatitis (AH)</title>
+    <recruitment open="Y">Recruiting</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcoholic Hepatitis (AH)</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Selonsertib</intervention>
+      <intervention type="Drug">Prednisolone</intervention>
+      <intervention type="Drug">Placebo</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Gilead Sciences</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <max_age>70 Years</max_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>120</enrollment>
+    <funded_bys>
+      <funded_by>Industry</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Participant, Investigator</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>GS-US-416-2124</other_id>
+      <other_id>2016-000821-37</other_id>
+    </other_ids>
+    <first_received>July 29, 2016</first_received>
+    <start_date>August 31, 2016</start_date>
+    <completion_date>April 2018</completion_date>
+    <last_updated>June 21, 2017</last_updated>
+    <last_verified>June 2017</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>January 2018</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Overall Safety Profile as assessed by percentage of participants experiencing treatment-emergent adverse events (AE), serious AEs, AEs leading to premature study drug discontinuation, and clinically significant laboratory abnormalities.</outcome_measure>
+      <outcome_measure>Incidence of Mortality</outcome_measure>
+      <outcome_measure>Percentage of Participants Receiving a Liver Transplant</outcome_measure>
+      <outcome_measure>Percentage of Participants with Hepatorenal Syndrome (HRS)</outcome_measure>
+      <outcome_measure>Percentage of Participants with Infection</outcome_measure>
+      <outcome_measure>Length of Hospital Stay</outcome_measure>
+      <outcome_measure>Change from Baseline in Liver Biochemistry Tests: Alanine Aminotransferase (ALT)</outcome_measure>
+      <outcome_measure>Change from Baseline in Liver Biochemistry Tests: Aspartate Aminotransferase (AST)</outcome_measure>
+      <outcome_measure>Change from Baseline in Liver Biochemistry Tests: Gamma Glutamyl Transferase (GGT)</outcome_measure>
+      <outcome_measure>Change from Baseline in Liver Biochemistry Tests: Alkaline Phosphatase</outcome_measure>
+      <outcome_measure>Change from Baseline in Liver Biochemistry Tests: Bilirubin</outcome_measure>
+      <outcome_measure>Change from Baseline in Liver Biochemistry Tests: Albumin</outcome_measure>
+      <outcome_measure>Change from Baseline in Liver Biochemistry Tests: International Normalized Ratio (INR)</outcome_measure>
+      <outcome_measure>Percentage of Participants with Lille Response (score &lt; 0.45) at Day 7</outcome_measure>
+      <outcome_measure>Percentage of Participants with a Lille Null Response (score ≥ 0.56) at Day 7</outcome_measure>
+      <outcome_measure>Lille Score at Day 7 as a Continuous Variable</outcome_measure>
+      <outcome_measure>Combined Scoring Including Lille Score at Day 7 and Baseline Model for End-Stage Liver Disease (MELD) Score</outcome_measure>
+      <outcome_measure>Change from Baseline in Prognostic Index: MELD Score</outcome_measure>
+      <outcome_measure>Change from Baseline in Prognostic Index: Child-Pugh-Turcotte (CPT) Score</outcome_measure>
+      <outcome_measure>Change from Baseline in Prognostic Index: Maddrey's Discriminant Function (DF) Score</outcome_measure>
+      <outcome_measure>Change from Baseline in HepQuant™ Score (select sites only)</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+      <country>Canada</country>
+      <country>Austria</country>
+      <country>Belgium</country>
+      <country>France</country>
+      <country>Switzerland</country>
+      <country>United Kingdom</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Arkansas</state>
+      <state>California</state>
+      <state>Florida</state>
+      <state>Illinois</state>
+      <state>Louisiana</state>
+      <state>Massachusetts</state>
+      <state>Michigan</state>
+      <state>Minnesota</state>
+      <state>Mississippi</state>
+      <state>Pennsylvania</state>
+      <state>Texas</state>
+      <state>Utah</state>
+      <state>Virginia</state>
+      <state>Washington</state>
+      <state>Wisconsin</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT02854631</url>
+  </study>
+  <study rank="59">
+    <nct_id>NCT00183183</nct_id>
+    <title>Impact of a Brief Motivational Interview on Drinking Behaviors of At Risk Drinkers Screened in the Emergency Room</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>Alcohol Abuse</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Behavioral">Screening and Brief Intervention</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>UConn Health</lead_sponsor>
+      <collaborator>National Institute on Alcohol Abuse and Alcoholism (NIAAA)</collaborator>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 3</phase>
+    </phases>
+    <enrollment>1137</enrollment>
+    <funded_bys>
+      <funded_by>Other</funded_by>
+      <funded_by>NIH</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Non-Randomized</study_design>
+      <study_design>Intervention Model: Single Group Assignment</study_design>
+      <study_design>Masking: Single Blind (Investigator)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>NIAAAASE15123</other_id>
+      <other_id>R21AA015123</other_id>
+      <other_id>NIH 5R21AA15123-02</other_id>
+    </other_ids>
+    <first_received>September 12, 2005</first_received>
+    <start_date>April 2004</start_date>
+    <completion_date>December 2005</completion_date>
+    <last_updated>May 21, 2010</last_updated>
+    <last_verified>May 2010</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <outcome_measures>
+      <outcome_measure>Quantity of drinks per day</outcome_measure>
+      <outcome_measure>Frequency of drinking days per week</outcome_measure>
+      <outcome_measure>Completing alcohol related treatment</outcome_measure>
+      <outcome_measure>Reporting negative alcohol related events</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>California</state>
+      <state>Colorado</state>
+      <state>Connecticut</state>
+      <state>District of Columbia</state>
+      <state>Georgia</state>
+      <state>Massachusetts</state>
+      <state>Michigan</state>
+      <state>New Jersey</state>
+      <state>New Mexico</state>
+      <state>Rhode Island</state>
+      <state>Virginia</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT00183183</url>
+  </study>
+  <study rank="60">
+    <nct_id>NCT01937130</nct_id>
+    <title>Pharmacokinetic and Pharmacodynamic Study of IDN-6556 in ACLF</title>
+    <recruitment open="N">Terminated</recruitment>
+    <study_results>Has Results</study_results>
+    <conditions>
+      <condition>Acute on Chronic Hepatic Failure</condition>
+      <condition>Acute Liver Failure</condition>
+      <condition>Liver Cirrhosis</condition>
+      <condition>Acute Alcoholic Hepatitis</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">IDN-6556</intervention>
+      <intervention type="Other">Placebo</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Conatus Pharmaceuticals Inc.</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 2</phase>
+    </phases>
+    <enrollment>23</enrollment>
+    <funded_bys>
+      <funded_by>Industry</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Care Provider, Investigator)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>IDN-6556-02</other_id>
+    </other_ids>
+    <first_received>September 4, 2013</first_received>
+    <start_date>September 2013</start_date>
+    <completion_date>February 2015</completion_date>
+    <last_updated>March 28, 2016</last_updated>
+    <last_verified>March 2016</last_verified>
+    <firstreceived_results_date>February 26, 2016</firstreceived_results_date>
+    <primary_completion_date>January 2015</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Area Under the Curve (AUC)</outcome_measure>
+      <outcome_measure>Cmax</outcome_measure>
+      <outcome_measure>Tmax &amp; t1/2 Parameters</outcome_measure>
+      <outcome_measure>Levels of CK18/M30</outcome_measure>
+      <outcome_measure>Levels of CK18/M65</outcome_measure>
+      <outcome_measure>Levels of Caspase 3/7 RLU</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+      <country>United Kingdom</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Alabama</state>
+      <state>California</state>
+      <state>District of Columbia</state>
+      <state>Kansas</state>
+      <state>Kentucky</state>
+      <state>Mississippi</state>
+      <state>New York</state>
+      <state>Utah</state>
+      <state>Washington</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01937130</url>
+  </study>
+  <study rank="61">
+    <nct_id>NCT01143246</nct_id>
+    <title>A Placebo-Controlled, Double-Blind Study to Confirm the Reversal of Hepatorenal Syndrome Type 1 With Terlipressin</title>
+    <recruitment open="N">Completed</recruitment>
+    <study_results>No Results Available</study_results>
+    <conditions>
+      <condition>HRS</condition>
+    </conditions>
+    <interventions>
+      <intervention type="Drug">Terlipressin</intervention>
+      <intervention type="Drug">Placebo</intervention>
+    </interventions>
+    <sponsors>
+      <lead_sponsor>Mallinckrodt</lead_sponsor>
+    </sponsors>
+    <gender>All</gender>
+    <min_age>18 Years</min_age>
+    <age_groups>
+      <age_group>Adult</age_group>
+      <age_group>Senior</age_group>
+    </age_groups>
+    <phases>
+      <phase>Phase 3</phase>
+    </phases>
+    <enrollment>196</enrollment>
+    <funded_bys>
+      <funded_by>Industry</funded_by>
+    </funded_bys>
+    <study_types>Interventional</study_types>
+    <study_designs>
+      <study_design>Allocation: Randomized</study_design>
+      <study_design>Intervention Model: Parallel Assignment</study_design>
+      <study_design>Masking: Double Blind (Participant, Investigator)</study_design>
+      <study_design>Primary Purpose: Treatment</study_design>
+    </study_designs>
+    <other_ids>
+      <other_id>IK-4001-HRS-301</other_id>
+    </other_ids>
+    <first_received>June 11, 2010</first_received>
+    <start_date>September 2010</start_date>
+    <completion_date>May 2013</completion_date>
+    <last_updated>September 8, 2016</last_updated>
+    <last_verified>September 2016</last_verified>
+    <firstreceived_results_date>No Study Results Posted</firstreceived_results_date>
+    <primary_completion_date>February 2013</primary_completion_date>
+    <outcome_measures>
+      <outcome_measure>Confirmed Hepatorenal syndrome reversal</outcome_measure>
+      <outcome_measure>Hepatorenal syndrome reversal</outcome_measure>
+      <outcome_measure>Transplant-free survival</outcome_measure>
+      <outcome_measure>Overall Survival</outcome_measure>
+      <outcome_measure>Serious Adverse Events</outcome_measure>
+    </outcome_measures>
+    <unique_countries>
+      <country>United States</country>
+      <country>Canada</country>
+    </unique_countries>
+    <unique_states country="United States">
+      <state>Alabama</state>
+      <state>Arizona</state>
+      <state>California</state>
+      <state>Colorado</state>
+      <state>Connecticut</state>
+      <state>District of Columbia</state>
+      <state>Florida</state>
+      <state>Georgia</state>
+      <state>Illinois</state>
+      <state>Indiana</state>
+      <state>Iowa</state>
+      <state>Kansas</state>
+      <state>Kentucky</state>
+      <state>Louisiana</state>
+      <state>Maryland</state>
+      <state>Massachusetts</state>
+      <state>Michigan</state>
+      <state>Minnesota</state>
+      <state>Missouri</state>
+      <state>Nebraska</state>
+      <state>New York</state>
+      <state>North Carolina</state>
+      <state>Ohio</state>
+      <state>Oklahoma</state>
+      <state>Oregon</state>
+      <state>Pennsylvania</state>
+      <state>South Carolina</state>
+      <state>Tennessee</state>
+      <state>Texas</state>
+      <state>Utah</state>
+      <state>Virginia</state>
+      <state>Washington</state>
+      <state>Wisconsin</state>
+    </unique_states>
+    <url>https://ClinicalTrials.gov/show/NCT01143246</url>
+  </study>
+</search_results>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" lang='en'>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title> "Study list" </title>
+</head>
+
+<body>
+
+  <div class="top-pad">
+    {% for id, product in study_list.iteritems() %}
+      <div class="well">
+        <h2>
+          <a href="{{ url_for('product', key=id) }}">{{product['nct_id'] }}</a>
+          <small>$ {{ product['price'] }}</small>
+        </h2>
+      </div>
+    {% endfor %}
+  </div>
+
+</body>
+
+</html>
