@@ -20,20 +20,16 @@ acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
 # possibility to search through the database
 # convert xml file into data object
 
+acl.delete_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
+
 if not parameters.db_created: # if database doesn't exist, create the db
     acl.create_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
     acl.create_tables(parameters.acl_db_params)
     study_list = acl.extract_xml_data(parameters.xml_file_name)
     acl.write_to_db(study_list, parameters.acl_db_params)
 
-# test
-conn = psycopg2.connect(parameters.acl_db_params)
-cur = conn.cursor()
-cur.execute("SELECT * from studies")
-records = cur.fetchall()
-cur.close()
-conn.close()
-print(records)
+studies_from_db = acl.query_postgresql("SELECT * FROM studies")
+print(len(studies_from_db), studies_from_db)
 
 # 3rd: display xml file in a user-friendly way
 # goals:
@@ -46,28 +42,7 @@ print(records)
 # e.g., select only a subset of entries from the database
 # one could use database syntax and customized python function
 
-# extract the nct_id from the database
-conn = None
-conn = psycopg2.connect(parameters.acl_db_params)
-cur = conn.cursor()
-cur.execute("SELECT * from studies")
-study_list = cur.fetchall()
-cur.close()
-conn.close()
-print(study_list)
 
-conn = None
-conn = psycopg2.connect(parameters.acl_db_params)
-cur = conn.cursor()
-cur.execute("SELECT nct_id from studies")
-nct_id_list = cur.fetchall()
-cur.close()
-conn.close()
-print(nct_id_list)
-
-# extract the complete information of one record
-nct_id = "'" + nct_id_list[0][0] + "'"
-acl.query_postgresql("SELECT * FROM studies WHERE nct_id=" + nct_id, parameters.acl_db_params)
 # acl.query_postgresql("SELECT * FROM conditions WHERE nct_id=" + nct_id, parameters.acl_db_params)\
 
 
@@ -135,3 +110,34 @@ for table in cur.fetchall():
     print(table)
 cur.close()
 conn.close()
+
+
+
+# test
+conn = psycopg2.connect(parameters.acl_db_params)
+cur = conn.cursor()
+cur.execute("SELECT * from studies")
+records = cur.fetchall()
+cur.close()
+conn.close()
+print(records)
+
+
+# extract the nct_id from the database
+conn = None
+conn = psycopg2.connect(parameters.acl_db_params)
+cur = conn.cursor()
+cur.execute("SELECT * from studies")
+study_list = cur.fetchall()
+cur.close()
+conn.close()
+print(study_list)
+
+conn = None
+conn = psycopg2.connect(parameters.acl_db_params)
+cur = conn.cursor()
+cur.execute("SELECT nct_id from studies")
+nct_id_list = cur.fetchall()
+cur.close()
+conn.close()
+print(nct_id_list)

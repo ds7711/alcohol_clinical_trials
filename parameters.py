@@ -12,7 +12,7 @@ xml_file_name = "acl_db.xml"
 
 
 # parameters for the acl_database
-db_created = True
+db_created = False
 postgresql_params = "dbname=postgres user=postgres host=localhost password=7711"
 acl_db_name = "acl_database"
 _acl_db_password = 7711
@@ -22,3 +22,15 @@ acl_db_params = "dbname=" + acl_db_name + " " + "user=" + _acl_db_username + " "
 # acl_db_params = "dbname=acl_database user=postgres password=7711" # parameters used to connect to the database
 
 
+# aact_schema
+aact_schema = \
+    """
+    
+    
+    
+    
+    
+    
+    
+    
+    """
