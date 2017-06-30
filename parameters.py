@@ -1,3 +1,4 @@
+import numpy as np
 
 # parameters for downloading .xml data from clinicaltrials.org
 main_site = "https://clinicaltrials.gov/beta/"
@@ -22,15 +23,159 @@ acl_db_params = "dbname=" + acl_db_name + " " + "user=" + _acl_db_username + " "
 # acl_db_params = "dbname=acl_database user=postgres password=7711" # parameters used to connect to the database
 
 
+
+# .xml to AACT schema-like database
+# columns in the np.array:
+#   1st: column name of the database table
+#   2nd: data type of the column
+#   3rd: extra specification for the column (e.g., NOT NULL or PRIMARY KEY)
+#   4th: keywords to query results from .xml for the column
+#   5th: is returned result a list? False / True
+#   6th: data type for insert entries (e.g., %s )
+
+xml2db_schema = [
+    {"studies": np.asarray([["nct_id", "CHARACTER(11)", "NOT NULL PRIMARY KEY", "nct_id", False, "%s"],
+                            ["official_title", "TEXT", "NOT NULL", "title", False, "%s"],
+                            ["enrollment_type", "VARCHAR(255)", "", "enrollment", False, "%s"],
+                            ["start_month_year", "VARCHAR(255)", "", "start_date", False, "%s"],
+                            ["completion_month_year", "VARCHAR(255)", "", "completion_date", False, "%s"]
+                            ])},
+    {"conditions": np.asarray([["nct_id", "CHARACTER(11)", "NOT NULL", "nct_id", False, "%s"],
+                               ["id", "SERIAL", "NOT NULL", "NO_KW", False, ""]
+                               ])}
+]
+
+# Perhaps two separate tables are better
+
 # aact_schema
-aact_schema = \
+commands = (
     """
-    
-    
-    
-    
-    
-    
-    
-    
+    CREATE TABLE studies (
+        nct_id CHARACTER(11) NOT NULL,
+        official_title TEXT NOT NULL,
+        start_month_year VARCHAR(255),
+        verification_month_year VARCHAR(255),
+        completion_month_year VARCHAR(255),
+        study_type VARCHAR(255),
+        acronym VARCHAR(255),
+        baseline_population TEXT,
+        overall_status VARCHAR(255),
+        last_known_status VARCHAR(255),
+        phase VARCHAR(255),
+        enrollment BIGINT,
+        enrollment_type VARCHAR(255),
+        source VARCHAR(255),
+        number_of_arms BIGINT,
+        number_of_groups BIGINT,
+        limitations_and_caveats VARCHAR(255),
+        PRIMARY KEY (nct_id)
+    )
     """
+    ,
+    """ CREATE TABLE conditions
+    (
+        nct_id CHARACTER(11) NOT NULL,
+        id INTEGER NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        PRIMARY KEY (id)
+    )
+    """
+    ,
+    """ CREATE TABLE eligibilities
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            gender VARCHAR(25) NOT NULL,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE links
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            url VARCHAR(255) NOT NULL,
+            description VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE outcomes
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            outcome_type VARCHAR(255),
+            title TEXT,
+            description TEXT,
+            time_frame TEXT,
+            population TEXT,
+            units VARCHAR(255),
+            units_analyzed VARCHAR(255),
+            anticipated_posting_month_year VARCHAR(255),
+            dispersion_type VARCHAR(255),
+            param_type VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE interventions
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            intervention_type VARCHAR(255),
+            name VARCHAR(255),
+            description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE keywords
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            name VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE designs
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            allocation VARCHAR(255),
+            intervention_model VARCHAR(255),
+            intervention_model_description VARCHAR(255),
+            primary_purpose VARCHAR(255),
+            description VARCHAR(255),
+            observational_model VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE result_groups
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            ctgov_group_code VARCHAR(255),
+            result_type VARCHAR(255),
+            title VARCHAR(255),
+            description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE outcome_counts
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER NOT NULL,
+            outcome_id INTEGER,
+            result_group_id INTEGER,
+            ctgov_group_code VARCHAR(255),
+            scope VARCHAR(255),
+            units VARCHAR(255),
+            count INTEGER,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+)

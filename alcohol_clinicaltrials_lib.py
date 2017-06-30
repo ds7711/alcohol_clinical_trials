@@ -46,25 +46,9 @@ class AlcoholStudy(object):
         self.conditions = []
 
 
-def extract_xml_data(xml_filename):
-    tree = ET.parse(xml_filename)
-    root = tree.getroot()
-    study_list = []
-    for child in root:
-        study = AlcoholStudy()
-        if child.tag != "study":
-            continue
-        study.nct_id = child.find("./nct_id").text
-        study.official_title = child.find("./title").text
-        study.url = child.find("./url").text
-        study.gender = child.find("./gender").text
-        condition_list = child.find("./conditions")
-        for item in condition_list:
-            study.conditions.append(item.text)
-        study_list.append(study)
-    return(study_list)
 
-
+### note: one could also write a function that takes a list as input and generate the corresponding create table string\n
+### as output. This will solve the problem of small typos and other errors
 def create_tables(acl_db_parameters):
     """ create tables in the PostgreSQL database"""
     commands = (
@@ -217,13 +201,6 @@ def create_tables(acl_db_parameters):
             conn.close()
 
 
-test = True
-if test:
-    pass
-else:
-    pass
-
-
 def create_postgresql_db(acl_db_name, admin_params=parameters.postgresql_params):
     """
     create new database
@@ -238,6 +215,7 @@ def create_postgresql_db(acl_db_name, admin_params=parameters.postgresql_params)
     cur.execute('CREATE DATABASE ' + acl_db_name)
     cur.close()
     conn.close()
+
 
 def delete_postgresql_db(acl_db_name, admin_params=parameters.postgresql_params):
     """
@@ -283,3 +261,43 @@ def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params
     cur.close()
     conn.close()
     return(records)
+
+
+
+test = True
+if test:
+    def extract_xml_data(xml_filename):
+        tree = ET.parse(xml_filename)
+        root = tree.getroot()
+        study_list = []
+        for child in root:
+            study = AlcoholStudy()
+            if child.tag != "study":
+                continue
+            study.nct_id = child.find("./nct_id").text
+            study.official_title = child.find("./title").text
+            study.url = child.find("./url").text
+            study.gender = child.find("./gender").text
+            condition_list = child.find("./conditions")
+            for item in condition_list:
+                study.conditions.append(item.text)
+            study_list.append(study)
+        return (study_list)
+else:
+    def extract_xml_data(xml_filename):
+        tree = ET.parse(xml_filename)
+        root = tree.getroot()
+        study_list = []
+        for child in root:
+            study = AlcoholStudy()
+            if child.tag != "study":
+                continue
+            study.nct_id = child.find("./nct_id").text
+            study.official_title = child.find("./title").text
+            study.url = child.find("./url").text
+            study.gender = child.find("./gender").text
+            condition_list = child.find("./conditions")
+            for item in condition_list:
+                study.conditions.append(item.text)
+            study_list.append(study)
+        return (study_list)
