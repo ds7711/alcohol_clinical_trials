@@ -33,19 +33,13 @@ acl_db_params = "dbname=" + acl_db_name + " " + "user=" + _acl_db_username + " "
 #   5th: is returned result a list? False / True
 #   6th: data type for insert entries (e.g., %s )
 
-xml2db_schema = [
-    {"studies": np.asarray([["nct_id", "CHARACTER(11)", "NOT NULL PRIMARY KEY", "nct_id", False, "%s"],
-                            ["official_title", "TEXT", "NOT NULL", "title", False, "%s"],
-                            ["enrollment_type", "VARCHAR(255)", "", "enrollment", False, "%s"],
-                            ["start_month_year", "VARCHAR(255)", "", "start_date", False, "%s"],
-                            ["completion_month_year", "VARCHAR(255)", "", "completion_date", False, "%s"]
-                            ])},
-    {"conditions": np.asarray([["nct_id", "CHARACTER(11)", "NOT NULL", "nct_id", False, "%s"],
-                               ["id", "SERIAL", "NOT NULL", "NO_KW", False, ""]
-                               ])}
-]
+
+
+
+
 
 # Perhaps two separate tables are better
+
 
 # aact_schema
 commands = (
@@ -75,7 +69,7 @@ commands = (
     """ CREATE TABLE conditions
     (
         nct_id CHARACTER(11) NOT NULL,
-        id INTEGER NOT NULL,
+        id SERIAL,
         name VARCHAR(255) NOT NULL,
         PRIMARY KEY (id)
     )
@@ -179,3 +173,12 @@ commands = (
     """
     ,
 )
+
+xml2db_queries = [
+    {"studies": [["nct_id", "nct_id", False, "%s"],
+                 ["official_title", "title", False, "%s"],
+                 ["enrollment", "enrollment", False, "%s"]]},
+    {"conditions": [["nct_id", "nct_id", False, "%s"],
+                    ["name", "conditions", True, "%s"]]}
+]
+

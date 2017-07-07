@@ -1,5 +1,7 @@
 # import required modules
 import parameters
+import itertools
+import copy
 import xml.etree.cElementTree as ET
 import urllib2
 import psycopg2
@@ -51,137 +53,7 @@ class AlcoholStudy(object):
 ### as output. This will solve the problem of small typos and other errors
 def create_tables(acl_db_parameters):
     """ create tables in the PostgreSQL database"""
-    commands = (
-        """
-        CREATE TABLE studies (
-            nct_id CHARACTER(11) NOT NULL,
-            official_title TEXT NOT NULL,
-            start_month_year VARCHAR(255),
-            verification_month_year VARCHAR(255),
-            completion_month_year VARCHAR(255),
-            study_type VARCHAR(255),
-            acronym VARCHAR(255),
-            baseline_population TEXT,
-            overall_status VARCHAR(255),
-            last_known_status VARCHAR(255),
-            phase VARCHAR(255),
-            enrollment BIGINT,
-            enrollment_type VARCHAR(255),
-            source VARCHAR(255),
-            number_of_arms BIGINT,
-            number_of_groups BIGINT,
-            limitations_and_caveats VARCHAR(255),
-            PRIMARY KEY (nct_id)
-        )
-        """
-        ,
-        """ CREATE TABLE conditions
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
-            name VARCHAR(255) NOT NULL,
-            PRIMARY KEY (id)
-        )
-        """
-        ,
-        """ CREATE TABLE eligibilities
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                gender VARCHAR(25) NOT NULL,
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        """ CREATE TABLE links
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                url VARCHAR(255) NOT NULL,
-                description VARCHAR(255),
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        """ CREATE TABLE outcomes
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                outcome_type VARCHAR(255),
-                title TEXT,
-                description TEXT,
-                time_frame TEXT,
-                population TEXT,
-                units VARCHAR(255),
-                units_analyzed VARCHAR(255),
-                anticipated_posting_month_year VARCHAR(255),
-                dispersion_type VARCHAR(255),
-                param_type VARCHAR(255),
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        """ CREATE TABLE interventions
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                intervention_type VARCHAR(255),
-                name VARCHAR(255),
-                description TEXT,
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        """ CREATE TABLE keywords
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                name VARCHAR(255),
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        """ CREATE TABLE designs
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                allocation VARCHAR(255),
-                intervention_model VARCHAR(255),
-                intervention_model_description VARCHAR(255),
-                primary_purpose VARCHAR(255),
-                description VARCHAR(255),
-                observational_model VARCHAR(255),
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        """ CREATE TABLE result_groups
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                ctgov_group_code VARCHAR(255),
-                result_type VARCHAR(255),
-                title VARCHAR(255),
-                description TEXT,
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        """ CREATE TABLE outcome_counts
-            (
-                nct_id CHARACTER(11) NOT NULL,
-                id INTEGER NOT NULL,
-                outcome_id INTEGER,
-                result_group_id INTEGER,
-                ctgov_group_code VARCHAR(255),
-                scope VARCHAR(255),
-                units VARCHAR(255),
-                count INTEGER,
-                PRIMARY KEY (id)
-            )
-        """
-        ,
-        )
+    commands = parameters.commands
     conn = None
     try:
         # connect to the PostgreSQL server
@@ -263,6 +135,49 @@ def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params
     return(records)
 
 
+def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
+    conn = None
+    conn = psycopg2.connect(acl_db_parameters)
+    cur = conn.cursor()
+    for table_dict in xml2db_queries:
+        table_name = table_dict.keys()[0]
+        table_cols = table_dict.values()[0]
+        col_names = ""
+        col_insert_params = ""
+        data = []
+        list_idx = [] # indexes of the queries that return a list
+        for idx, col in enumerate(table_cols):
+            col_names = col_names + col[0] + ", "
+            col_insert_params = col_insert_params + col[-1] + ", "
+            if not col[2]: # if the queried result from .xml is not a list, obtain its value directly
+                tmp_data = study_xml.find("./" + col[1]).text
+            else:
+                list_idx.append(idx)
+                tmp_data = study_xml.find("./" + col[1])
+                tmp_data = [item.text for item in tmp_data]
+            data.append(tmp_data)
+        query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
+                "(" + col_insert_params[:-2] + ");"
+        if len(list_idx) == 0:
+            cur.execute(query, data)
+        else:
+            augmented_data = augment_data(data, list_idx)
+            for data in augmented_data:
+                cur.execute(query, data)
+
+    conn.commit()
+    conn.close()
+    return(None)
+
+def xml_file2db(xml_filename):
+    tree = ET.parse(xml_filename)
+    root = tree.getroot()
+    study_list = []
+    for child in root:
+        study = AlcoholStudy()
+        if child.tag != "study":
+            continue
+        study_xml2db(child)
 
 test = True
 if test:
@@ -301,3 +216,41 @@ else:
                 study.conditions.append(item.text)
             study_list.append(study)
         return (study_list)
+
+def augment_data(my_list, list_idx):
+    list_of_lists = [my_list[idx] for idx in list_idx]
+    combinations = itertools.product(*list_of_lists)
+    new_data = []
+    for item in combinations:
+        for iii, idx in enumerate(list_idx):
+            entry = my_list
+            entry[idx] = item[iii]
+        new_data.append(copy.deepcopy(entry))
+        print entry
+    return (new_data)
+
+
+### Reference Backup only
+# xml2db_schema = [
+#     {"studies": [["nct_id", "CHARACTER(11)", "NOT NULL PRIMARY KEY", "nct_id", False, "%s"],
+#                  ["official_title", "TEXT", "NOT NULL", "title", False, "%s"],
+#                  ["enrollment_type", "VARCHAR(255)", "", "enrollment", False, "%s"],
+#                  ["start_month_year", "VARCHAR(255)", "", "start_date", False, "%s"],
+#                  ["completion_month_year", "VARCHAR(255)", "", "completion_date", False, "%s"]
+#                  ]},
+#     {"conditions": [["nct_id", "CHARACTER(11)", "NOT NULL", "nct_id", False, "%s"],
+#                     ["id", "SERIAL", "NOT NULL", "NO_KW", False, ""]
+#                    ]}
+# ]
+#
+# def create_table_commands(table_dict):
+#     table_name = table_dict.keys()[0]
+#     table_cols = table_dict.values()[0]
+#     space_separator = " "
+#     start_str = "CREATE TABLE " + table_name + space_separator + "("
+#     end_str = ")"
+#     main_command = ""
+#     for col in table_cols:
+#         main_command = main_command + col[0] + space_separator + col[1] + space_separator + col[2] + ","
+#     command = start_str + main_command[:-1] + end_str
+#     return(command)

@@ -25,8 +25,10 @@ acl.delete_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
 if not parameters.db_created: # if database doesn't exist, create the db
     acl.create_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
     acl.create_tables(parameters.acl_db_params)
-    study_list = acl.extract_xml_data(parameters.xml_file_name)
-    acl.write_to_db(study_list, parameters.acl_db_params)
+    # study_list = acl.extract_xml_data(parameters.xml_file_name)
+    # acl.write_to_db(study_list, parameters.acl_db_params)
+
+acl.xml_file2db(parameters.xml_file_name)
 
 studies_from_db = acl.query_postgresql("SELECT * FROM studies")
 print(len(studies_from_db), studies_from_db)
