@@ -38,22 +38,14 @@ def download_xml_file(search_url, xml_filename=parameters.xml_file_name):
     return(None)
 
 
-class AlcoholStudy(object):
 
-    def __init__(self):
-        self.nct_id = None
-        self.official_title = None
-        self.gender = None
-        self.url = None
-        self.conditions = []
 
 
 
 ### note: one could also write a function that takes a list as input and generate the corresponding create table string\n
 ### as output. This will solve the problem of small typos and other errors
-def create_tables(acl_db_parameters):
+def create_tables(acl_db_parameters, commands):
     """ create tables in the PostgreSQL database"""
-    commands = parameters.commands
     conn = None
     try:
         # connect to the PostgreSQL server
@@ -105,6 +97,17 @@ def delete_postgresql_db(acl_db_name, admin_params=parameters.postgresql_params)
     conn.close()
 
 
+def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params):
+    conn = None
+    conn = psycopg2.connect(db_conn_parameters)
+    cur = conn.cursor()
+    cur.execute(command_string)
+    records = cur.fetchall()
+    cur.close()
+    conn.close()
+    return(records)
+
+
 def write_to_db(study_list, acl_db_parameters):
     """
     write records in study_list into acl_db_parameters (filename specified by acl_db_parameters)
@@ -124,17 +127,6 @@ def write_to_db(study_list, acl_db_parameters):
     return(None)
 
 
-def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params):
-    conn = None
-    conn = psycopg2.connect(db_conn_parameters)
-    cur = conn.cursor()
-    cur.execute(command_string)
-    records = cur.fetchall()
-    cur.close()
-    conn.close()
-    return(records)
-
-
 def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
     conn = None
     conn = psycopg2.connect(acl_db_parameters)
@@ -150,11 +142,14 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
             col_names = col_names + col[0] + ", "
             col_insert_params = col_insert_params + col[-1] + ", "
             if not col[2]: # if the queried result from .xml is not a list, obtain its value directly
-                tmp_data = study_xml.find("./" + col[1]).text
+                tmp_data = study_xml.find("./" + col[1])
+                if tmp_data is not None:
+                    tmp_data = tmp_data.text
             else:
                 list_idx.append(idx)
                 tmp_data = study_xml.find("./" + col[1])
-                tmp_data = [item.text for item in tmp_data]
+                if tmp_data is not None:
+                    tmp_data = [item.text for item in tmp_data]
             data.append(tmp_data)
         query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
                 "(" + col_insert_params[:-2] + ");"
@@ -169,7 +164,7 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
     conn.close()
     return(None)
 
-def xml_file2db(xml_filename):
+def xml_file2db(xml_filename, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
     tree = ET.parse(xml_filename)
     root = tree.getroot()
     study_list = []
@@ -177,7 +172,8 @@ def xml_file2db(xml_filename):
         study = AlcoholStudy()
         if child.tag != "study":
             continue
-        study_xml2db(child)
+        study_xml2db(child, xml2db_queries, acl_db_parameters)
+
 
 test = True
 if test:
@@ -254,3 +250,14 @@ def augment_data(my_list, list_idx):
 #         main_command = main_command + col[0] + space_separator + col[1] + space_separator + col[2] + ","
 #     command = start_str + main_command[:-1] + end_str
 #     return(command)
+
+
+
+class AlcoholStudy(object):
+
+    def __init__(self):
+        self.nct_id = None
+        self.official_title = None
+        self.gender = None
+        self.url = None
+        self.conditions = []

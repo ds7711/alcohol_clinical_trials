@@ -78,8 +78,15 @@ commands = (
     """ CREATE TABLE eligibilities
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
+            id SERIAL,
             gender VARCHAR(25) NOT NULL,
+            minimum_age VARCHAR(25),
+            maximum_age VARCHAR(25),
+            healthy_volunteers VARCHAR(255),
+            population TEXT,
+            gender_description TEXT,
+            criteria TEXT,
+            age_groups VARCHAR(255),
             PRIMARY KEY (id)
         )
     """
@@ -87,9 +94,9 @@ commands = (
     """ CREATE TABLE links
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
-            url VARCHAR(255) NOT NULL,
-            description VARCHAR(255),
+            id SERIAL,
+            url VARCHAR(500) NOT NULL,
+            description TEXT,
             PRIMARY KEY (id)
         )
     """
@@ -97,7 +104,7 @@ commands = (
     """ CREATE TABLE outcomes
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
+            id SERIAL,
             outcome_type VARCHAR(255),
             title TEXT,
             description TEXT,
@@ -115,7 +122,7 @@ commands = (
     """ CREATE TABLE interventions
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
+            id SERIAL,
             intervention_type VARCHAR(255),
             name VARCHAR(255),
             description TEXT,
@@ -126,7 +133,7 @@ commands = (
     """ CREATE TABLE keywords
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
+            id SERIAL,
             name VARCHAR(255),
             PRIMARY KEY (id)
         )
@@ -135,7 +142,7 @@ commands = (
     """ CREATE TABLE designs
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
+            id SERIAL,
             allocation VARCHAR(255),
             intervention_model VARCHAR(255),
             intervention_model_description VARCHAR(255),
@@ -149,7 +156,7 @@ commands = (
     """ CREATE TABLE result_groups
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
+            id SERIAL,
             ctgov_group_code VARCHAR(255),
             result_type VARCHAR(255),
             title VARCHAR(255),
@@ -161,7 +168,7 @@ commands = (
     """ CREATE TABLE outcome_counts
         (
             nct_id CHARACTER(11) NOT NULL,
-            id INTEGER NOT NULL,
+            id SERIAL,
             outcome_id INTEGER,
             result_group_id INTEGER,
             ctgov_group_code VARCHAR(255),
@@ -174,11 +181,50 @@ commands = (
     ,
 )
 
+
+# Queries used to fetch data from .xml file
+# Each dictionary stores information for one table.
+# They key for each dictionary stores the name of the table, its value stores the column name and how data are fetched.
+
+
+
+""" CREATE TABLE outcomes
+    (
+        nct_id CHARACTER(11) NOT NULL,
+        id SERIAL,
+        outcome_type VARCHAR(255),
+        title TEXT,
+        description TEXT,
+        time_frame TEXT,
+        population TEXT,
+        units VARCHAR(255),
+        units_analyzed VARCHAR(255),
+        anticipated_posting_month_year VARCHAR(255),
+        dispersion_type VARCHAR(255),
+        param_type VARCHAR(255),
+        PRIMARY KEY (id)
+    )
+"""
+
 xml2db_queries = [
     {"studies": [["nct_id", "nct_id", False, "%s"],
                  ["official_title", "title", False, "%s"],
-                 ["enrollment", "enrollment", False, "%s"]]},
+                 ["enrollment", "enrollment", False, "%s"],
+                 ["acronym", "acronym", False, "%s"],
+                 ["start_month_year", "start_date", False, "%s"],
+                 ["completion_month_year", "completion_date", False, "%s"],
+                 ["verification_month_year", "last_verified", False, "%s"],
+                 ["study_type", "study_types", False, "%s"]]},
     {"conditions": [["nct_id", "nct_id", False, "%s"],
-                    ["name", "conditions", True, "%s"]]}
+                    ["name", "conditions", True, "%s"]]},
+    {"eligibilities": [["nct_id", "nct_id", False, "%s"],
+                       ["gender", "gender", False, "%s"],
+                       ["minimum_age", "min_age", False, "%s"],
+                       ["maximum_age", "max_age", False, "%s"],
+                       ["age_groups", "age_groups", True, "%s"]]},
+    {"links": [["nct_id", "nct_id", False, "%s"],
+               ["url", "url", False, "%s"]]},
+    {"outcomes": [["nct_id", "nct_id", False, "%s"],
+                  ["title", "title", False, "%s"]]},
 ]
 
