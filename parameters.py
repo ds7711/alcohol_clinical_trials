@@ -7,7 +7,7 @@ search_url_separating_kw = "results"
 download_specification = "&down_flds=all&down_fmt=xml"
 download_kw = "/download_fields"
 xml_file_name = "acl_db.xml"
-
+individual_study_xml_url = ["https://clinicaltrials.gov/ct2/show/", "?displayxml=true"] # used to create the
 # download_kes = ["down_flds=all", "down_fmt=xml"]
 # seprator = "&"
 
@@ -50,6 +50,7 @@ commands = (
         start_month_year VARCHAR(255),
         verification_month_year VARCHAR(255),
         completion_month_year VARCHAR(255),
+        primary_completion_month_year
         study_type VARCHAR(255),
         acronym VARCHAR(255),
         baseline_population TEXT,
@@ -207,24 +208,21 @@ commands = (
 """
 
 xml2db_queries = [
-    {"studies": [["nct_id", "nct_id", False, "%s"],
-                 ["official_title", "title", False, "%s"],
+    {"studies": [["nct_id", "id_info/nct_id", False, "%s"],
+                 ["official_title", "official_title", False, "%s"],
                  ["enrollment", "enrollment", False, "%s"],
-                 ["acronym", "acronym", False, "%s"],
                  ["start_month_year", "start_date", False, "%s"],
                  ["completion_month_year", "completion_date", False, "%s"],
-                 ["verification_month_year", "last_verified", False, "%s"],
-                 ["study_type", "study_types", False, "%s"]]},
-    {"conditions": [["nct_id", "nct_id", False, "%s"],
+                 ["verification_month_year", "verification_date", False, "%s"],
+                 ["study_type", "study_type", False, "%s"]]},
+    {"conditions": [["nct_id", "id_info/nct_id", False, "%s"],
                     ["name", "conditions", True, "%s"]]},
-    {"eligibilities": [["nct_id", "nct_id", False, "%s"],
-                       ["gender", "gender", False, "%s"],
+    {"eligibilities": [["nct_id", "id_info/nct_id", False, "%s"],
+                       ["gender", "eligibility/gender", False, "%s"],
                        ["minimum_age", "min_age", False, "%s"],
                        ["maximum_age", "max_age", False, "%s"],
                        ["age_groups", "age_groups", True, "%s"]]},
-    {"links": [["nct_id", "nct_id", False, "%s"],
-               ["url", "url", False, "%s"]]},
-    {"outcomes": [["nct_id", "nct_id", False, "%s"],
-                  ["title", "title", False, "%s"]]},
+    {"links": [["nct_id", "id_info/nct_id", False, "%s"],
+               ["url", "required_header/url", False, "%s"]]}
 ]
 

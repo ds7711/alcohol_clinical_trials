@@ -1,36 +1,26 @@
 import alcohol_clinicaltrials_lib as acl
-import xml.etree.cElementTree as ET
 import psycopg2
 import parameters # cutomized parameters for the script, for editing
 
 
-# 1st: download xml file according to customized search criterion
-# instructions:
-#   use advanced search on clinicaltrials.org and copy the search url
-#   input that and the scripts will automatically download all the data in .xml format
-
-search_url = parameters.search_url
-acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
-
-
-# 2nd: convert xml to relational database
-# structure of the database is similar to that of aact (clinical trials)
-# to finish later
-# for expandibility in the future
-# possibility to search through the database
-# convert xml file into data object
-
+# 1st: create the relational database
 acl.delete_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
-
 if not parameters.db_created: # if database doesn't exist, create the db
     acl.create_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
     acl.create_tables(parameters.acl_db_params, parameters.commands)
-    # study_list = acl.extract_xml_data(parameters.xml_file_name)
-    # acl.write_to_db(study_list, parameters.acl_db_params)
+
+
+# 2nd: download xml file according to customized search criterion
+# instructions:
+#   use advanced search on clinicaltrials.org and copy the search url
+#   input that and the scripts will automatically download all the data in .xml format
+search_url = parameters.search_url
+xml_string = acl.get_xml_string(search_url)
+# acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
 
 
 
-acl.xml_file2db(parameters.xml_file_name)
+acl.write2db(xml_string)
 
 studies_from_db = acl.query_postgresql("SELECT study_type FROM studies;")
 print(len(studies_from_db), studies_from_db)

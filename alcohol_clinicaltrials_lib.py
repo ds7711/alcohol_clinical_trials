@@ -8,7 +8,7 @@ import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
-# 1st: create download url and download url from the website
+# 1st: input search url and create download url to get the NCT_ID list
 def get_xml_string(search_url):
     """
     get the search results (.xml) as a string
@@ -38,10 +38,12 @@ def download_xml_file(search_url, xml_filename=parameters.xml_file_name):
     return(None)
 
 
+def create_individual_study_xml_url(nct_id, individual_study_xml_url=parameters.individual_study_xml_url):
+    return(individual_study_xml_url[0] + "NCT01143246" + individual_study_xml_url[1])
 
 
 
-
+# Create and delete database, add new relational table in the database
 ### note: one could also write a function that takes a list as input and generate the corresponding create table string\n
 ### as output. This will solve the problem of small typos and other errors
 def create_tables(acl_db_parameters, commands):
@@ -127,7 +129,19 @@ def write_to_db(study_list, acl_db_parameters):
     return(None)
 
 
+
+
+class AlcoholStudy(object):
+    def __init__(self):
+        self.nct_id = None
+        self.official_title = None
+        self.gender = None
+        self.url = None
+        self.conditions = []
+
+
 def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
+    pass
     conn = None
     conn = psycopg2.connect(acl_db_parameters)
     cur = conn.cursor()
@@ -147,7 +161,7 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
                     tmp_data = tmp_data.text
             else:
                 list_idx.append(idx)
-                tmp_data = study_xml.find("./" + col[1])
+                tmp_data = study_xml.findall("./" + col[1])
                 if tmp_data is not None:
                     tmp_data = [item.text for item in tmp_data]
             data.append(tmp_data)
@@ -164,15 +178,24 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
     conn.close()
     return(None)
 
-def xml_file2db(xml_filename, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
-    tree = ET.parse(xml_filename)
-    root = tree.getroot()
-    study_list = []
+
+def write2db(xml_string, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
+    root = ET.fromstring(xml_string)
+    debug_idx = 0
     for child in root:
-        study = AlcoholStudy()
+        if debug_idx > 3:
+            break
         if child.tag != "study":
             continue
-        study_xml2db(child, xml2db_queries, acl_db_parameters)
+        nct_id = child.find("./nct_id").text # get the nct_id of the study
+        # create the url to fetch the xml string for each study
+        individual_study_xml_url = create_individual_study_xml_url(nct_id, parameters.individual_study_xml_url)
+        # fetch the xml file
+        tmp_response = urllib2.urlopen(individual_study_xml_url)
+        tmp_xml_string = tmp_response.read()
+        tmp_root = ET.fromstring(tmp_xml_string)
+        study_xml2db(tmp_root)
+        debug_idx += 1
 
 
 test = True
@@ -213,6 +236,7 @@ else:
             study_list.append(study)
         return (study_list)
 
+
 def augment_data(my_list, list_idx):
     list_of_lists = [my_list[idx] for idx in list_idx]
     combinations = itertools.product(*list_of_lists)
@@ -252,12 +276,22 @@ def augment_data(my_list, list_idx):
 #     return(command)
 
 
+# The following functions extract data from xml and write to corresponding table
+# def extract_xml_data(study_xml):
+#     tmp_study = AlcoholStudy()
+#     tmp_study.nct_id = study_xml.find("./id_info").find("./nct_id").text
+#     tmp_study.url = study_xml.find("./required_header").find("./url").text
+#     tmp_study.official_title = study_xml.find("./official_title").text
+#
+#
+def xml2studies_table(study_xml):
+    nct_id = study_xml.find("./id_info/nct_id").text
+    url = study_xml.find("./required_header./url").text
+    official_title = study_xml.find("./official_title").text
+    overall_status = study_xml.find("./overall_status").text
+    start_month_year = study_xml.find("./start_date").text
+    completion_month_year = study_xml.find("./completion_date").text
+    primary_completion_month_year = study_xml.find("./primary_completion_date").text
+    study_type = study_xml.find("./study_type").text
+    pass
 
-class AlcoholStudy(object):
-
-    def __init__(self):
-        self.nct_id = None
-        self.official_title = None
-        self.gender = None
-        self.url = None
-        self.conditions = []
