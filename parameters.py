@@ -50,7 +50,7 @@ commands = (
         start_month_year VARCHAR(255),
         verification_month_year VARCHAR(255),
         completion_month_year VARCHAR(255),
-        primary_completion_month_year
+        primary_completion_month_year VARCHAR(255),
         study_type VARCHAR(255),
         acronym VARCHAR(255),
         baseline_population TEXT,
@@ -179,7 +179,6 @@ commands = (
             PRIMARY KEY (id)
         )
     """
-    ,
 )
 
 
@@ -187,25 +186,6 @@ commands = (
 # Each dictionary stores information for one table.
 # They key for each dictionary stores the name of the table, its value stores the column name and how data are fetched.
 
-
-
-""" CREATE TABLE outcomes
-    (
-        nct_id CHARACTER(11) NOT NULL,
-        id SERIAL,
-        outcome_type VARCHAR(255),
-        title TEXT,
-        description TEXT,
-        time_frame TEXT,
-        population TEXT,
-        units VARCHAR(255),
-        units_analyzed VARCHAR(255),
-        anticipated_posting_month_year VARCHAR(255),
-        dispersion_type VARCHAR(255),
-        param_type VARCHAR(255),
-        PRIMARY KEY (id)
-    )
-"""
 
 xml2db_queries = [
     {"studies": [["nct_id", "id_info/nct_id", False, "%s"],

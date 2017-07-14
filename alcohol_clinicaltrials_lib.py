@@ -284,6 +284,15 @@ def augment_data(my_list, list_idx):
 #     tmp_study.official_title = study_xml.find("./official_title").text
 #
 #
+
+def single_query(study_xml, query_list):
+    """
+    fetch single query from the xml using query list
+    :param study_xml:
+    :param query_object:
+    :return:
+    """
+
 def xml2studies_table(study_xml):
     nct_id = study_xml.find("./id_info/nct_id").text
     url = study_xml.find("./required_header./url").text

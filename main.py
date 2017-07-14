@@ -1,6 +1,7 @@
 import alcohol_clinicaltrials_lib as acl
 import psycopg2
 import parameters # cutomized parameters for the script, for editing
+import xml.etree.cElementTree as ET
 
 
 # 1st: create the relational database
@@ -17,7 +18,6 @@ if not parameters.db_created: # if database doesn't exist, create the db
 search_url = parameters.search_url
 xml_string = acl.get_xml_string(search_url)
 # acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
-
 
 
 acl.write2db(xml_string)
