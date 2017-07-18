@@ -8,7 +8,7 @@ download_specification = "&down_flds=all&down_fmt=xml"
 download_kw = "/download_fields"
 xml_file_name = "acl_db.xml"
 individual_study_xml_url = ["https://clinicaltrials.gov/ct2/show/", "?displayxml=true"] # used to create the
-# download_kes = ["down_flds=all", "down_fmt=xml"]
+# download_keys = ["down_flds=all", "down_fmt=xml"]
 # seprator = "&"
 
 
@@ -48,21 +48,30 @@ commands = (
         nct_id CHARACTER(11) NOT NULL,
         official_title TEXT NOT NULL,
         start_month_year VARCHAR(255),
+        start_date DATE, 
         verification_month_year VARCHAR(255),
+        verification_date DATE,
         completion_month_year VARCHAR(255),
+        completion_date DATE,
         primary_completion_month_year VARCHAR(255),
+        primary_completion_date DATE,
+        last_changed_date DATE,
         study_type VARCHAR(255),
         acronym VARCHAR(255),
         baseline_population TEXT,
         overall_status VARCHAR(255),
         last_known_status VARCHAR(255),
         phase VARCHAR(255),
-        enrollment BIGINT,
+        enrollment INT,
         enrollment_type VARCHAR(255),
         source VARCHAR(255),
-        number_of_arms BIGINT,
-        number_of_groups BIGINT,
+        number_of_arms INT,
+        number_of_groups INT,
         limitations_and_caveats VARCHAR(255),
+        brief_title VARCHAR(255),
+        why_stopped VARCHAR(255), 
+        has_expanded_access_type VARCHAR(25), 
+        has_expanded_access BOOLEAN,
         PRIMARY KEY (nct_id)
     )
     """
@@ -81,8 +90,10 @@ commands = (
             nct_id CHARACTER(11) NOT NULL,
             id SERIAL,
             gender VARCHAR(25) NOT NULL,
-            minimum_age VARCHAR(25),
-            maximum_age VARCHAR(25),
+            minimum_age_type VARCHAR(25),
+            minimum_age INT,
+            maximum_age_type VARCHAR(25),
+            maximum_age INT,
             healthy_volunteers VARCHAR(255),
             population TEXT,
             gender_description TEXT,

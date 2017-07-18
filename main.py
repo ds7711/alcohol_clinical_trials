@@ -20,7 +20,7 @@ xml_string = acl.get_xml_string(search_url)
 # acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
 
 
-acl.write2db(xml_string)
+acl.batch_xml2db(xml_string)
 
 studies_from_db = acl.query_postgresql("SELECT study_type FROM studies;")
 print(len(studies_from_db), studies_from_db)
@@ -40,17 +40,7 @@ print(len(studies_from_db), studies_from_db)
 # acl.query_postgresql("SELECT * FROM conditions WHERE nct_id=" + nct_id, parameters.acl_db_params)\
 
 
-# convert study list into dictionary for display
-def list2dict(my_list):
-    my_dict = {}
-    for idx, item in enumerate(my_list):
-        tmp_dict = {}
-        tmp_dict["name"] = item[0]
-        tmp_dict["price"] = item[1]
-        my_dict[str(idx)] = tmp_dict
-    return(my_dict)
 
-STUDY_DICT = list2dict(study_list)
 
 
 # 4th: use FLASK for display
