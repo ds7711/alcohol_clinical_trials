@@ -134,9 +134,30 @@ commands = (
     """ CREATE TABLE interventions
         (
             nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
+            id INTEGER,
             intervention_type VARCHAR(255),
             name VARCHAR(255),
+            description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE intervention_other_names
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL, 
+            intervention_id INTEGER,
+            name VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE design_groups
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER,
+            group_type VARCHAR(255),
+            title VARCHAR(255),
             description TEXT,
             PRIMARY KEY (id)
         )
@@ -187,6 +208,15 @@ commands = (
             scope VARCHAR(255),
             units VARCHAR(255),
             count INTEGER,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE brief_summaries
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            description TEXT,
             PRIMARY KEY (id)
         )
     """

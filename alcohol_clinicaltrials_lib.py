@@ -113,6 +113,20 @@ def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params
 
 
 ### helper function
+def generate_query(table_name, col_name_list, col_type_list):
+    """
+    generate the query used to add data to database
+    :param table_name: table name in the relational database
+    :param col_name_list:
+    :param col_type_list:
+    :return:
+    """
+    join_kw = ", "
+    query = "INSERT INTO " + table_name + " (" + join_kw.join(col_name_list) + ") " + " VALUES " + \
+            "(" + join_kw.join(col_type_list) + ");"
+    return(query)
+
+
 def str2bool(my_string):
     if my_string == "Yes":
         return(True)
@@ -164,6 +178,25 @@ def str2monthyear(my_string):
 
 
 type_conversion_funcs = {"%bool": str2bool,"%d": str2num, "%my": str2monthyear}
+
+
+def all_queries(study_xml, query_list):
+    """
+    single query, but may contain multiple simple returns. e.g., condition
+    :param study_xml:
+    :param query_list:
+    :return:
+    """
+    col_name = query_list[0]
+    col_type = query_list[-1]
+    query_kw = query_list[1]
+    query = "./" + query_kw
+    query_results = study_xml.findall(query)
+    query_results = [item.text for item in query_results]
+    if query_results is not None:
+        return([col_name, col_type, query_results])
+    else:
+        return(None)
 
 
 def simple_query(study_xml, query_list):
@@ -258,6 +291,7 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
 def batch_xml2db(xml_string, acl_db_parameters=parameters.acl_db_params):
     root = ET.fromstring(xml_string)
     debug_idx = 0
+    intervention_id = 1 # primary key for table interventions, foreign key for table intervention_other_name
     for child in root:
         if debug_idx > 3:
             break
@@ -274,7 +308,7 @@ def batch_xml2db(xml_string, acl_db_parameters=parameters.acl_db_params):
         debug_idx += 1
 
 
-def studies2db(study_xml):
+def studies2db(study_xml, cur):
     table_name = "studies"
     list_flag = False
     xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
@@ -308,10 +342,11 @@ def studies2db(study_xml):
     col_names, col_types, data = simple_query_list(study_xml, xmldb_queries)
     query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
             "(" + col_types[:-2] + ");"
-    return(query, data, list_flag)
+    cur.execute(query, data)
+    # return(query, data, list_flag)
 
 
-def eligibilities2db(study_xml):
+def eligibilities2db(study_xml, cur):
     table_name = "eligibilities"
     list_flag = False
     xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
@@ -327,24 +362,26 @@ def eligibilities2db(study_xml):
     col_names, col_types, data = simple_query_list(study_xml, xmldb_queries)
     query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
             "(" + col_types[:-2] + ");"
-    return(query, data, list_flag)
+    cur.execute(query, data)
+    # return(query, data, list_flag)
 
 
-def conditions2db(study_xml):
+def conditions2db(study_xml, cur):
     table_name = "conditions"
     list_flag = True
-    col_names = "nct_id, name, "
-    col_types = "%s, %s, "
+    col_names = ["nct_id", "name"]
+    col_types = ["%s", "%s"]
     nct_id = study_xml.find("./id_info/nct_id").text
     condition_list = study_xml.findall("./condition")
     conditions = [item.text for item in condition_list]
-    query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
-            "(" + col_types[:-2] + ");"
+    query = generate_query(table_name, col_names, col_types)
     data = augment_data([nct_id, conditions], [1])
-    return(query, data, list_flag)
+    for tmp_data in data:
+        cur.execute(query, tmp_data)
+    # return(query, data, list_flag)
 
 
-def links2db(study_xml):
+def links2db(study_xml, cur):
     table_name = "links"
     list_flag = False
     xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
@@ -354,10 +391,77 @@ def links2db(study_xml):
     col_names, col_types, data = simple_query_list(study_xml, xmldb_queries)
     query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
             "(" + col_types[:-2] + ");"
-    return(query, data, list_flag)
+    cur.execute(query, data)
+    # return(cur)
 
 
-table_funcs = [studies2db, eligibilities2db, conditions2db, links2db]
+def brief_summaries2db(study_xml, cur):
+    table_name = "brief_summaries"
+    query_entry = ["brief_summaries", "brief_summary/textblock", False, "%s"]
+    nct_id = study_xml.find("./id_info/nct_id").text
+    col_names = ["nct_id", "description"]
+    col_types = ["%s", "%s"]
+    _, _, brief_summaries = all_queries(study_xml, query_entry)
+    query = generate_query(table_name, col_names, col_types)
+    data = augment_data([nct_id, brief_summaries], [1])
+    for tmp_data in data:
+        cur.execute(query, tmp_data)
+    # return(cur)
+
+
+class Intervention2DB_Obj(object):
+    """
+    write interventions information into the database, use object to keep track of the id
+    """
+    def __init__(self):
+        self.intervention_id = 1
+        self.nct_id = None
+
+    def intervention_other_names(self, intervention_xml, cur):
+        table_name = "intervention_other_names"
+        col_names = ["nct_id", "intervention_id", "name"]
+        col_types = ["%s", "%s", "%s"]
+        query = generate_query(table_name, col_names, col_types)
+        other_name_list = intervention_xml.findall("./other_name")
+        if other_name_list == []:
+            pass
+        else:
+            other_name_list = [item.text for item in other_name_list]
+            data = augment_data([self.nct_id, self.intervention_id, other_name_list], [-1])
+            for tmp_data in data:
+                cur.execute(query, tmp_data)
+        print(self.intervention_id)
+
+    def design_group_main_func(self):
+        pass
+
+    def intervention_main_func(self, study_xml, cur):
+        table_name = "interventions"
+        col_names = ["nct_id", "id", "intervention_type", "name", "description"]
+        col_types = ["%s", "%s", "%s", "%s", "%s"]
+        query = generate_query(table_name, col_names, col_types)
+
+        nct_id = study_xml.find("./id_info/nct_id").text
+        self.nct_id = nct_id
+
+        intervention_list = study_xml.findall("./intervention")
+
+        for xml_item in intervention_list:
+            intervention_type = xml_item.find("./intervention_type").text
+            intervention_name = xml_item.find("./intervention_name").text
+            intervention_description = xml_item.find("./unknown_query!!!")  # unknown query kw
+            tmp_data = [nct_id, self.intervention_id, intervention_type, intervention_name,
+                        intervention_description]
+            cur.execute(query, tmp_data)
+            self.intervention_other_names(xml_item, cur=cur)
+            self.intervention_id += 1
+        # return(None, None, False)
+
+
+
+interventions2db = Intervention2DB_Obj()
+
+table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db, interventions2db.intervention_main_func]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
@@ -371,12 +475,15 @@ def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
     # else:
     #     cur.execute(query, data)
     for tmp_func in table_funcs:
-        query, data, list_flag = tmp_func(study_xml)
-        if list_flag:
-            for tmp_data in data:
-                cur.execute(query, tmp_data)
-        else:
-            cur.execute(query, data)
+        # query, data, list_flag = tmp_func(study_xml)
+        tmp_func(study_xml, cur)
+        # if query is None:
+        #     continue
+        # if list_flag:
+        #     for tmp_data in data:
+        #         cur.execute(query, tmp_data)
+        # else:
+        #     cur.execute(query, data)
     conn.commit()
     conn.close()
     return(None)
@@ -483,3 +590,15 @@ else:
                 study.conditions.append(item.text)
             study_list.append(study)
         return (study_list)
+
+
+class Test(object):
+    a = lambda x: x ** 2
+    b = lambda x: x * 10
+    c = [a, b]
+    def __init__(self):
+        self.x = 0
+
+    def calculator(self, other_funcs=c):
+        for tmp_func in other_funcs:
+            print(tmp_func(5))

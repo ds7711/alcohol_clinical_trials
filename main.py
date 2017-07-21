@@ -5,7 +5,10 @@ import xml.etree.cElementTree as ET
 
 
 # 1st: create the relational database
-acl.delete_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
+try:
+    acl.delete_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
+except:
+    pass
 if not parameters.db_created: # if database doesn't exist, create the db
     acl.create_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
     acl.create_tables(parameters.acl_db_params, parameters.commands)
@@ -22,7 +25,7 @@ xml_string = acl.get_xml_string(search_url)
 
 acl.batch_xml2db(xml_string)
 
-studies_from_db = acl.query_postgresql("SELECT study_type FROM studies;")
+studies_from_db = acl.query_postgresql("SELECT * FROM brief_summaries;")
 print(len(studies_from_db), studies_from_db)
 
 # 3rd: display xml file in a user-friendly way
