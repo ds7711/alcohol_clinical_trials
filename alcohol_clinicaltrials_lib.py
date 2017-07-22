@@ -113,15 +113,17 @@ def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params
 
 
 ### helper function
-def generate_query(table_name, col_name_list, col_type_list):
+def generate_query(table_name, col_name_list, col_type_list=None):
     """
     generate the query used to add data to database
     :param table_name: table name in the relational database
     :param col_name_list:
-    :param col_type_list:
+    :param col_type_list: if col_type_list is omitted, infer it
     :return:
     """
     join_kw = ", "
+    if col_type_list is None:
+        col_type_list = ["%s"] * len(col_name_list)
     query = "INSERT INTO " + table_name + " (" + join_kw.join(col_name_list) + ") " + " VALUES " + \
             "(" + join_kw.join(col_type_list) + ");"
     return(query)
@@ -190,8 +192,8 @@ def all_queries(study_xml, query_list):
     col_name = query_list[0]
     col_type = query_list[-1]
     query_kw = query_list[1]
-    query = "./" + query_kw
-    query_results = study_xml.findall(query)
+    query_kw = "./" + query_kw
+    query_results = study_xml.findall(query_kw)
     query_results = [item.text for item in query_results]
     if query_results is not None:
         return([col_name, col_type, query_results])
@@ -212,22 +214,32 @@ def simple_query(study_xml, query_list):
 
 
 def simple_query_list(study_xml, query_lists):
-    col_names = ""
-    col_types = ""
-    basic_col_type = "%s"
+    col_names = []
     data = []
+    basic_col_type = "%s"
     for query_list in query_lists:
         query_result = simple_query(study_xml, query_list)
         if query_result is None:
             continue
         else:
             col_name, col_type, tmp_data = query_result
-            col_names = col_names + col_name + ", "
-            col_types = col_types + basic_col_type + ", "
+            col_names.append(col_name)
             if col_type != basic_col_type:
                 tmp_data = type_conversion_funcs[col_type](tmp_data)
             data.append(tmp_data)
-    return(col_names, col_types, data)
+    return(col_names, data)
+
+
+def hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True):
+
+    if multiple_returns:
+        main_kw = "./" + main_kw
+        complex_object_list = study_xml.findall(main_kw)
+        for xml_item in complex_object_list:
+            tmp_col_names, tmp_data = simple_query_list(xml_item, sub_query_list)
+
+    else:
+        pass
 
 
 def example_write_to_db(study_list, acl_db_parameters):
@@ -291,7 +303,6 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
 def batch_xml2db(xml_string, acl_db_parameters=parameters.acl_db_params):
     root = ET.fromstring(xml_string)
     debug_idx = 0
-    intervention_id = 1 # primary key for table interventions, foreign key for table intervention_other_name
     for child in root:
         if debug_idx > 3:
             break
@@ -309,8 +320,20 @@ def batch_xml2db(xml_string, acl_db_parameters=parameters.acl_db_params):
 
 
 def studies2db(study_xml, cur):
-    table_name = "studies"
-    list_flag = False
+    """
+    extract data about studies and write into the database
+    :param study_xml: study_xml object used to extract data
+    :param cur: cursor object used for writing
+    :return: the cursor object
+    """
+    table_name = "studies"  # name of the table
+    # xmldb_queries structure:
+        # each row includes information for one column in the table
+        # 1st: name of the column,
+        # 2nd: keyword used to extract data from xml object
+        # 3rd: obsolete for now, may be useful in the future
+        # 4th: type of the data, default %s, if other, data will be converted accordingly.
+            # e.g.,  %d indicate the extracted data will be first converted into a number and then write into the database
     xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
                      ["official_title", "official_title", False, "%s"],
                      ["start_month_year", "start_date", False, "%s"],
@@ -339,16 +362,20 @@ def studies2db(study_xml, cur):
                      ["has_expanded_access_type", "has_expanded_access", False, "%s"],
                      ["has_expanded_access", "has_expanded_access", False, "%bool"]
                     ]
-    col_names, col_types, data = simple_query_list(study_xml, xmldb_queries)
-    query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
-            "(" + col_types[:-2] + ");"
+    col_names, data = simple_query_list(study_xml, xmldb_queries)
+    query = generate_query(table_name, col_names)  # query string used by cursor object (psycopg2) to write to the database
     cur.execute(query, data)
-    # return(query, data, list_flag)
+    return(cur)
 
 
 def eligibilities2db(study_xml, cur):
+    """
+    extract data and write to eligibilities table, detail see studies2db
+    :param study_xml:
+    :param cur:
+    :return:
+    """
     table_name = "eligibilities"
-    list_flag = False
     xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
                      ["gender", "eligibility/gender", False, "%s"],
                      ["minimum_age_type", "eligibility/minimum_age", "%s"],
@@ -359,40 +386,35 @@ def eligibilities2db(study_xml, cur):
                      ["age_groups", "eligibility/age_groups", False, "%s"],  #unknown query kw
                      ["criteria", "eligibility/criteria/textblock", False, "%s"]
                     ]
-    col_names, col_types, data = simple_query_list(study_xml, xmldb_queries)
-    query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
-            "(" + col_types[:-2] + ");"
+    col_names, data = simple_query_list(study_xml, xmldb_queries)
+    query = generate_query(table_name, col_names)
     cur.execute(query, data)
-    # return(query, data, list_flag)
+    return(cur)
 
 
 def conditions2db(study_xml, cur):
     table_name = "conditions"
-    list_flag = True
     col_names = ["nct_id", "name"]
-    col_types = ["%s", "%s"]
     nct_id = study_xml.find("./id_info/nct_id").text
     condition_list = study_xml.findall("./condition")
     conditions = [item.text for item in condition_list]
-    query = generate_query(table_name, col_names, col_types)
+    query = generate_query(table_name, col_names)
     data = augment_data([nct_id, conditions], [1])
     for tmp_data in data:
         cur.execute(query, tmp_data)
-    # return(query, data, list_flag)
+    return(cur)
 
 
 def links2db(study_xml, cur):
     table_name = "links"
-    list_flag = False
     xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
                      ["url", "required_header/url", False, "%s"],
                      ["description", "required_header/download_date", False, "%s"]  # unknown query kw and content
                     ]
-    col_names, col_types, data = simple_query_list(study_xml, xmldb_queries)
-    query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
-            "(" + col_types[:-2] + ");"
+    col_names, data = simple_query_list(study_xml, xmldb_queries)
+    query = generate_query(table_name, col_names)
     cur.execute(query, data)
-    # return(cur)
+    return(cur)
 
 
 def brief_summaries2db(study_xml, cur):
@@ -400,13 +422,12 @@ def brief_summaries2db(study_xml, cur):
     query_entry = ["brief_summaries", "brief_summary/textblock", False, "%s"]
     nct_id = study_xml.find("./id_info/nct_id").text
     col_names = ["nct_id", "description"]
-    col_types = ["%s", "%s"]
     _, _, brief_summaries = all_queries(study_xml, query_entry)
-    query = generate_query(table_name, col_names, col_types)
+    query = generate_query(table_name, col_names)
     data = augment_data([nct_id, brief_summaries], [1])
     for tmp_data in data:
         cur.execute(query, tmp_data)
-    # return(cur)
+    return(cur)
 
 
 class Intervention2DB_Obj(object):
@@ -414,13 +435,14 @@ class Intervention2DB_Obj(object):
     write interventions information into the database, use object to keep track of the id
     """
     def __init__(self):
-        self.intervention_id = 1
+        self.intervention_id = 1  # primary key for table interventions, foreign key for table intervention_other_name
         self.nct_id = None
+        self.design_group_id = 1
 
     def intervention_other_names(self, intervention_xml, cur):
         table_name = "intervention_other_names"
         col_names = ["nct_id", "intervention_id", "name"]
-        col_types = ["%s", "%s", "%s"]
+        col_types = ["%s"] * len(col_names)
         query = generate_query(table_name, col_names, col_types)
         other_name_list = intervention_xml.findall("./other_name")
         if other_name_list == []:
@@ -432,13 +454,23 @@ class Intervention2DB_Obj(object):
                 cur.execute(query, tmp_data)
         print(self.intervention_id)
 
-    def design_group_main_func(self):
-        pass
+    def design_group_main_func(self, study_xml, cur):
+        table_name = "design_groups"
+        col_names = ["nct_id", "id", "group_type", "title", "description"]
+        query = generate_query(table_name, col_names)
+        nct_id = study_xml.find("./id_info/nct_id").text
+
+        first_level_kw = "./arm_group"
+        second_level_kw_list = ["./arm_group_label", "./arm_group_type", "./description"]
+        design_group_list = study_xml.findall(first_level_kw)
+
+
+
 
     def intervention_main_func(self, study_xml, cur):
         table_name = "interventions"
         col_names = ["nct_id", "id", "intervention_type", "name", "description"]
-        col_types = ["%s", "%s", "%s", "%s", "%s"]
+        col_types = ["%s"] * len(col_names)
         query = generate_query(table_name, col_names, col_types)
 
         nct_id = study_xml.find("./id_info/nct_id").text
