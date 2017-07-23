@@ -113,6 +113,20 @@ def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params
 
 
 ### helper function
+
+def augment_data(my_list, list_idx):
+    list_of_lists = [my_list[idx] for idx in list_idx]
+    combinations = itertools.product(*list_of_lists)
+    new_data = []
+    for item in combinations:
+        for iii, idx in enumerate(list_idx):
+            entry = my_list
+            entry[idx] = item[iii]
+        new_data.append(copy.deepcopy(entry))
+        # print entry
+    return(new_data)
+
+
 def generate_query(table_name, col_name_list, col_type_list=None):
     """
     generate the query used to add data to database
@@ -182,6 +196,30 @@ def str2monthyear(my_string):
 type_conversion_funcs = {"%bool": str2bool,"%d": str2num, "%my": str2monthyear}
 
 
+def xml_find(study_xml, keyword):
+    """
+    handle exception to prevent error
+    :param study_xml:
+    :param keyword:
+    :return:
+    """
+    result = study_xml.find("./" + keyword)
+    if result is not None:
+        return(result.text)
+    else:
+        return(None)
+
+
+def xml_findall(study_xml, keyword):
+    keyword = "./" + keyword
+    results = study_xml.findall(keyword)
+    if results:  #short hand for results == []
+        return([item.text for item in results])
+    else:
+        return([])
+
+
+
 def all_queries(study_xml, query_list):
     """
     single query, but may contain multiple simple returns. e.g., condition
@@ -220,7 +258,8 @@ def simple_query_list(study_xml, query_lists):
     for query_list in query_lists:
         query_result = simple_query(study_xml, query_list)
         if query_result is None:
-            continue
+            col_names.append(query_list[0])
+            data.append(None)
         else:
             col_name, col_type, tmp_data = query_result
             col_names.append(col_name)
@@ -231,15 +270,25 @@ def simple_query_list(study_xml, query_lists):
 
 
 def hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True):
-
+    data = []
+    tmp_col_names = []
+    main_kw = "./" + main_kw
     if multiple_returns:
-        main_kw = "./" + main_kw
         complex_object_list = study_xml.findall(main_kw)
-        for xml_item in complex_object_list:
-            tmp_col_names, tmp_data = simple_query_list(xml_item, sub_query_list)
-
+        if complex_object_list:
+            for xml_item in complex_object_list:
+                tmp_col_names, tmp_data = simple_query_list(xml_item, sub_query_list)
+                data.append(tmp_data)
+        else:
+            return([], [])
     else:
-        pass
+        complex_object = study_xml.find(main_kw)
+        if complex_object is not None:
+            tmp_col_names, data = simple_query_list(complex_object, sub_query_list)
+            data = [data]
+        else:
+            return([], [])
+    return(tmp_col_names, data)
 
 
 def example_write_to_db(study_list, acl_db_parameters):
@@ -302,21 +351,22 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
 
 def batch_xml2db(xml_string, acl_db_parameters=parameters.acl_db_params):
     root = ET.fromstring(xml_string)
-    debug_idx = 0
-    for child in root:
-        if debug_idx > 3:
+    for debug_idx, child in enumerate(root):
+        if debug_idx > 300:
             break
         if child.tag != "study":
             continue
         nct_id = child.find("./nct_id").text # get the nct_id of the study
+        print("%dth study: %s" % (debug_idx, nct_id))
         # create the url to fetch the xml string for each study
         individual_study_xml_url = create_individual_study_xml_url(nct_id, parameters.individual_study_xml_url)
+        print(individual_study_xml_url)
+        print("\n")
         # fetch the xml file
         tmp_response = urllib2.urlopen(individual_study_xml_url)
         tmp_xml_string = tmp_response.read()
         tmp_root = ET.fromstring(tmp_xml_string)
         individual_xml2db(tmp_root, acl_db_parameters)
-        debug_idx += 1
 
 
 def studies2db(study_xml, cur):
@@ -435,7 +485,8 @@ class Intervention2DB_Obj(object):
     write interventions information into the database, use object to keep track of the id
     """
     def __init__(self):
-        self.intervention_id = 1  # primary key for table interventions, foreign key for table intervention_other_name
+        self.intervention_detailed_id = 1  # primary key for table interventions, foreign key for table intervention_other_name
+        self.intervention_id = 1
         self.nct_id = None
         self.design_group_id = 1
 
@@ -452,26 +503,38 @@ class Intervention2DB_Obj(object):
             data = augment_data([self.nct_id, self.intervention_id, other_name_list], [-1])
             for tmp_data in data:
                 cur.execute(query, tmp_data)
-        print(self.intervention_id)
+        return(cur)
 
-    def design_group_main_func(self, study_xml, cur):
+    def design_group_func(self, study_xml, cur):
         table_name = "design_groups"
         col_names = ["nct_id", "id", "group_type", "title", "description"]
         query = generate_query(table_name, col_names)
         nct_id = study_xml.find("./id_info/nct_id").text
 
-        first_level_kw = "./arm_group"
-        second_level_kw_list = ["./arm_group_label", "./arm_group_type", "./description"]
-        design_group_list = study_xml.findall(first_level_kw)
+        main_query_kw = "arm_group"
+        sub_query_list = [["group_type", "arm_group_type", False, "%s"],
+                          ["title", "arm_group_label", False, "%s"],
+                          ["description", "description", False, "%s"]]
+        _, data = hierarchical_query(study_xml, main_query_kw, sub_query_list, multiple_returns=True)
+
+        design_group_data = []
+        for tmp_data in data:
+            tmp_all_data = [nct_id, self.design_group_id] + tmp_data
+            try:
+                cur.execute(query, tmp_all_data)
+            except:
+                print(query, tmp_all_data)
+                raise("Eror")
+            design_group_data.append(tmp_all_data)
+            self.design_group_id += 1
+
+        return(design_group_data)
 
 
-
-
-    def intervention_main_func(self, study_xml, cur):
-        table_name = "interventions"
+    def intervention_func_detailed(self, study_xml, cur):
+        table_name = "interventions_detailed"
         col_names = ["nct_id", "id", "intervention_type", "name", "description"]
-        col_types = ["%s"] * len(col_names)
-        query = generate_query(table_name, col_names, col_types)
+        query = generate_query(table_name, col_names)
 
         nct_id = study_xml.find("./id_info/nct_id").text
         self.nct_id = nct_id
@@ -479,27 +542,94 @@ class Intervention2DB_Obj(object):
         intervention_list = study_xml.findall("./intervention")
 
         for xml_item in intervention_list:
-            intervention_type = xml_item.find("./intervention_type").text
-            intervention_name = xml_item.find("./intervention_name").text
-            intervention_description = xml_item.find("./unknown_query!!!")  # unknown query kw
-            tmp_data = [nct_id, self.intervention_id, intervention_type, intervention_name,
-                        intervention_description]
+            intervention_type = xml_find(study_xml, "intervention_type")
+            intervention_name = xml_find(study_xml, "intervention_name")
+            intervention_description = xml_item.findall("./arm_group_label")  # unknown query kw
+            if intervention_description == []:
+                tmp_data = [nct_id, self.intervention_detailed_id, intervention_type, intervention_name, None]
+                cur.execute(query, tmp_data)
+                # self.intervention_other_names(xml_item, cur=cur)  # complete the other funcitons
+                self.intervention_detailed_id += 1
+            else:
+                for item in intervention_description:
+                    tmp_data = [nct_id, self.intervention_detailed_id, intervention_type, intervention_name,
+                                item.text]
+                    cur.execute(query, tmp_data)
+                    # self.intervention_other_names(xml_item, cur=cur)  # complete the other funcitons
+                    self.intervention_detailed_id += 1
+        return(cur)
+
+
+    def intervention_func(self, study_xml, cur):
+        table_name = "interventions"
+        col_names = ["nct_id", "id", "intervention_type", "name", "description"]
+        query = generate_query(table_name, col_names)
+
+        nct_id = study_xml.find("./id_info/nct_id").text
+        self.nct_id = nct_id
+
+        intervention_list = study_xml.findall("./intervention")
+
+        intervention_design_group_dict = {}
+
+        for xml_item in intervention_list:
+            intervention_type = xml_find(study_xml, "intervention_type")
+            intervention_name = xml_find(study_xml, "intervention_name")
+            intervention_description = xml_find(study_xml, "description")
+            intervention_details = xml_item.findall("./arm_group_label")
+            tmp_data = [nct_id, self.intervention_id, intervention_type, intervention_name, intervention_description]
             cur.execute(query, tmp_data)
-            self.intervention_other_names(xml_item, cur=cur)
+            self.intervention_other_names(xml_item, cur=cur)  # complete the other funcitons
+
+            if intervention_details != []:
+                for item in intervention_details:
+                    intervention_design_group_dict[item.text] = self.intervention_id
             self.intervention_id += 1
-        # return(None, None, False)
+        return(intervention_design_group_dict)
+
+
+    def design_group_interventions_func(self, intervention_design_group_dict, design_group_data, cur):
+        table_name = "design_group_interventions"
+        col_names = ["nct_id", "design_group_id", "intervention_id"]
+        query = generate_query(table_name, col_names)
+        for item in design_group_data:
+            design_group_id = item[1]
+            intervention_group_key = item[3]
+            try:
+                intervention_id = intervention_design_group_dict[intervention_group_key]
+            except:
+                # print(self.nct_id)
+                # print(intervention_design_group_dict)
+                # print(design_group_data)
+                intervention_id = None
+            data = [self.nct_id, design_group_id, intervention_id]
+            cur.execute(query, data)
+        return(cur)
+
+
+    def main_func(self, study_xml, cur):
+        self.intervention_func_detailed(study_xml=study_xml, cur=cur)
+        intervention_design_group_dict = self.intervention_func(study_xml=study_xml, cur=cur)
+        design_group_data = self.design_group_func(study_xml=study_xml, cur=cur)
+        self.design_group_interventions_func(intervention_design_group_dict, design_group_data, cur=cur)
+        # print intervention_design_group_dict
+        # print design_group_data
+
 
 
 
 interventions2db = Intervention2DB_Obj()
 
-table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db, interventions2db.intervention_main_func]
+table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db, interventions2db.main_func]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
     conn = None
     conn = psycopg2.connect(acl_db_parameters)
     cur = conn.cursor()
+
+    # for debugging:
+    # study_xml = ET.parse("NCT01937130.xml").getroot()
     # query, data = conditions2db(study_xml)
     # if type(data) is list:
     #     for tmp_data in data:
@@ -521,23 +651,19 @@ def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
     return(None)
 
 
+def debug_xml2db(xml_filename, acl_db_parameters=parameters.acl_db_params):
+    # study_xml = ET.parse(xml_filename).getroot()
+
+    tmp_response = urllib2.urlopen(xml_filename)
+    tmp_xml_string = tmp_response.read()
+    study_xml = ET.fromstring(tmp_xml_string)
+
+    conn = None
+    conn = psycopg2.connect(acl_db_parameters)
+    cur = conn.cursor()
+    interventions2db.design_group_func(study_xml, cur)
 
 
-
-
-
-
-def augment_data(my_list, list_idx):
-    list_of_lists = [my_list[idx] for idx in list_idx]
-    combinations = itertools.product(*list_of_lists)
-    new_data = []
-    for item in combinations:
-        for iii, idx in enumerate(list_idx):
-            entry = my_list
-            entry[idx] = item[iii]
-        new_data.append(copy.deepcopy(entry))
-        # print entry
-    return (new_data)
 
 
 ### Reference Backup only
@@ -553,84 +679,9 @@ def augment_data(my_list, list_idx):
 #                    ]}
 # ]
 #
-# def create_table_commands(table_dict):
-#     table_name = table_dict.keys()[0]
-#     table_cols = table_dict.values()[0]
-#     space_separator = " "
-#     start_str = "CREATE TABLE " + table_name + space_separator + "("
-#     end_str = ")"
-#     main_command = ""
-#     for col in table_cols:
-#         main_command = main_command + col[0] + space_separator + col[1] + space_separator + col[2] + ","
-#     command = start_str + main_command[:-1] + end_str
-#     return(command)
 
 
-# The following functions extract data from xml and write to corresponding table
-# def extract_xml_data(study_xml):
-#     tmp_study = AlcoholStudy()
-#     tmp_study.nct_id = study_xml.find("./id_info").find("./nct_id").text
-#     tmp_study.url = study_xml.find("./required_header").find("./url").text
-#     tmp_study.official_title = study_xml.find("./official_title").text
-#
-#
 
 
-class AlcoholStudy(object):
-    def __init__(self):
-        self.nct_id = None
-        self.official_title = None
-        self.gender = None
-        self.url = None
-        self.conditions = []
 
 
-test = True
-if test:
-    def extract_xml_data(xml_filename):
-        tree = ET.parse(xml_filename)
-        root = tree.getroot()
-        study_list = []
-        for child in root:
-            study = AlcoholStudy()
-            if child.tag != "study":
-                continue
-            study.nct_id = child.find("./nct_id").text
-            study.official_title = child.find("./title").text
-            study.url = child.find("./url").text
-            study.gender = child.find("./gender").text
-            condition_list = child.find("./conditions")
-            for item in condition_list:
-                study.conditions.append(item.text)
-            study_list.append(study)
-        return (study_list)
-else:
-    def extract_xml_data(xml_filename):
-        tree = ET.parse(xml_filename)
-        root = tree.getroot()
-        study_list = []
-        for child in root:
-            study = AlcoholStudy()
-            if child.tag != "study":
-                continue
-            study.nct_id = child.find("./nct_id").text
-            study.official_title = child.find("./title").text
-            study.url = child.find("./url").text
-            study.gender = child.find("./gender").text
-            condition_list = child.find("./conditions")
-            for item in condition_list:
-                study.conditions.append(item.text)
-            study_list.append(study)
-        return (study_list)
-
-
-class Test(object):
-    a = lambda x: x ** 2
-    b = lambda x: x * 10
-    c = [a, b]
-    def __init__(self):
-        self.x = 0
-
-    def calculator(self, other_funcs=c):
-        for tmp_func in other_funcs:
-            print(tmp_func(5))

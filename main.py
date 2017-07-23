@@ -23,7 +23,11 @@ xml_string = acl.get_xml_string(search_url)
 # acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
 
 
+acl.debug_xml2db("https://clinicaltrials.gov/ct2/show/NCT01757353?displayxml=true")
+
+
 acl.batch_xml2db(xml_string)
+
 
 studies_from_db = acl.query_postgresql("SELECT * FROM brief_summaries;")
 print(len(studies_from_db), studies_from_db)

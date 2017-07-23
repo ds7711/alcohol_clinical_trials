@@ -46,7 +46,7 @@ commands = (
     """
     CREATE TABLE studies (
         nct_id CHARACTER(11) NOT NULL,
-        official_title TEXT NOT NULL,
+        official_title TEXT,
         start_month_year VARCHAR(255),
         start_date DATE, 
         verification_month_year VARCHAR(255),
@@ -142,6 +142,19 @@ commands = (
         )
     """
     ,
+    # intervention_detailed treat experiment group with different dose as different design group
+    # e.g., drug group may be divided into low, middle, high three group
+    """ CREATE TABLE interventions_detailed
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER,
+            intervention_type VARCHAR(255),
+            name VARCHAR(255),
+            description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
     """ CREATE TABLE intervention_other_names
         (
             nct_id CHARACTER(11) NOT NULL,
@@ -159,6 +172,16 @@ commands = (
             group_type VARCHAR(255),
             title VARCHAR(255),
             description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE design_group_interventions
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            design_group_id INTEGER,
+            intervention_id INTEGER,
             PRIMARY KEY (id)
         )
     """
