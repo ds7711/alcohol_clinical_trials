@@ -29,7 +29,7 @@ acl.debug_xml2db("https://clinicaltrials.gov/ct2/show/NCT01757353?displayxml=tru
 acl.batch_xml2db(xml_string)
 
 
-studies_from_db = acl.query_postgresql("SELECT * FROM brief_summaries;")
+studies_from_db = acl.query_postgresql("SELECT * FROM interventions_detailed;")
 print(len(studies_from_db), studies_from_db)
 
 # 3rd: display xml file in a user-friendly way

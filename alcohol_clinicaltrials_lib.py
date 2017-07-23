@@ -542,8 +542,8 @@ class Intervention2DB_Obj(object):
         intervention_list = study_xml.findall("./intervention")
 
         for xml_item in intervention_list:
-            intervention_type = xml_find(study_xml, "intervention_type")
-            intervention_name = xml_find(study_xml, "intervention_name")
+            intervention_type = xml_find(xml_item, "intervention_type")
+            intervention_name = xml_find(xml_item, "intervention_name")
             intervention_description = xml_item.findall("./arm_group_label")  # unknown query kw
             if intervention_description == []:
                 tmp_data = [nct_id, self.intervention_detailed_id, intervention_type, intervention_name, None]
@@ -573,9 +573,9 @@ class Intervention2DB_Obj(object):
         intervention_design_group_dict = {}
 
         for xml_item in intervention_list:
-            intervention_type = xml_find(study_xml, "intervention_type")
-            intervention_name = xml_find(study_xml, "intervention_name")
-            intervention_description = xml_find(study_xml, "description")
+            intervention_type = xml_find(xml_item, "intervention_type")
+            intervention_name = xml_find(xml_item, "intervention_name")
+            intervention_description = xml_find(xml_item, "description")
             intervention_details = xml_item.findall("./arm_group_label")
             tmp_data = [nct_id, self.intervention_id, intervention_type, intervention_name, intervention_description]
             cur.execute(query, tmp_data)
