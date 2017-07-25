@@ -28,23 +28,6 @@ acl_db_params = "dbname=" + acl_db_name + " " + "user=" + _acl_db_username + " "
 
 
 
-# .xml to AACT schema-like database
-# columns in the np.array:
-#   1st: column name of the database table
-#   2nd: data type of the column
-#   3rd: extra specification for the column (e.g., NOT NULL or PRIMARY KEY)
-#   4th: keywords to query results from .xml for the column
-#   5th: is returned result a list? False / True
-#   6th: data type for insert entries (e.g., %s )
-
-
-
-
-
-
-# Perhaps two separate tables are better
-
-
 # aact_schema
 commands = (
     """
@@ -181,29 +164,6 @@ commands = (
         )
     """
     ,
-    """ CREATE TABLE keywords
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
-            name VARCHAR(255),
-            PRIMARY KEY (id)
-        )
-    """
-    ,
-    """ CREATE TABLE designs
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
-            allocation VARCHAR(255),
-            intervention_model VARCHAR(255),
-            intervention_model_description VARCHAR(255),
-            primary_purpose VARCHAR(255),
-            description VARCHAR(255),
-            observational_model VARCHAR(255),
-            PRIMARY KEY (id)
-        )
-    """
-    ,
     """ CREATE TABLE result_groups
         (
             nct_id CHARACTER(11) NOT NULL,
@@ -247,7 +207,36 @@ commands = (
             PRIMARY KEY (id)
         )
     """
+    ,
+    """ CREATE TABLE keywords
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            name VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE designs
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            allocation VARCHAR(255),
+            intervention_model VARCHAR(255),
+            intervention_model_description VARCHAR(255),
+            primary_purpose VARCHAR(255),
+            description VARCHAR(255),
+            observational_model VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
 )
+
+
+
+
+
+
 
 
 # Queries used to fetch data from .xml file
@@ -274,3 +263,22 @@ xml2db_queries = [
                ["url", "required_header/url", False, "%s"]]}
 ]
 
+
+
+
+
+# .xml to AACT schema-like database
+# columns in the np.array:
+#   1st: column name of the database table
+#   2nd: data type of the column
+#   3rd: extra specification for the column (e.g., NOT NULL or PRIMARY KEY)
+#   4th: keywords to query results from .xml for the column
+#   5th: is returned result a list? False / True
+#   6th: data type for insert entries (e.g., %s )
+
+
+
+
+
+
+# Perhaps two separate tables are better

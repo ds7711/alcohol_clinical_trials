@@ -23,11 +23,15 @@ zip_filename = acl.download_all_studies(search_url, zip_filename=parameters.zip_
 # acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
 
 
+### debug
+# acl.debug_xml2db("NCT01937130_results.xml", test_func=acl.clinical_results2db.result_outcome_main)
+
+
 # convert .xml files into database
 acl.batch_xml2db(zip_filename)
 
 
-studies_from_db = acl.query_postgresql("SELECT * FROM interventions_detailed;")
+studies_from_db = acl.query_postgresql("SELECT * FROM outcomes;")
 print(len(studies_from_db), studies_from_db)
 
 # 3rd: display xml file in a user-friendly way
