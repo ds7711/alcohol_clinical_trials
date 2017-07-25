@@ -1,5 +1,6 @@
 # import required modules
 import datetime
+import zipfile
 import parameters
 import itertools
 import copy
@@ -10,37 +11,24 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 # 1st: input search url and create download url to get the NCT_ID list
-def get_xml_string(search_url):
-    """
-    get the search results (.xml) as a string
-    :param search_url: url used for search
-    :return:
-    """
-    index = search_url.find(parameters.search_url_separating_kw)
-    kw_length = len(parameters.search_url_separating_kw)
+def separate_search_url(search_url, separating_kw=parameters.search_url_separating_kw):
+    index = search_url.find(separating_kw)
+    kw_length = len(separating_kw)
     cut_index = index + kw_length
-    base_url = search_url[:cut_index]
+    search_affix = search_url[:cut_index]
     search_specification = search_url[cut_index:]
-    search_string = base_url + parameters.download_kw + search_specification + parameters.download_specification
-    response = urllib2.urlopen(search_string)
+    return(search_affix, search_specification)
+
+
+def download_all_studies(search_url, zip_filename=parameters.zip_filename):
+    zip_download_affix = "https://clinicaltrials.gov/ct2/download_studies"
+    _, search_specification = separate_search_url(search_url)
+    download_url = zip_download_affix + search_specification
+    response = urllib2.urlopen(download_url)
     xml_string = response.read()
-    return(xml_string)
-
-
-def download_xml_file(search_url, xml_filename=parameters.xml_file_name):
-    """
-    write the string as a .xml file
-    :param search_url:
-    :return:
-    """
-    xml_string = get_xml_string(search_url)
-    with open(xml_filename, "wb") as thefile:
+    with open(zip_filename, "wb") as thefile:
         thefile.write(xml_string)
-    return(None)
-
-
-def create_individual_study_xml_url(nct_id, individual_study_xml_url=parameters.individual_study_xml_url):
-    return(individual_study_xml_url[0] + nct_id + individual_study_xml_url[1])
+    return(zip_filename)
 
 
 
@@ -219,7 +207,6 @@ def xml_findall(study_xml, keyword):
         return([])
 
 
-
 def all_queries(study_xml, query_list):
     """
     single query, but may contain multiple simple returns. e.g., condition
@@ -349,24 +336,17 @@ def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_par
     return(None)
 
 
-def batch_xml2db(xml_string, acl_db_parameters=parameters.acl_db_params):
-    root = ET.fromstring(xml_string)
-    for debug_idx, child in enumerate(root):
-        if debug_idx > 300:
+def batch_xml2db(zip_filename, acl_db_parameters=parameters.acl_db_params):
+    studies_zip = zipfile.ZipFile(zip_filename, "r")
+    for idx, xml_filename in enumerate(studies_zip.namelist()):
+        with studies_zip.open(xml_filename) as xml_file:
+            xml_string = xml_file.read()
+        if idx > 100:
             break
-        if child.tag != "study":
-            continue
-        nct_id = child.find("./nct_id").text # get the nct_id of the study
-        print("%dth study: %s" % (debug_idx, nct_id))
-        # create the url to fetch the xml string for each study
-        individual_study_xml_url = create_individual_study_xml_url(nct_id, parameters.individual_study_xml_url)
-        print(individual_study_xml_url)
+        study_xml = ET.fromstring(xml_string)
+        print("%dth study: %s" % (idx+1, xml_filename[:-4]))
         print("\n")
-        # fetch the xml file
-        tmp_response = urllib2.urlopen(individual_study_xml_url)
-        tmp_xml_string = tmp_response.read()
-        tmp_root = ET.fromstring(tmp_xml_string)
-        individual_xml2db(tmp_root, acl_db_parameters)
+        individual_xml2db(study_xml, acl_db_parameters)
 
 
 def studies2db(study_xml, cur):
@@ -505,6 +485,7 @@ class Intervention2DB_Obj(object):
                 cur.execute(query, tmp_data)
         return(cur)
 
+
     def design_group_func(self, study_xml, cur):
         table_name = "design_groups"
         col_names = ["nct_id", "id", "group_type", "title", "description"]
@@ -616,11 +597,48 @@ class Intervention2DB_Obj(object):
         # print design_group_data
 
 
-
-
 interventions2db = Intervention2DB_Obj()
 
-table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db, interventions2db.main_func]
+
+class Result_Outcome2DB_Obj(object):
+
+    def __init__(self):
+        self.nct_id = None
+        self.result_group_id = 1
+        self.outcome_id = 1
+
+    def result_outcome_main(self, study_xml, cur):
+        self.nct_id = study_xml.find("./id_info/nct_id").text
+        self.results_group_func(study_xml, cur)
+        pass
+
+    def results_group_func(self, study_xml, cur):
+        table_name = "result_groups"
+        col_names = ["nct_id", "id", "result_type", "title", "description"]
+        query = generate_query(table_name, col_names)
+        pass
+
+
+    def outcomes_func(self, study_xml, cur):
+        pass
+
+    def reported_events_func(self, study_xml, cur):
+        pass
+
+    def outcome_analyses_func(self, study_xml, cur):
+        pass
+
+    def outcome_analysis_groups_func(self, study_xml, cur):
+        pass
+
+    def outcome_counts_func(self, study_xml, cur):
+        pass
+
+result_outcome2db = Result_Outcome2DB_Obj()
+
+
+table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db,
+               interventions2db.main_func, result_outcome2db.result_outcome_main]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
@@ -636,16 +654,10 @@ def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
     #         cur.execute(query, tmp_data)
     # else:
     #     cur.execute(query, data)
+
     for tmp_func in table_funcs:
-        # query, data, list_flag = tmp_func(study_xml)
         tmp_func(study_xml, cur)
-        # if query is None:
-        #     continue
-        # if list_flag:
-        #     for tmp_data in data:
-        #         cur.execute(query, tmp_data)
-        # else:
-        #     cur.execute(query, data)
+
     conn.commit()
     conn.close()
     return(None)
@@ -679,6 +691,40 @@ def debug_xml2db(xml_filename, acl_db_parameters=parameters.acl_db_params):
 #                    ]}
 # ]
 #
+
+
+### !!!!!!!!!!!!!!!!!!!!! obsolete functions: to delete !!!!!!!!!!!!!!!!!!!!!
+def get_xml_string(search_url):
+    """
+    get the search results (.xml) as a string
+    :param search_url: url used for search
+    :return:
+    """
+    index = search_url.find(parameters.search_url_separating_kw)
+    kw_length = len(parameters.search_url_separating_kw)
+    cut_index = index + kw_length
+    base_url = search_url[:cut_index]
+    search_specification = search_url[cut_index:]
+    search_string = base_url + parameters.download_kw + search_specification + parameters.download_specification
+    response = urllib2.urlopen(search_string)
+    xml_string = response.read()
+    return(xml_string)
+
+
+def download_xml_file(search_url, xml_filename=parameters.xml_file_name):
+    """
+    write the string as a .xml file
+    :param search_url:
+    :return:
+    """
+    xml_string = get_xml_string(search_url)
+    with open(xml_filename, "wb") as thefile:
+        thefile.write(xml_string)
+    return(None)
+
+
+def create_individual_study_xml_url(nct_id, individual_study_xml_url=parameters.individual_study_xml_url):
+    return(individual_study_xml_url[0] + nct_id + individual_study_xml_url[1])
 
 
 

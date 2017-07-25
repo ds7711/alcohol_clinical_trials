@@ -19,14 +19,12 @@ if not parameters.db_created: # if database doesn't exist, create the db
 #   use advanced search on clinicaltrials.org and copy the search url
 #   input that and the scripts will automatically download all the data in .xml format
 search_url = parameters.search_url
-xml_string = acl.get_xml_string(search_url)
+zip_filename = acl.download_all_studies(search_url, zip_filename=parameters.zip_filename)
 # acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
 
 
-acl.debug_xml2db("https://clinicaltrials.gov/ct2/show/NCT01757353?displayxml=true")
-
-
-acl.batch_xml2db(xml_string)
+# convert .xml files into database
+acl.batch_xml2db(zip_filename)
 
 
 studies_from_db = acl.query_postgresql("SELECT * FROM interventions_detailed;")

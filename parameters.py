@@ -1,9 +1,13 @@
 import numpy as np
 
 # parameters for downloading .xml data from clinicaltrials.org
+zip_download_affix = "https://clinicaltrials.gov/ct2/download_studies?"
+search_url_separating_kw = "results"
+zip_filename = "acl_results.zip"
+
+# old website
 main_site = "https://clinicaltrials.gov/beta/"
 search_url = "https://clinicaltrials.gov/beta/results?term=college&type=&rslt=&age_v=&gndr=&cond=Alcoholic+OR+alcoholism+OR+alcohol&intr=&titles=&outc=&spons=&lead=&id=&cntry1=NA%3AUS&state1=&cntry2=&state2=&cntry3=&state3=&locn=&rcv_s=&rcv_e=&lup_s=&lup_e="
-search_url_separating_kw = "results"
 download_specification = "&down_flds=all&down_fmt=xml"
 download_kw = "/download_fields"
 xml_file_name = "acl_db.xml"
@@ -113,24 +117,6 @@ commands = (
         )
     """
     ,
-    """ CREATE TABLE outcomes
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
-            outcome_type VARCHAR(255),
-            title TEXT,
-            description TEXT,
-            time_frame TEXT,
-            population TEXT,
-            units VARCHAR(255),
-            units_analyzed VARCHAR(255),
-            anticipated_posting_month_year VARCHAR(255),
-            dispersion_type VARCHAR(255),
-            param_type VARCHAR(255),
-            PRIMARY KEY (id)
-        )
-    """
-    ,
     """ CREATE TABLE interventions
         (
             nct_id CHARACTER(11) NOT NULL,
@@ -186,6 +172,15 @@ commands = (
         )
     """
     ,
+    """ CREATE TABLE brief_summaries
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
     """ CREATE TABLE keywords
         (
             nct_id CHARACTER(11) NOT NULL,
@@ -212,11 +207,29 @@ commands = (
     """ CREATE TABLE result_groups
         (
             nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
+            id INTEGER,
             ctgov_group_code VARCHAR(255),
             result_type VARCHAR(255),
             title VARCHAR(255),
             description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE outcomes
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER,
+            outcome_type VARCHAR(255),
+            title TEXT,
+            description TEXT,
+            time_frame TEXT,
+            population TEXT,
+            units VARCHAR(255),
+            units_analyzed VARCHAR(255),
+            anticipated_posting_month_year VARCHAR(255),
+            dispersion_type VARCHAR(255),
+            param_type VARCHAR(255),
             PRIMARY KEY (id)
         )
     """
@@ -231,15 +244,6 @@ commands = (
             scope VARCHAR(255),
             units VARCHAR(255),
             count INTEGER,
-            PRIMARY KEY (id)
-        )
-    """
-    ,
-    """ CREATE TABLE brief_summaries
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
-            description TEXT,
             PRIMARY KEY (id)
         )
     """
