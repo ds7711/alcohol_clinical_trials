@@ -1,13 +1,13 @@
 import numpy as np
 
 # parameters for downloading .xml data from clinicaltrials.org
+search_url = "https://clinicaltrials.gov/ct2/results?term=college&cond=Alcoholic+OR+alcoholism+OR+alcohol&cntry1=NA%3AUS&age_v=&gndr=&type=&rslt=With&Search=Apply"
 zip_download_affix = "https://clinicaltrials.gov/ct2/download_studies?"
 search_url_separating_kw = "results"
 zip_filename = "acl_results.zip"
 
 # old website
 main_site = "https://clinicaltrials.gov/beta/"
-search_url = "https://clinicaltrials.gov/beta/results?term=college&type=&rslt=&age_v=&gndr=&cond=Alcoholic+OR+alcoholism+OR+alcohol&intr=&titles=&outc=&spons=&lead=&id=&cntry1=NA%3AUS&state1=&cntry2=&state2=&cntry3=&state3=&locn=&rcv_s=&rcv_e=&lup_s=&lup_e="
 download_specification = "&down_flds=all&down_fmt=xml"
 download_kw = "/download_fields"
 xml_file_name = "acl_db.xml"
@@ -204,6 +204,58 @@ commands = (
             scope VARCHAR(255),
             units VARCHAR(255),
             count INTEGER,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE reported_events
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            result_group_id INTEGER,
+            ctgov_group_code VARCHAR(255),
+            time_frame TEXT,
+            event_type VARCHAR(255),
+            default_vocab VARCHAR(255),
+            default_assessment VARCHAR(255),
+            subjects_affected VARCHAR(255),
+            subjects_at_risk VARCHAR(255),
+            description TEXT,
+            event_count INTEGER,
+            organ_system VARCHAR(255),
+            adverse_event_term VARCHAR(255),
+            frequent_threshold INTEGER,
+            vocal VARCHAR(255),
+            assessment VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE outcome_analyses
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            outcome_id INTEGER,
+            non_inferiority_type VARCHAR(255),
+            non_inferiority_description TEXT,
+            param_type VARCHAR(255),
+            param_value NUMERIC,
+            dispersion_type VARCHAR(255),
+            dispersion_value NUMERIC,
+            p_value FLOAT,
+            p_value_modifier VARCHAR(255),
+            p_value_description TEXT,
+            ci_n_sides VARCHAR(255),
+            ci_percent NUMERIC,
+            ci_lower_limit NUMERIC,
+            ci_upper_limit NUMERIC,
+            ci_upper_limit_na_comment VARCHAR(255),
+            method VARCHAR(255),
+            method_description TEXT,
+            description TEXT,
+            estimate_description TEXT,
+            groups_description TEXT,
+            other_analysis_description TEXT,
             PRIMARY KEY (id)
         )
     """

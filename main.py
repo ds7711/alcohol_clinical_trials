@@ -31,7 +31,7 @@ zip_filename = acl.download_all_studies(search_url, zip_filename=parameters.zip_
 acl.batch_xml2db(zip_filename)
 
 
-studies_from_db = acl.query_postgresql("SELECT * FROM outcomes;")
+studies_from_db = acl.query_postgresql("SELECT * FROM outcome_counts;")
 print(len(studies_from_db), studies_from_db)
 
 # 3rd: display xml file in a user-friendly way

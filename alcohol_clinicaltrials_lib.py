@@ -99,7 +99,16 @@ def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params
     return(records)
 
 
-
+def aact_query(command_string):
+    conn = None
+    db_conn_parameters = "dbname=aact user=postgres host=localhost password=7711"
+    conn = psycopg2.connect(db_conn_parameters)
+    cur = conn.cursor()
+    cur.execute(command_string)
+    records = cur.fetchall()
+    cur.close()
+    conn.close()
+    return(records)
 ### helper function
 
 def augment_data(my_list, list_idx):
@@ -609,6 +618,15 @@ class Clinical_Results(object):
         self.nct_id = None
         self.result_group_id = 1
         self.outcome_id = 1
+        self.ctgov_group_code2result_group_id = {}
+
+    def _results_group_data2dict(self, results_group_data):
+        for entry in results_group_data:
+            participant_group_code = entry[2]
+            outcome_group_code = "O" + participant_group_code[-1]
+            result_group_id = entry[1]
+            self.ctgov_group_code2result_group_id[participant_group_code] = result_group_id
+            self.ctgov_group_code2result_group_id[outcome_group_code] = result_group_id
 
     def result_outcome_main(self, study_xml, cur):
         results_xml = study_xml.find("./clinical_results")
@@ -616,34 +634,70 @@ class Clinical_Results(object):
             return(None)
 
         self.nct_id = study_xml.find("./id_info/nct_id").text
-        design_group_data = self.results_group_func(results_xml, cur)
+        results_group_data = self.results_group_func(results_xml, cur)
+        self._results_group_data2dict(results_group_data)
         outcome_data = self.outcomes_func(results_xml, cur)
         # print(outcome_data)
         pass
 
     def results_group_func(self, results_xml, cur):
+
+        def group_info_func(group_xml):
+            xmldb_queries = [["title", "title", False, "%s"],
+                             ["description", "description", False, "%s"],
+                             ]
+            ctgov_group_code = group_xml.attrib["group_id"]
+            _, data = simple_query_list(group_xml, xmldb_queries)
+            return(ctgov_group_code, data)
+
+        def participant_results_group(results_xml, cur):
+            result_type = "participant_flow"
+            participant_results_xml = results_xml.find("./participant_flow/group_list")
+            if participant_results_xml is None:
+                return(None)
+            else:
+                results_group_list = participant_results_xml.findall("./group")
+                if results_group_list != []:
+                    for child in results_group_list:
+                        ctgov_group_code, data = group_info_func(child)
+                        self.ctgov_group_code2result_group_id[ctgov_group_code] = self.result_group_id
+                        data = [self.nct_id, self.result_group_id, result_type, ctgov_group_code] + data
+                        cur.execute(query, data)
+                        self.result_group_id += 1
+                return(None)
+
+        def baseline_results_group(results_xml, cur):
+            result_type = "baseline"
+            baseline_results_xml = results_xml.find("./baseline")
+            if baseline_results_xml is None:
+                return(None)
+            else:
+                group_list_xml = baseline_results_xml.find("./group_list")
+                if group_list_xml is None:
+                    return(None)
+                else:
+                    group_xml_list = group_list_xml.findall("./group")
+                    if group_xml_list != []:
+                        for group_xml in group_xml_list:
+                            ctgov_group_code, data = group_info_func(group_xml)
+                            self.ctgov_group_code2result_group_id[ctgov_group_code] = self.result_group_id
+                            data = [self.nct_id, self.result_group_id, result_type, ctgov_group_code] + data
+                            cur.execute(query, data)
+                            self.result_group_id += 1
+                        return (None)
+
+        def outcome_results_group(results_xml, cur):
+            result_type = "outcome"
+            outcome_results_xml = results_xml.find("./outcome_list")
+            pass
+
+        def reported_events_results_group(results_xml, cur):
+            pass
+
         table_name = "result_groups"
-        col_names = ["nct_id", "id", "ctgov_group_code", "title", "description", "result_type"]
+        col_names = ["nct_id", "id", "result_type", "ctgov_group_code", "title", "description"]
         query = generate_query(table_name, col_names)
-        results_group_data = []
-        results_group = results_xml.find("./participant_flow/group_list")
-        if results_group is None:
-            return([])
-        else:
-            results_group_list = results_group.findall("./group")
-            if results_group_list is not []:
-                xmldb_queries = [["title", "title", False, "%s"],
-                                 ["description", "description", False, "%s"],
-                                 ["result_type", "unknown_kw!!!", False, "%s"]  # unknown query kw !!!
-                                 ]
-                for child in results_group_list:
-                    ctgov_group_code = child.attrib["group_id"]
-                    _, data = simple_query_list(child, xmldb_queries)
-                    data = [self.nct_id, self.result_group_id, ctgov_group_code] + data
-                    results_group_data.append(data)
-                    cur.execute(query, data)
-                    self.result_group_id += 1
-        return(results_group_data)
+        results_group_func_list = ["participant_flow", "baseline", "outcome", "reported_event"]
 
 
     def outcomes_func(self, results_xml, cur):
@@ -666,28 +720,99 @@ class Clinical_Results(object):
                              ["dispersion_type", "measure/dispersion", False, "%s"],
                              ["param_type", "measure/param", False, "%s"]
                              ]
-            if outcome_list is not []:
+            if outcome_list != []:
                 for child_outcome in outcome_list:
                     tmp_col_names, tmp_data = simple_query_list(child_outcome, xmldb_queries)
                     col_names = col_names_partial + tmp_col_names
                     query = generate_query(table_name, col_names)
                     data = [self.nct_id, self.outcome_id] + tmp_data
                     cur.execute(query, data)
+
+                    ### other functions
+
+                    # outcome_analyses  (measure sub_struct)
+                    outcome_analyses_xml = xml_find(child_outcome, "measure", return_string=False)
+                    if outcome_analyses_xml is not None:
+                        self.outcome_analyses_func(outcome_analyses_xml, cur)
+
+                    # outcome_counts
+                    analyzed_list_xml = xml_find(child_outcome, "measure/analyzed_list", return_string=False)
+                    if analyzed_list_xml is not None:
+                        self.outcome_counts_func(analyzed_list_xml, cur)
+
+                    ### other functions
+
                     outcomes_data.append(data)
                     self.outcome_id += 1
         return(outcomes_data)
 
-    def reported_events_func(self, study_xml, cur):
+    def reported_events_func(self, results_xml, cur):
+        table_name = "reported_events"
         pass
 
-    def outcome_analyses_func(self, study_xml, cur):
+    def outcome_counts_func(self, analyzed_list_xml, cur):
+        """
+        write data into table outcome_counts.
+            requires the data from table result group and outcome
+        :param analyzed_list_xml:
+        :param cur:
+        :return:
+        """
+        table_name = "outcome_counts"
+        col_names = ["nct_id",  "outcome_id", "result_group_id", "units", "scope",
+                     "ctgov_group_code", "count"]
+        query = generate_query(table_name, col_names)
+        analyzed_xml_list = analyzed_list_xml.findall("./analyzed")
+        for analyzed_xml in analyzed_xml_list:
+            units = xml_find(analyzed_xml, "units", return_string=True)
+            scope = xml_find(analyzed_xml, "scope", return_string=True)
+            count_xml_list = analyzed_xml.find("./count_list")
+            if count_xml_list is not None:
+                count_xml_list = count_xml_list.findall("./count")
+                if count_xml_list != []:
+                    for count_xml in count_xml_list:
+                        count_dict = count_xml.attrib
+                        ctgov_group_code, count_value = count_dict["group_id"], count_dict["value"]
+                        count_value = int(count_value)
+                        if ctgov_group_code in self.ctgov_group_code2result_group_id.keys():
+                            results_group_id = self.ctgov_group_code2result_group_id[ctgov_group_code]
+                        else:
+                            results_group_id = None
+                        data = [self.nct_id, self.outcome_id, results_group_id,
+                                units, scope, ctgov_group_code, count_value]
+                        cur.execute(query, data)
+
+    def outcome_analyses_func(self, outcome_analyses_xml, cur):
+        """
+        to finish, need an xml file that contains these values
+        :param outcome_analyses_xml:
+        :param cur:
+        :return:
+        """
+        table_name = "outcome_analyses"
+        col_names = ["nct_id", "outcome_id", "non_inferiority_type", "non_inferiority_description",
+                     "param_type", "param_value", "dispersion_type", "dispersion_value", "p_value",
+                     "p_value_modifier", "p_value_description", "ci_n_sides", "ci_percent", "ci_percent",
+                     "ci_lower_limit", "ci_upper_limit", "ci_upper_limit_na_comment", "method",
+                     "method_description", "description", "estimate_description", "groups_description",
+                     "other_analysis_description"
+                    ]
+        query = generate_query(table_name, col_names)
+        outcome_id = self.outcome_id
+        non_inferiority_type = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
+        non_inferiority_description = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
+        param_type = xml_find(outcome_analyses_xml, "param", return_string=True)
+        param_value = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
+        dispersion_type = xml_find(outcome_analyses_xml, "dispersion", return_string=True)
+        dispersion_value = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
         pass
 
-    def outcome_analysis_groups_func(self, study_xml, cur):
+
+
+    def outcome_analysis_groups_func(self, results_xml, cur):
         pass
 
-    def outcome_counts_func(self, study_xml, cur):
-        pass
+
 
 clinical_results2db = Clinical_Results()
 
