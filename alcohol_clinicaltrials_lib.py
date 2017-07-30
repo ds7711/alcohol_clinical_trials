@@ -109,7 +109,16 @@ def aact_query(command_string):
     cur.close()
     conn.close()
     return(records)
+
+
 ### helper function
+
+def xml2db_log(nct_id, error_message, log_name=parameters.log_filename):
+    date = datetime.time()
+    with open(log_name, "a") as thefile:
+        log_string = nct_id + ": " + error_message +"\n"
+        thefile.write(log_string)
+
 
 def augment_data(my_list, list_idx):
     list_of_lists = [my_list[idx] for idx in list_idx]
@@ -619,28 +628,49 @@ class Clinical_Results(object):
         self.result_group_id = 1
         self.outcome_id = 1
         self.ctgov_group_code2result_group_id = {}
+        self.ctgov_group_code2result_group_title = {}
 
-    def _results_group_data2dict(self, results_group_data):
-        for entry in results_group_data:
-            participant_group_code = entry[2]
-            outcome_group_code = "O" + participant_group_code[-1]
-            result_group_id = entry[1]
-            self.ctgov_group_code2result_group_id[participant_group_code] = result_group_id
-            self.ctgov_group_code2result_group_id[outcome_group_code] = result_group_id
+    def _add2result_group_dict(self, query, data, cur):
+        """
+        update the result_group_id dictionary, if exception, write to log file
+        :param ctgov_code:
+        :return:
+        """
+        ctgov_code = data[-3]
+        ctgov_code_title = data[-2]
+        if ctgov_code not in self.ctgov_group_code2result_group_id.keys():
+            self.ctgov_group_code2result_group_id[ctgov_code] = self.result_group_id
+            self.ctgov_group_code2result_group_title[ctgov_code] = ctgov_code_title
+            cur.execute(query, data)
+            self.result_group_id += 1
+            return(True)
+        else:
+            if self.ctgov_group_code2result_group_title[ctgov_code] != ctgov_code_title:
+                # print self.ctgov_group_code2result_group_title[ctgov_code]
+                # print ctgov_code_title
+                # print("\n\n")
+                error_message = "ctgov code is not unique in the .xml file. %s refer to both %s and %s." \
+                                % (ctgov_code, self.ctgov_group_code2result_group_title[ctgov_code], ctgov_code_title)
+                xml2db_log(self.nct_id, error_message)
+                return(False)
 
     def result_outcome_main(self, study_xml, cur):
+        # reset the dictionary for each study
+        self.ctgov_group_code2result_group_id = {}
+        self.ctgov_group_code2result_group_title = {}
         results_xml = study_xml.find("./clinical_results")
         if results_xml is None: # if no results are available, jump to the next part
             return(None)
-
         self.nct_id = study_xml.find("./id_info/nct_id").text
         results_group_data = self.results_group_func(results_xml, cur)
-        self._results_group_data2dict(results_group_data)
         outcome_data = self.outcomes_func(results_xml, cur)
         # print(outcome_data)
-        pass
 
     def results_group_func(self, results_xml, cur):
+
+        table_name = "result_groups"
+        col_names = ["nct_id", "id", "result_type", "ctgov_group_code", "title", "description"]
+        query = generate_query(table_name, col_names)
 
         def group_info_func(group_xml):
             xmldb_queries = [["title", "title", False, "%s"],
@@ -650,7 +680,7 @@ class Clinical_Results(object):
             _, data = simple_query_list(group_xml, xmldb_queries)
             return(ctgov_group_code, data)
 
-        def participant_results_group(results_xml, cur):
+        def participant_results_group_id(results_xml, cur):
             result_type = "participant_flow"
             participant_results_xml = results_xml.find("./participant_flow/group_list")
             if participant_results_xml is None:
@@ -660,13 +690,11 @@ class Clinical_Results(object):
                 if results_group_list != []:
                     for child in results_group_list:
                         ctgov_group_code, data = group_info_func(child)
-                        self.ctgov_group_code2result_group_id[ctgov_group_code] = self.result_group_id
                         data = [self.nct_id, self.result_group_id, result_type, ctgov_group_code] + data
-                        cur.execute(query, data)
-                        self.result_group_id += 1
+                        self._add2result_group_dict(query, data, cur)
                 return(None)
 
-        def baseline_results_group(results_xml, cur):
+        def baseline_results_group_id(results_xml, cur):
             result_type = "baseline"
             baseline_results_xml = results_xml.find("./baseline")
             if baseline_results_xml is None:
@@ -680,25 +708,50 @@ class Clinical_Results(object):
                     if group_xml_list != []:
                         for group_xml in group_xml_list:
                             ctgov_group_code, data = group_info_func(group_xml)
-                            self.ctgov_group_code2result_group_id[ctgov_group_code] = self.result_group_id
                             data = [self.nct_id, self.result_group_id, result_type, ctgov_group_code] + data
-                            cur.execute(query, data)
-                            self.result_group_id += 1
-                        return (None)
+                            self._add2result_group_dict(query, data, cur)
 
-        def outcome_results_group(results_xml, cur):
+                    return (None)
+
+        def outcome_results_group_id(results_xml, cur):
             result_type = "outcome"
             outcome_results_xml = results_xml.find("./outcome_list")
-            pass
+            if outcome_results_xml is None:
+                return(None)
+            else:
+                outcome_xml_list = outcome_results_xml.findall("./outcome")
+                if outcome_xml_list != []:
+                    for outcome_xml in outcome_xml_list:
+                        group_list_xml = outcome_xml.find("./group_list")
+                        if group_list_xml is not None:
+                            group_xml_list = group_list_xml.findall("./group")
+                            for group_xml in group_xml_list:
+                                ctgov_group_code, data = group_info_func(group_xml)
+                                data = [self.nct_id, self.result_group_id, result_type, ctgov_group_code] + data
+                                self._add2result_group_dict(query, data, cur)
+                return(None)
 
-        def reported_events_results_group(results_xml, cur):
-            pass
+        def reported_events_results_group_id(results_xml, cur):
+            result_type = "reported_events"
+            reported_events_xml = results_xml.find("./reported_events")
+            if reported_events_xml is None:
+                return(None)
+            else:
+                reported_events_group_xml = reported_events_xml.find("./group_list")
+                if reported_events_group_xml is not None:
+                    group_xml_list = reported_events_group_xml.findall("./group")
+                    if group_xml_list != []:
+                        for group_xml in group_xml_list:
+                            ctgov_group_code, data = group_info_func(group_xml)
+                            data = [self.nct_id, self.result_group_id, result_type, ctgov_group_code] + data
+                            self._add2result_group_dict(query, data, cur)
+                return(None)
 
-        table_name = "result_groups"
-        col_names = ["nct_id", "id", "result_type", "ctgov_group_code", "title", "description"]
-        query = generate_query(table_name, col_names)
-        results_group_func_list = ["participant_flow", "baseline", "outcome", "reported_event"]
 
+        results_group_func_list = [participant_results_group_id, baseline_results_group_id,
+                                   outcome_results_group_id, reported_events_results_group_id]
+        for func in results_group_func_list:
+            func(results_xml, cur)
 
     def outcomes_func(self, results_xml, cur):
         table_name = "outcomes"

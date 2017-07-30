@@ -1,4 +1,9 @@
-import numpy as np
+import datetime
+
+# xml2database log filename
+current_time = datetime.datetime.now()
+suffix = str(current_time)[:-16] + "-" + str(current_time)[-15:-13]
+log_filename = "xml2db_log_" + suffix + ".txt"
 
 # parameters for downloading .xml data from clinicaltrials.org
 search_url = "https://clinicaltrials.gov/ct2/results?term=college&cond=Alcoholic+OR+alcoholism+OR+alcohol&cntry1=NA%3AUS&age_v=&gndr=&type=&rslt=With&Search=Apply"
