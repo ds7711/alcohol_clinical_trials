@@ -169,6 +169,130 @@ commands = (
         )
     """
     ,
+    """ CREATE TABLE keywords
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            name VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE study_references
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            pmid VARCHAR(255),
+            reference_type VARCHAR(255),
+            citation TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE browse_conditions
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            mesh_term VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE browse_interventions
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            mesh_term VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE detailed_descriptions
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE participant_flows
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            recruitment_details TEXT,
+            pre_assignment_details TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE result_agreements
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            pi_employee VARCHAR(255),
+            agreement TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE result_contacts
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            organization VARCHAR(255),
+            name VARCHAR(255),
+            phone VARCHAR(255),
+            email VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE overall_officials
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            role VARCHAR(255),
+            name VARCHAR(255),
+            affiliation VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    # partial complete
+    """ CREATE TABLE designs
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            allocation VARCHAR(255),
+            intervention_model VARCHAR(255),
+            intervention_model_description VARCHAR(255),
+            primary_purpose VARCHAR(255),
+            description VARCHAR(255),
+            observational_model VARCHAR(255),
+            masking VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE id_information
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            id_type VARCHAR(255),
+            id_value VARCHAR(55),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    # outcome group
     """ CREATE TABLE result_groups
         (
             nct_id CHARACTER(11) NOT NULL,
@@ -261,29 +385,6 @@ commands = (
             estimate_description TEXT,
             groups_description TEXT,
             other_analysis_description TEXT,
-            PRIMARY KEY (id)
-        )
-    """
-    ,
-    """ CREATE TABLE keywords
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
-            name VARCHAR(255),
-            PRIMARY KEY (id)
-        )
-    """
-    ,
-    """ CREATE TABLE designs
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
-            allocation VARCHAR(255),
-            intervention_model VARCHAR(255),
-            intervention_model_description VARCHAR(255),
-            primary_purpose VARCHAR(255),
-            description VARCHAR(255),
-            observational_model VARCHAR(255),
             PRIMARY KEY (id)
         )
     """

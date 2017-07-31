@@ -456,15 +456,16 @@ def conditions2db(study_xml, cur):
     return(cur)
 
 
-def links2db(study_xml, cur):
-    table_name = "links"
-    xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
-                     ["url", "required_header/url", False, "%s"],
-                     ["description", "required_header/download_date", False, "%s"]  # unknown query kw and content
-                    ]
-    col_names, data = simple_query_list(study_xml, xmldb_queries)
+def keywords2db(study_xml, cur):
+    table_name = "keywords"
+    col_names = ["nct_id", "name"]
+    nct_id = study_xml.find("./id_info/nct_id").text
     query = generate_query(table_name, col_names)
-    cur.execute(query, data)
+    keyword_list = xml_findall(study_xml, "keyword")
+    if keyword_list != []:
+        for keyword in keyword_list:
+            data = [nct_id, keyword]
+            cur.execute(query, data)
     return(cur)
 
 
@@ -621,6 +622,170 @@ class Intervention2DB_Obj(object):
 interventions2db = Intervention2DB_Obj()
 
 
+def links2db(study_xml, cur):
+    table_name = "links"
+    xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
+                     ["url", "required_header/url", False, "%s"],
+                     ["description", "required_header/download_date", False, "%s"]  # unknown query kw and content
+                    ]
+    col_names, data = simple_query_list(study_xml, xmldb_queries)
+    query = generate_query(table_name, col_names)
+    cur.execute(query, data)
+    return(cur)
+    pass
+
+
+def study_references2db(study_xml, cur):
+    table_name = "study_references"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    main_kw = "reference"
+    sub_query_list = [["citation", "citation", False, "%s"],
+                      ["pmid", "PMID", False, "%s"],
+                      ["reference_type", "unknown_kw???", False, "%s"]
+                      ]
+    col_names, data = hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True)
+    col_names = ["nct_id"] + col_names
+    query = generate_query(table_name, col_names)
+    for tmp_data in data:
+        tmp_data = [nct_id] + tmp_data
+        cur.execute(query, tmp_data)
+
+
+def browse_conditions2db(study_xml, cur):
+    table_name = "browse_conditions"
+    col_names = ["nct_id", "mesh_term"]
+    query = generate_query(table_name, col_names)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    browse_condition_xml = xml_find(study_xml, "condition_browse", return_string=False)
+    if browse_condition_xml is not None:
+        mesh_term_list = xml_findall(browse_condition_xml, "mesh_term")
+        for mesh_term in mesh_term_list:
+            data = [nct_id, mesh_term]
+            cur.execute(query, data)
+
+
+def browse_inerventions2db(study_xml, cur):
+    table_name = "browse_interventions"
+    col_names = ["nct_id", "mesh_term"]
+    query = generate_query(table_name, col_names)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    browse_condition_xml = xml_find(study_xml, "intervention_browse", return_string=False)
+    if browse_condition_xml is not None:
+        mesh_term_list = xml_findall(browse_condition_xml, "mesh_term")
+        for mesh_term in mesh_term_list:
+            data = [nct_id, mesh_term]
+            cur.execute(query, data)
+
+
+def detailed_descriptions2db(study_xml, cur):
+    table_name = "detailed_descriptions"
+    col_names = ["nct_id", "description"]
+    query = generate_query(table_name, col_names)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    detailed_description = xml_find(study_xml, "/detailed_description/textblock", return_string=True)
+    if detailed_description is not None:
+        data = [nct_id, detailed_description]
+        cur.execute(query, data)
+
+
+def participant_flows2db(study_xml, cur):
+    table_name = "participant_flows"
+    xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
+                     ["recruitment_details", "clinical_results/participant_flow/recruitment_details", False, "%s"],
+                     ["pre_assignment_details", "clinical_results/participant_flow/pre_assignment_details", False, "%s"],
+                     ]
+    col_names, data = simple_query_list(study_xml, xmldb_queries)
+    query = generate_query(table_name, col_names)
+    cur.execute(query, data)
+    return(cur)
+
+
+def result_contacts2db(study_xml, cur):
+    table_name = "result_contacts"
+    col_names = ["nct_id", "organization", "name", "phone", "email"]
+    query = generate_query(table_name, col_names)
+    point_of_contact_xml = xml_find(study_xml, "clinical_results/point_of_contact", return_string=False)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    if point_of_contact_xml is not None:
+        xmldb_queries = [["organization", "organization", False, "%s"],
+                         ["name", "name_or_title", False, "%s"],
+                         ["phone", "phone", False, "%s"],
+                         ["email", "email", False, "%s"]]
+        _, data = simple_query_list(point_of_contact_xml, xmldb_queries)
+        data = [nct_id] + data
+        cur.execute(query, data)
+        return(cur)
+
+
+def overall_officials2db(study_xml, cur):
+    table_name = "overall_officials"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    main_kw = "overall_official"
+    sub_query_list = [["name", "last_name", False, "%s"],
+                      ["role", "role", False, "%s"],
+                      ["affiliation", "affiliation", False, "%s"]
+                      ]
+    col_names, data = hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True)
+    col_names = ["nct_id"] + col_names
+    query = generate_query(table_name, col_names)
+    for tmp_data in data:
+        tmp_data = [nct_id] + tmp_data
+        cur.execute(query, tmp_data)
+    return(cur)
+
+
+def responsible_parties2db(study_xml, cur):
+    pass
+
+
+### functions that are partial done
+def designs2db(study_xml, cur):
+    table_name = "designs"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    study_design_info_xml = study_xml.find("./study_design_info")
+    if study_design_info_xml is not None:
+        xmldb_queries = [["allocation", "allocation", False, "%s"],
+                         ["intervention_model", "intervention_model", False, "%s"],
+                         ["primary_purpose", "primary_purpose", False, "%s"],
+                         ["masking", "masking", False, "%s"],
+                         ["observational_model", "observational_model", False, "%s"]  # unknown query kw and content
+                         ]
+        col_names, data = simple_query_list(study_design_info_xml, xmldb_queries)
+        col_names = ["nct_id"] + col_names
+        query = generate_query(table_name, col_names)
+        data = [nct_id] + data
+        cur.execute(query, data)
+        return(cur)
+
+def result_agreements2db(study_xml, cur):
+    table_name = "result_agreements"
+    col_names = ["nct_id", "pi_employee", "agreement"]
+    query = generate_query(table_name, col_names)
+    certain_agreement_xml = xml_find(study_xml, "clinical_results/certain_agreements", return_string=False)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    if certain_agreement_xml is not None:
+        xmldb_queries = [["pi_employee", "pi_employee", False, "%s"],
+                         ["agreement", "restrictive_agreement", False, "%s"]]
+        _, data = simple_query_list(certain_agreement_xml, xmldb_queries)
+        data = [nct_id] + data
+        cur.execute(query, data)
+
+### functions to finish
+# to refer to AACT database
+def id_information2db(study_xml, cur):
+    pass
+    table_name = "id_information"
+    col_names = ["nct_id", "id_type", "id_value"]
+    nct_id = study_xml.find("./id_info/nct_id").text
+    query = generate_query(table_name, col_names)
+    keyword_list = xml_findall(study_xml, "keyword")
+    if keyword_list != []:
+        for keyword in keyword_list:
+            data = [nct_id, keyword]
+            cur.execute(query, data)
+    return (cur)
+
+
 class Clinical_Results(object):
 
     def __init__(self):
@@ -662,7 +827,7 @@ class Clinical_Results(object):
         if results_xml is None: # if no results are available, jump to the next part
             return(None)
         self.nct_id = study_xml.find("./id_info/nct_id").text
-        results_group_data = self.results_group_func(results_xml, cur)
+        self.results_group_func(results_xml, cur)
         outcome_data = self.outcomes_func(results_xml, cur)
         # print(outcome_data)
 
@@ -866,12 +1031,14 @@ class Clinical_Results(object):
         pass
 
 
-
 clinical_results2db = Clinical_Results()
 
 
 table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db,
-               interventions2db.main_func, clinical_results2db.result_outcome_main]
+               interventions2db.main_func, keywords2db, clinical_results2db.result_outcome_main,
+               designs2db, study_references2db, browse_conditions2db, browse_inerventions2db,
+               detailed_descriptions2db, participant_flows2db, result_agreements2db, result_contacts2db,
+               overall_officials2db]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
