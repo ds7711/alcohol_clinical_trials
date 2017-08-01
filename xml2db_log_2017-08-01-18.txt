@@ -1,0 +1,12 @@
+NCT01620177: ctgov code is not unique in the .xml file. O1 refer to both Cannabis - THC and 0% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O2 refer to both Alcohol - BrAC (Breath Alcohol Concentration) and 2.5-3.5% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O3 refer to both THC x BrAC and 6.0-7.5% THC and 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O1 refer to both Cannabis - THC and 0% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O2 refer to both Alcohol - BrAC (Breath Alcohol Concentration) and 2.5-3.5% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O3 refer to both THC x BrAC and 6.0-7.5% THC and 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O1 refer to both Cannabis - THC and 0% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O2 refer to both Alcohol - BrAC (Breath Alcohol Concentration) and 2.5-3.5% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O3 refer to both THC x BrAC and 6.0-7.5% THC and 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O1 refer to both Cannabis - THC and 0% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O2 refer to both Alcohol - BrAC (Breath Alcohol Concentration) and 2.5-3.5% THC With 0.065 g/dL BAC.
+NCT01620177: ctgov code is not unique in the .xml file. O3 refer to both THC x BrAC and 6.0-7.5% THC and 0.065 g/dL BAC.

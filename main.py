@@ -3,7 +3,6 @@ import psycopg2
 import parameters # cutomized parameters for the script, for editing
 import xml.etree.cElementTree as ET
 
-
 # 1st: create the relational database
 try:
     acl.delete_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
@@ -13,27 +12,21 @@ if not parameters.db_created: # if database doesn't exist, create the db
     acl.create_postgresql_db(parameters.acl_db_name, parameters.postgresql_params)
     acl.create_tables(parameters.acl_db_params, parameters.commands)
 
-
 # 2nd: download xml file according to customized search criterion
 # instructions:
 #   use advanced search on clinicaltrials.org and copy the search url
 #   input that and the scripts will automatically download all the data in .xml format
 search_url = parameters.search_url
 zip_filename = acl.download_all_studies(search_url, zip_filename=parameters.zip_filename)
-# acl.download_xml_file(search_url, xml_filename=parameters.xml_file_name)
-
 
 ### debug
 # acl.debug_xml2db("NCT01937130_results.xml", test_func=acl.clinical_results2db.result_outcome_main)
-acl.debug_xml2db("NCT02274688.xml", test_func=acl.sponsors2db)
-
-
+acl.debug_xml2db("NCT02274688.xml", test_func=acl.clinical_results2db.result_outcome_main)
 
 # convert .xml files into database
 acl.batch_xml2db(zip_filename)
 
-
-studies_from_db = acl.query_postgresql("SELECT * FROM countries;")
+studies_from_db = acl.query_postgresql("SELECT * FROM outcome_measurements;")
 print(len(studies_from_db), studies_from_db)
 
 # 3rd: display xml file in a user-friendly way

@@ -292,19 +292,6 @@ commands = (
         )
     """
     ,
-    """ CREATE TABLE central_contacts
-
-        (
-            nct_id CHARACTER(11) NOT NULL,
-            id SERIAL,
-            contact_type VARCHAR(255),
-            name VARCHAR(255),
-            phone VARCHAR(255),
-            email VARCHAR(255),
-            PRIMARY KEY (id)
-        )
-    """
-    ,
     """ CREATE TABLE countries
 
         (
@@ -316,7 +303,6 @@ commands = (
         )
     """
     ,
-    # partial complete
     """ CREATE TABLE designs
         (
             nct_id CHARACTER(11) NOT NULL,
@@ -328,6 +314,8 @@ commands = (
             description VARCHAR(255),
             observational_model VARCHAR(255),
             masking VARCHAR(255),
+            time_perspective VARCHAR(255), 
+            masking_description VARCHAR(1000),
             PRIMARY KEY (id)
         )
     """
@@ -342,6 +330,8 @@ commands = (
         )
     """
     ,
+    # partial complete
+    #
     # outcome group
     """ CREATE TABLE result_groups
         (
@@ -387,6 +377,71 @@ commands = (
         )
     """
     ,
+    """ CREATE TABLE outcome_analyses
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id INTEGER,
+            outcome_id INTEGER,
+            non_inferiority_type VARCHAR(255),
+            non_inferiority_description TEXT,
+            param_type VARCHAR(255),
+            param_value NUMERIC,
+            dispersion_type VARCHAR(255),
+            dispersion_value NUMERIC,
+            p_value FLOAT,
+            p_value_modifier VARCHAR(255),
+            p_value_description TEXT,
+            ci_n_sides VARCHAR(255),
+            ci_percent NUMERIC,
+            ci_lower_limit NUMERIC,
+            ci_upper_limit NUMERIC,
+            ci_upper_limit_na_comment VARCHAR(255),
+            method VARCHAR(255),
+            method_description TEXT,
+            description TEXT,
+            estimate_description TEXT,
+            groups_description TEXT,
+            other_analysis_description TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE outcome_analysis_groups
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            outcome_analysis_id INTEGER,
+            result_group_id INTEGER,
+            ctgov_group_code VARCHAR(10),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE outcome_measurements
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            outcome_id INTEGER,
+            result_group_id INTEGER,
+            ctgov_group_code VARCHAR(10),
+            classification VARCHAR(255),
+            category VARCHAR(255),
+            title VARCHAR(255),
+            description TEXT,
+            units VARCHAR(255),
+            param_value VARCHAR(255),
+            param_type VARCHAR(255),
+            param_value_num NUMERIC,
+            dispersion_type VARCHAR(255),
+            dispersion_value VARCHAR(255),
+            dispersion_value_num NUMERIC,
+            dispersion_lower_limit NUMERIC,
+            dispersion_upper_limit NUMERIC,
+            explanation_of_na TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
     """ CREATE TABLE reported_events
         (
             nct_id CHARACTER(11) NOT NULL,
@@ -410,31 +465,15 @@ commands = (
         )
     """
     ,
-    """ CREATE TABLE outcome_analyses
+    """ CREATE TABLE central_contacts
+    
         (
             nct_id CHARACTER(11) NOT NULL,
             id SERIAL,
-            outcome_id INTEGER,
-            non_inferiority_type VARCHAR(255),
-            non_inferiority_description TEXT,
-            param_type VARCHAR(255),
-            param_value NUMERIC,
-            dispersion_type VARCHAR(255),
-            dispersion_value NUMERIC,
-            p_value FLOAT,
-            p_value_modifier VARCHAR(255),
-            p_value_description TEXT,
-            ci_n_sides VARCHAR(255),
-            ci_percent NUMERIC,
-            ci_lower_limit NUMERIC,
-            ci_upper_limit NUMERIC,
-            ci_upper_limit_na_comment VARCHAR(255),
-            method VARCHAR(255),
-            method_description TEXT,
-            description TEXT,
-            estimate_description TEXT,
-            groups_description TEXT,
-            other_analysis_description TEXT,
+            contact_type VARCHAR(255),
+            name VARCHAR(255),
+            phone VARCHAR(255),
+            email VARCHAR(255),
             PRIMARY KEY (id)
         )
     """

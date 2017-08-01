@@ -156,9 +156,19 @@ def str2bool(my_string):
         return(False)
 
 
-def str2num(my_string):
+def str2int(my_string):
     """convert a string to an integer"""
-    return(int(my_string))
+    try:
+        return(int(my_string))
+    except:
+        return(None)
+
+
+def str2float(my_string):
+    try:
+        return(float(my_string))
+    except:
+        return(None)
 
 
 def str2monthyear(my_string):
@@ -199,7 +209,64 @@ def str2monthyear(my_string):
     return(datetime.date(year, month, day))
 
 
-type_conversion_funcs = {"%bool": str2bool,"%d": str2num, "%my": str2monthyear}
+def str2p_value(my_string):
+    """
+    extract p_value from expression (e.g., <0.01)
+    :param my_string:
+    :return:
+    """
+    def is_number(string):
+        """
+        test whether the single character contained in the string can be converted into an integer
+        :param string:
+        :return:
+        """
+        try:
+            int(string)
+            return (True)
+        except:
+            return (False)
+    idx = 0
+    while (not is_number(my_string[idx])) and (my_string[idx]!="."):
+        idx += 1
+    p_value = my_string[idx:]
+    return(float(p_value))
+
+
+def str2p_value_modifier(my_string):
+    """
+    extract p_value modifier (minus sign) from expression (e.g., <0.01)
+    :param my_string:
+    :return:
+    """
+    def is_number(string):
+        """
+        test whether the single character contained in the string can be converted into an integer
+        :param string:
+        :return:
+        """
+        try:
+            int(string)
+            return (True)
+        except:
+            return (False)
+    idx = 0
+    while (not is_number(my_string[idx])) and (my_string[idx]!="."):
+        idx += 1
+    p_value_modifier = my_string[:idx]
+    return(p_value_modifier)
+
+
+type_conversion_funcs = {"%bool": str2bool,"%d": str2int, "%my": str2monthyear,
+                         "%p_value": str2p_value, "%p_value_modifier": str2p_value_modifier,
+                         "%f": str2float}
+
+def xmldict_query(xml_dict, key):
+    dictionary = xml_dict.attrib
+    if key in dictionary.keys():
+        return(dictionary[key])
+    else:
+        return(None)
 
 
 def xml_find(study_xml, keyword, return_string=True):
@@ -219,11 +286,14 @@ def xml_find(study_xml, keyword, return_string=True):
             return(result)
 
 
-def xml_findall(study_xml, keyword):
+def xml_findall(study_xml, keyword, return_string=True):
     keyword = "./" + keyword
     results = study_xml.findall(keyword)
     if results:  #short hand for results == []
-        return([item.text for item in results])
+        if return_string:
+            return([item.text for item in results])
+        else:
+            return(results)
     else:
         return([])
 
@@ -299,62 +369,9 @@ def hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True
     return(tmp_col_names, data)
 
 
-def example_write_to_db(study_list, acl_db_parameters):
-    """
-    write records in study_list into acl_db_parameters (filename specified by acl_db_parameters)
-    :param study_list:
-    :param acl_db_parameters:
-    :return:
-    """
-    conn = None
-    conn = psycopg2.connect(acl_db_parameters)
-    cur = conn.cursor()
-    for study in study_list:
-        query = "INSERT INTO studies (nct_id, official_title) VALUES (%s, %s);"
-        data = (study.nct_id, study.official_title)
-        cur.execute(query, data)
-    conn.commit()
-    conn.close()
-    return(None)
 
 
-def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
-    pass
-    conn = None
-    conn = psycopg2.connect(acl_db_parameters)
-    cur = conn.cursor()
-    for table_dict in xml2db_queries:
-        table_name = table_dict.keys()[0]
-        table_cols = table_dict.values()[0]
-        col_names = ""
-        col_insert_params = ""
-        data = []
-        list_idx = [] # indexes of the queries that return a list
-        for idx, col in enumerate(table_cols):
-            col_names = col_names + col[0] + ", "
-            col_insert_params = col_insert_params + col[-1] + ", "
-            if not col[2]: # if the queried result from .xml is not a list, obtain its value directly
-                tmp_data = study_xml.find("./" + col[1])
-                if tmp_data is not None:
-                    tmp_data = tmp_data.text
-            else:
-                list_idx.append(idx)
-                tmp_data = study_xml.findall("./" + col[1])
-                if tmp_data is not None:
-                    tmp_data = [item.text for item in tmp_data]
-            data.append(tmp_data)
-        query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
-                "(" + col_insert_params[:-2] + ");"
-        if len(list_idx) == 0:
-            cur.execute(query, data)
-        else:
-            augmented_data = augment_data(data, list_idx)
-            for data in augmented_data:
-                cur.execute(query, data)
 
-    conn.commit()
-    conn.close()
-    return(None)
 
 
 def batch_xml2db(zip_filename, acl_db_parameters=parameters.acl_db_params):
@@ -499,14 +516,13 @@ class Intervention2DB_Obj(object):
         query = generate_query(table_name, col_names, col_types)
         other_name_list = intervention_xml.findall("./other_name")
         if other_name_list == []:
-            pass
+            return(None)
         else:
             other_name_list = [item.text for item in other_name_list]
             data = augment_data([self.nct_id, self.intervention_id, other_name_list], [-1])
             for tmp_data in data:
                 cur.execute(query, tmp_data)
         return(cur)
-
 
     def design_group_func(self, study_xml, cur):
         table_name = "design_groups"
@@ -532,7 +548,6 @@ class Intervention2DB_Obj(object):
             self.design_group_id += 1
 
         return(design_group_data)
-
 
     def intervention_func_detailed(self, study_xml, cur):
         table_name = "interventions_detailed"
@@ -562,7 +577,6 @@ class Intervention2DB_Obj(object):
                     self.intervention_detailed_id += 1
         return(cur)
 
-
     def intervention_func(self, study_xml, cur):
         table_name = "interventions"
         col_names = ["nct_id", "id", "intervention_type", "name", "description"]
@@ -590,7 +604,6 @@ class Intervention2DB_Obj(object):
             self.intervention_id += 1
         return(intervention_design_group_dict)
 
-
     def design_group_interventions_func(self, intervention_design_group_dict, design_group_data, cur):
         table_name = "design_group_interventions"
         col_names = ["nct_id", "design_group_id", "intervention_id"]
@@ -609,14 +622,11 @@ class Intervention2DB_Obj(object):
             cur.execute(query, data)
         return(cur)
 
-
     def main_func(self, study_xml, cur):
         self.intervention_func_detailed(study_xml=study_xml, cur=cur)
         intervention_design_group_dict = self.intervention_func(study_xml=study_xml, cur=cur)
         design_group_data = self.design_group_func(study_xml=study_xml, cur=cur)
         self.design_group_interventions_func(intervention_design_group_dict, design_group_data, cur=cur)
-        # print intervention_design_group_dict
-        # print design_group_data
 
 
 interventions2db = Intervention2DB_Obj()
@@ -754,21 +764,34 @@ def sponsors2db(study_xml, cur):
         if collaborator_sponsor_xml is not None:
             lead_or_collaborator = "collaborator"
             _, tmp_data = simple_query_list(collaborator_sponsor_xml, xmldb_queries)
-            print(tmp_data)
+            # print(tmp_data)
             data = [nct_id, lead_or_collaborator] + tmp_data
-            print(data)
+            # print(data)
             cur.execute(query, data)
         return(cur)
 
 
-
-
-
-
+def id_information2db(study_xml, cur):
+    table_name = "id_information"
+    col_names = ["nct_id", "id_type", "id_value"]
+    id_info_xml = study_xml.find("./id_info")
+    nct_id = id_info_xml.find("./nct_id").text
+    query = generate_query(table_name, col_names)
+    id_type_query_list = [["org_study_id", "org_study_id"],
+                          ["secondary_id", "secondary_id"],
+                          ["nct_alias", "nct_alias"]
+                          ]
+    for id_type_query in id_type_query_list:
+        id_type = id_type_query[0]
+        id_query = id_type_query[1]
+        id_value = xml_find(id_info_xml, id_query, return_string=True)
+        if id_value is not None:
+            data = [nct_id, id_type, id_value]
+            cur.execute(query, data)
+    return (cur)
 
 
 ### functions that are partial done
-
 def countries2db(study_xml, cur):
     table_name = "countries"
     col_names = ["nct_id", "name", "removed"]
@@ -782,6 +805,7 @@ def countries2db(study_xml, cur):
             data = [nct_id, country, removed]
             cur.execute(query, data)
         return(cur)
+
 
 def central_contacts2db(study_xml, cur):
     "missing example data"
@@ -818,6 +842,9 @@ def designs2db(study_xml, cur):
                          ["intervention_model", "intervention_model", False, "%s"],
                          ["primary_purpose", "primary_purpose", False, "%s"],
                          ["masking", "masking", False, "%s"],
+                         ["time_perspective", "time_perspective", False, "%s"],
+                         ["intervention_model_description", "intervention_model_description", False, "%s"],
+                         ["masking_description", "masking_description", False, "%s"],
                          ["observational_model", "observational_model", False, "%s"]  # unknown query kw and content
                          ]
         col_names, data = simple_query_list(study_design_info_xml, xmldb_queries)
@@ -840,20 +867,10 @@ def result_agreements2db(study_xml, cur):
         data = [nct_id] + data
         cur.execute(query, data)
 
+
 ### functions to finish
 # to refer to AACT database
-def id_information2db(study_xml, cur):
-    pass
-    table_name = "id_information"
-    col_names = ["nct_id", "id_type", "id_value"]
-    nct_id = study_xml.find("./id_info/nct_id").text
-    query = generate_query(table_name, col_names)
-    keyword_list = xml_findall(study_xml, "keyword")
-    if keyword_list != []:
-        for keyword in keyword_list:
-            data = [nct_id, keyword]
-            cur.execute(query, data)
-    return (cur)
+
 
 
 class Clinical_Results(object):
@@ -862,6 +879,7 @@ class Clinical_Results(object):
         self.nct_id = None
         self.result_group_id = 1
         self.outcome_id = 1
+        self.outcome_analysis_id = 1
         self.ctgov_group_code2result_group_id = {}
         self.ctgov_group_code2result_group_title = {}
 
@@ -881,9 +899,6 @@ class Clinical_Results(object):
             return(True)
         else:
             if self.ctgov_group_code2result_group_title[ctgov_code] != ctgov_code_title:
-                # print self.ctgov_group_code2result_group_title[ctgov_code]
-                # print ctgov_code_title
-                # print("\n\n")
                 error_message = "ctgov code is not unique in the .xml file. %s refer to both %s and %s." \
                                 % (ctgov_code, self.ctgov_group_code2result_group_title[ctgov_code], ctgov_code_title)
                 xml2db_log(self.nct_id, error_message)
@@ -898,7 +913,7 @@ class Clinical_Results(object):
             return(None)
         self.nct_id = study_xml.find("./id_info/nct_id").text
         self.results_group_func(results_xml, cur)
-        outcome_data = self.outcomes_func(results_xml, cur)
+        self.outcomes_func(results_xml, cur)
         # print(outcome_data)
 
     def results_group_func(self, results_xml, cur):
@@ -980,8 +995,7 @@ class Clinical_Results(object):
                             ctgov_group_code, data = group_info_func(group_xml)
                             data = [self.nct_id, self.result_group_id, result_type, ctgov_group_code] + data
                             self._add2result_group_dict(query, data, cur)
-                return(None)
-
+                return(cur)
 
         results_group_func_list = [participant_results_group_id, baseline_results_group_id,
                                    outcome_results_group_id, reported_events_results_group_id]
@@ -1004,7 +1018,7 @@ class Clinical_Results(object):
                              ["population", "population", False, "%s"],
                              ["units", "measure/units", False, "%s"],
                              ["units_analyzed", "measure/units_analyzed", False, "%s"],
-                             ["anticipated_posting_month_year", "unknown_kw!!!", False, "%s"],  # unknown query kw !!!
+                             ["anticipated_posting_month_year", "posting_date", False, "%s"],  # unknown query kw !!!
                              ["dispersion_type", "measure/dispersion", False, "%s"],
                              ["param_type", "measure/param", False, "%s"]
                              ]
@@ -1019,7 +1033,7 @@ class Clinical_Results(object):
                     ### other functions
 
                     # outcome_analyses  (measure sub_struct)
-                    outcome_analyses_xml = xml_find(child_outcome, "measure", return_string=False)
+                    outcome_analyses_xml = xml_find(child_outcome, "analysis_list", return_string=False)
                     if outcome_analyses_xml is not None:
                         self.outcome_analyses_func(outcome_analyses_xml, cur)
 
@@ -1027,6 +1041,9 @@ class Clinical_Results(object):
                     analyzed_list_xml = xml_find(child_outcome, "measure/analyzed_list", return_string=False)
                     if analyzed_list_xml is not None:
                         self.outcome_counts_func(analyzed_list_xml, cur)
+
+                    # outcome_measurements
+                    self.outcome_measurements_func(child_outcome, cur)
 
                     ### other functions
 
@@ -1036,6 +1053,7 @@ class Clinical_Results(object):
 
     def reported_events_func(self, results_xml, cur):
         table_name = "reported_events"
+
         pass
 
     def outcome_counts_func(self, analyzed_list_xml, cur):
@@ -1070,7 +1088,8 @@ class Clinical_Results(object):
                                 units, scope, ctgov_group_code, count_value]
                         cur.execute(query, data)
 
-    def outcome_analyses_func(self, outcome_analyses_xml, cur):
+
+    def outcome_analyses_func(self, outcome_analyses_list_xml, cur):
         """
         to finish, need an xml file that contains these values
         :param outcome_analyses_xml:
@@ -1078,27 +1097,97 @@ class Clinical_Results(object):
         :return:
         """
         table_name = "outcome_analyses"
-        col_names = ["nct_id", "outcome_id", "non_inferiority_type", "non_inferiority_description",
-                     "param_type", "param_value", "dispersion_type", "dispersion_value", "p_value",
-                     "p_value_modifier", "p_value_description", "ci_n_sides", "ci_percent", "ci_percent",
-                     "ci_lower_limit", "ci_upper_limit", "ci_upper_limit_na_comment", "method",
-                     "method_description", "description", "estimate_description", "groups_description",
-                     "other_analysis_description"
-                    ]
+        xmldb_queries = [["non_inferiority_type", "non_inferiority_type", False, "%s"],
+                         ["non_inferiority_description", "non_inferiority_desc", False, "%s"],
+                         ["param_type", "param_type", False, "%s"],
+                         ["param_value", "param_value", False, "%f"],
+                         ["dispersion_type", "dispersion_type", False, "%s"],
+                         ["dispersion_value", "dispersion_value", False, "%f"],
+                         ["p_value", "p_value", False, "%p_value"],
+                         ["p_value_modifier", "p_value", False, "%p_value_modifier"],  # extra calculation may be needed
+                         ["ci_n_sides", "ci_n_sides", False, "%s"],
+                         ["ci_percent", "ci_percent", False, "%f"],
+                         ["ci_lower_limit", "ci_lower_limit", False, "%f"],
+                         ["ci_upper_limit", "ci_upper_limit", False, "%f"],
+                         ["ci_upper_limit_na_comment", "ci_upper_limit_na_comment", False, "%s"],
+                         ["p_value_description", "p_value_desc", False, "%s"],
+                         ["method", "method", False, "%s"],
+                         ["method_description", "method_desc", False, "%s"],
+                         ["estimate_description", "estimate_desc", False, "%s"],
+                         ["other_analysis_description", "other_analysis_desc", False, "%s"],
+                         ["groups_description", "group_desc", False, "%s"]
+                         ]
+        for outcome_analysis_xml in outcome_analyses_list_xml.findall("./analysis"):
+            col_names, data = simple_query_list(outcome_analysis_xml, xmldb_queries)
+            col_names = ["id" , "nct_id", "outcome_id"] + col_names
+            query = generate_query(table_name, col_names)
+            data = [self.outcome_analysis_id , self.nct_id, self.outcome_id] + data
+            cur.execute(query, data)
+
+            ### other functions
+            self.outcome_analysis_groups_func(outcome_analysis_xml, cur)
+            ### other functions
+
+            self.outcome_analysis_id += 1
+        return(cur)
+
+
+    def outcome_analysis_groups_func(self, outcome_analysis_xml, cur):
+        table_name = "outcome_analysis_groups"
+        col_names = ["nct_id", "result_group_id", "outcome_analysis_id", "ctgov_group_code"]
         query = generate_query(table_name, col_names)
+        group_id_list_xml = xml_find(outcome_analysis_xml, "group_id_list", return_string=False)
+        if group_id_list_xml is not None:
+            group_id_list = xml_findall(group_id_list_xml, "group_id")
+            for group_id in group_id_list:
+                result_group_id = self.ctgov_group_code2result_group_id[group_id]
+                data = [self.nct_id, result_group_id, self.outcome_analysis_id, group_id]
+                cur.execute(query, data)
+            return(cur)
+
+
+    def outcome_measurements_func(self, outcome_analysis_xml, cur):
+        table_name = "outcome_measurements"
         outcome_id = self.outcome_id
-        non_inferiority_type = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
-        non_inferiority_description = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
-        param_type = xml_find(outcome_analyses_xml, "param", return_string=True)
-        param_value = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
-        dispersion_type = xml_find(outcome_analyses_xml, "dispersion", return_string=True)
-        dispersion_value = xml_find(outcome_analyses_xml, "unknown_kw???", return_string=True)
-        pass
+        xmldb_queries = [
+            ["title", "title", False, "%s"],
+            ["description", "description", False, "%s"],
+            ["units", "units", False, "%s"],
+            ["param_type", "param", False, "%s"],
+            ["dispersion_type", "dispersion", False, "%s"]
+        ]
+        for measure_xml in xml_findall(outcome_analysis_xml, "measure", return_string=False):
+            partial_col_names, partial_data = simple_query_list(measure_xml, xmldb_queries)
+            col_names = ["nct_id", "outcome_id", "result_group_id"] + partial_col_names + \
+                        ["classification", "ctgov_group_code", "dispersion_value",
+                         "dispersion_value_num", "param_value", "param_value_num",
+                         "dispersion_lower_limit", "dispersion_upper_limit"]
+            query = generate_query(table_name, col_names)
+            class_list_xml = xml_find(measure_xml, "class_list", return_string=False)
+            if class_list_xml is not None:
+                for class_xml in class_list_xml.findall("./class"):
+                    classification = xml_find(class_xml, "title", return_string=True)
+                    category_list_xml = xml_find(class_xml, "category_list", return_string=False)
+                    if category_list_xml is not None:
+                        for category_xml in category_list_xml.findall("./category"):
+                            measurement_list_xml = xml_find(category_xml, "measurement_list", return_string=False)
+                            if measurement_list_xml is not None:
+                                for measurement_xml in measurement_list_xml.findall("./measurement"):
+                                    ctgov_group_code = xmldict_query(measurement_xml, "group_id")
+                                    result_group_code = self.ctgov_group_code2result_group_id[ctgov_group_code]
+                                    dispersion_value = xmldict_query(measurement_xml, "spread")
+                                    dispersion_value_num = str2float(dispersion_value)
+                                    param_value = xmldict_query(measurement_xml, "value")
+                                    param_value_num = str2float(param_value)
+                                    dispersion_lower_limit = str2float(xmldict_query(measurement_xml, "lower_limit"))
+                                    dispersion_upper_limit = str2float(xmldict_query(measurement_xml, "upper_limit"))
+                                    data = [self.nct_id, outcome_id, result_group_code] + partial_data + \
+                                        [classification, ctgov_group_code, dispersion_value,
+                                         dispersion_value_num, param_value, param_value_num,
+                                         dispersion_lower_limit, dispersion_upper_limit]
+                                    cur.execute(query, data)
+        return(cur)
 
-
-
-    def outcome_analysis_groups_func(self, results_xml, cur):
-        pass
 
 
 clinical_results2db = Clinical_Results()
@@ -1108,7 +1197,7 @@ table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summ
                interventions2db.main_func, keywords2db, clinical_results2db.result_outcome_main,
                designs2db, study_references2db, browse_conditions2db, browse_inerventions2db,
                detailed_descriptions2db, participant_flows2db, result_agreements2db, result_contacts2db,
-               overall_officials2db, responsible_parties2db, sponsors2db, countries2db]
+               overall_officials2db, responsible_parties2db, sponsors2db, countries2db, id_information2db]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
@@ -1197,6 +1286,60 @@ def create_individual_study_xml_url(nct_id, individual_study_xml_url=parameters.
 
 
 
+def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
+    pass
+    conn = None
+    conn = psycopg2.connect(acl_db_parameters)
+    cur = conn.cursor()
+    for table_dict in xml2db_queries:
+        table_name = table_dict.keys()[0]
+        table_cols = table_dict.values()[0]
+        col_names = ""
+        col_insert_params = ""
+        data = []
+        list_idx = [] # indexes of the queries that return a list
+        for idx, col in enumerate(table_cols):
+            col_names = col_names + col[0] + ", "
+            col_insert_params = col_insert_params + col[-1] + ", "
+            if not col[2]: # if the queried result from .xml is not a list, obtain its value directly
+                tmp_data = study_xml.find("./" + col[1])
+                if tmp_data is not None:
+                    tmp_data = tmp_data.text
+            else:
+                list_idx.append(idx)
+                tmp_data = study_xml.findall("./" + col[1])
+                if tmp_data is not None:
+                    tmp_data = [item.text for item in tmp_data]
+            data.append(tmp_data)
+        query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
+                "(" + col_insert_params[:-2] + ");"
+        if len(list_idx) == 0:
+            cur.execute(query, data)
+        else:
+            augmented_data = augment_data(data, list_idx)
+            for data in augmented_data:
+                cur.execute(query, data)
+
+    conn.commit()
+    conn.close()
+    return(None)
 
 
 
+def example_write_to_db(study_list, acl_db_parameters):
+    """
+    write records in study_list into acl_db_parameters (filename specified by acl_db_parameters)
+    :param study_list:
+    :param acl_db_parameters:
+    :return:
+    """
+    conn = None
+    conn = psycopg2.connect(acl_db_parameters)
+    cur = conn.cursor()
+    for study in study_list:
+        query = "INSERT INTO studies (nct_id, official_title) VALUES (%s, %s);"
+        data = (study.nct_id, study.official_title)
+        cur.execute(query, data)
+    conn.commit()
+    conn.close()
+    return(None)
