@@ -734,11 +734,81 @@ def overall_officials2db(study_xml, cur):
     return(cur)
 
 
-def responsible_parties2db(study_xml, cur):
-    pass
+def sponsors2db(study_xml, cur):
+    table_name = "sponsors"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    sponsors_xml = xml_find(study_xml, "sponsors", return_string=False)
+    xmldb_queries = [["agency_class", "agency_class", False, "%s"],
+                     ["name", "agency", False, "%s"]
+                     ]
+    col_names = ["nct_id", "lead_or_collaborator", "agency_class", "name"]
+    query = generate_query(table_name, col_names)
+    if sponsors_xml is not None:
+        lead_sponsor_xml = xml_find(sponsors_xml, "lead_sponsor", return_string=False)
+        if lead_sponsor_xml is not None:
+            lead_or_collaborator = "lead"
+            _, tmp_data = simple_query_list(lead_sponsor_xml, xmldb_queries)
+            data = [nct_id, lead_or_collaborator] + tmp_data
+            cur.execute(query, data)
+        collaborator_sponsor_xml = xml_find(sponsors_xml, "collaborator", return_string=False)
+        if collaborator_sponsor_xml is not None:
+            lead_or_collaborator = "collaborator"
+            _, tmp_data = simple_query_list(collaborator_sponsor_xml, xmldb_queries)
+            print(tmp_data)
+            data = [nct_id, lead_or_collaborator] + tmp_data
+            print(data)
+            cur.execute(query, data)
+        return(cur)
+
+
+
+
+
+
 
 
 ### functions that are partial done
+
+def countries2db(study_xml, cur):
+    table_name = "countries"
+    col_names = ["nct_id", "name", "removed"]
+    query = generate_query(table_name, col_names)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    countries_xml = xml_find(study_xml, "location_countries", return_string=False)
+    if countries_xml is not None:
+        country_list = xml_findall(countries_xml, "country")
+        removed = None  # unknown query kw !!
+        for country in country_list:
+            data = [nct_id, country, removed]
+            cur.execute(query, data)
+        return(cur)
+
+def central_contacts2db(study_xml, cur):
+    "missing example data"
+    table_name = "central_contacts"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    pass
+
+
+def responsible_parties2db(study_xml, cur):
+    table_name = "responsible_parties"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    main_kw = "responsible_party"
+    sub_query_list = [["responsible_party_type", "responsible_party_type", False, "%s"],
+                      ["name", "name", False, "%s"],
+                      ["title", "title", False, "%s"],
+                      ["organization", "organization", False, "%s"],
+                      ["affiliation", "affiliation", False, "%s"]
+                      ]
+    col_names, data = hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True)
+    col_names = ["nct_id"] + col_names
+    query = generate_query(table_name, col_names)
+    for tmp_data in data:
+        tmp_data = [nct_id] + tmp_data
+        cur.execute(query, tmp_data)
+    return(cur)
+
+
 def designs2db(study_xml, cur):
     table_name = "designs"
     nct_id = study_xml.find("./id_info/nct_id").text
@@ -1038,7 +1108,7 @@ table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summ
                interventions2db.main_func, keywords2db, clinical_results2db.result_outcome_main,
                designs2db, study_references2db, browse_conditions2db, browse_inerventions2db,
                detailed_descriptions2db, participant_flows2db, result_agreements2db, result_contacts2db,
-               overall_officials2db]
+               overall_officials2db, responsible_parties2db, sponsors2db, countries2db]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):

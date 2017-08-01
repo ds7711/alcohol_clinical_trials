@@ -266,6 +266,56 @@ commands = (
         )
     """
     ,
+    """ CREATE TABLE responsible_parties
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            responsible_party_type VARCHAR(255),
+            title VARCHAR(255),
+            name VARCHAR(255),
+            organization VARCHAR(255),
+            affiliation TEXT,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE sponsors
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            agency_class VARCHAR(255),
+            lead_or_collaborator VARCHAR(255),
+            name VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE central_contacts
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            contact_type VARCHAR(255),
+            name VARCHAR(255),
+            phone VARCHAR(255),
+            email VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE countries
+
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            name VARCHAR(255),
+            removed VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
     # partial complete
     """ CREATE TABLE designs
         (
