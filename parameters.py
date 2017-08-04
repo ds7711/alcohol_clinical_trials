@@ -458,9 +458,73 @@ commands = (
             event_count INTEGER,
             organ_system VARCHAR(255),
             adverse_event_term VARCHAR(255),
-            frequent_threshold INTEGER,
-            vocal VARCHAR(255),
+            frequency_threshold NUMERIC,
+            vocab VARCHAR(255),
             assessment VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE baseline_counts
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            ctgov_group_code VARCHAR(10),
+            result_group_id INTEGER,
+            units VARCHAR(255),
+            scope VARCHAR(255),
+            count INTEGER,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE baseline_measurements
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            result_group_id INTEGER,
+            ctgov_group_code VARCHAR(10),
+            classification VARCHAR(255),
+            category VARCHAR(255),
+            title VARCHAR(255),
+            description TEXT,
+            units VARCHAR(255),
+            param_type VARCHAR(255),
+            param_value VARCHAR(255),
+            param_value_num NUMERIC,
+            dispersion_type VARCHAR(255),
+            dispersion_value VARCHAR(255),
+            dispersion_value_num NUMERIC,
+            dispersion_lower_limit NUMERIC,
+            dispersion_upper_limit NUMERIC,
+            explanation_of_na VARCHAR(255),
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE milestones
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            result_group_id INTEGER,
+            ctgov_group_code VARCHAR(10),
+            title VARCHAR(255),
+            period VARCHAR(255),
+            description TEXT,
+            count INTEGER,
+            PRIMARY KEY (id)
+        )
+    """
+    ,
+    """ CREATE TABLE drop_withdrawals
+        (
+            nct_id CHARACTER(11) NOT NULL,
+            id SERIAL,
+            result_group_id INTEGER,
+            ctgov_group_code VARCHAR(10),
+            period VARCHAR(255),
+            reason VARCHAR(255),
+            count INTEGER,
             PRIMARY KEY (id)
         )
     """

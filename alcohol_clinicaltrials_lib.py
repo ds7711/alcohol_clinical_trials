@@ -1,3 +1,7 @@
+# note
+# unknown query keyword label: unknown_kw
+
+
 # import required modules
 import datetime
 import zipfile
@@ -114,7 +118,6 @@ def aact_query(command_string):
 ### helper function
 
 def xml2db_log(nct_id, error_message, log_name=parameters.log_filename):
-    date = datetime.time()
     with open(log_name, "a") as thefile:
         log_string = nct_id + ": " + error_message +"\n"
         thefile.write(log_string)
@@ -268,8 +271,33 @@ def xmldict_query(xml_dict, key):
     else:
         return(None)
 
+def xml_attrib_extract(my_xml, xml_dict_query_list):
+    """
+    extract attribute information from an simple XML structure
+    :param my_xml:
+    :param xml_dict_query_list:
+        a list of lists: each list contains three strings,
+            the 1st one is the corresponding column name in the database table;
+            the 2nd one is the corresponding query keyword used for the xml attribute;
+            the 3rd one is reserved for future purpose
+            the 4th one is for possible type conversion
+    :return:
+    """
+    values = []
+    col_names = []
+    for item in xml_dict_query_list:
+        tmp_col_name = item[0]
+        col_names.append(tmp_col_name)
+        query_kw = item[1]
+        tmp_type = item[3]
+        tmp_value = xmldict_query(my_xml, query_kw)
+        if tmp_type != "%s":
+            tmp_value = type_conversion_funcs[tmp_type](tmp_value)
+        values.append(tmp_value)
+    return(col_names, values)
 
-def xml_find(study_xml, keyword, return_string=True):
+
+def xml_find(study_xml, keyword, return_string):
     """
     handle exception to prevent error
     :param study_xml:
@@ -367,10 +395,6 @@ def hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True
         else:
             return([], [])
     return(tmp_col_names, data)
-
-
-
-
 
 
 
@@ -560,8 +584,8 @@ class Intervention2DB_Obj(object):
         intervention_list = study_xml.findall("./intervention")
 
         for xml_item in intervention_list:
-            intervention_type = xml_find(xml_item, "intervention_type")
-            intervention_name = xml_find(xml_item, "intervention_name")
+            intervention_type = xml_find(xml_item, "intervention_type", return_string=True)
+            intervention_name = xml_find(xml_item, "intervention_name", return_string=True)
             intervention_description = xml_item.findall("./arm_group_label")  # unknown query kw
             if intervention_description == []:
                 tmp_data = [nct_id, self.intervention_detailed_id, intervention_type, intervention_name, None]
@@ -590,9 +614,9 @@ class Intervention2DB_Obj(object):
         intervention_design_group_dict = {}
 
         for xml_item in intervention_list:
-            intervention_type = xml_find(xml_item, "intervention_type")
-            intervention_name = xml_find(xml_item, "intervention_name")
-            intervention_description = xml_find(xml_item, "description")
+            intervention_type = xml_find(xml_item, "intervention_type", return_string=True)
+            intervention_name = xml_find(xml_item, "intervention_name", return_string=True)
+            intervention_description = xml_find(xml_item, "description", return_string=True)
             intervention_details = xml_item.findall("./arm_group_label")
             tmp_data = [nct_id, self.intervention_id, intervention_type, intervention_name, intervention_description]
             cur.execute(query, tmp_data)
@@ -914,6 +938,9 @@ class Clinical_Results(object):
         self.nct_id = study_xml.find("./id_info/nct_id").text
         self.results_group_func(results_xml, cur)
         self.outcomes_func(results_xml, cur)
+        self.milestones_func(results_xml, cur)
+        self.reported_events_func(results_xml, cur)
+        self.baseline_counts_func(results_xml, cur)
         # print(outcome_data)
 
     def results_group_func(self, results_xml, cur):
@@ -1051,11 +1078,6 @@ class Clinical_Results(object):
                     self.outcome_id += 1
         return(outcomes_data)
 
-    def reported_events_func(self, results_xml, cur):
-        table_name = "reported_events"
-
-        pass
-
     def outcome_counts_func(self, analyzed_list_xml, cur):
         """
         write data into table outcome_counts.
@@ -1087,7 +1109,6 @@ class Clinical_Results(object):
                         data = [self.nct_id, self.outcome_id, results_group_id,
                                 units, scope, ctgov_group_code, count_value]
                         cur.execute(query, data)
-
 
     def outcome_analyses_func(self, outcome_analyses_list_xml, cur):
         """
@@ -1131,7 +1152,6 @@ class Clinical_Results(object):
             self.outcome_analysis_id += 1
         return(cur)
 
-
     def outcome_analysis_groups_func(self, outcome_analysis_xml, cur):
         table_name = "outcome_analysis_groups"
         col_names = ["nct_id", "result_group_id", "outcome_analysis_id", "ctgov_group_code"]
@@ -1144,7 +1164,6 @@ class Clinical_Results(object):
                 data = [self.nct_id, result_group_id, self.outcome_analysis_id, group_id]
                 cur.execute(query, data)
             return(cur)
-
 
     def outcome_measurements_func(self, outcome_analysis_xml, cur):
         table_name = "outcome_measurements"
@@ -1187,6 +1206,125 @@ class Clinical_Results(object):
                                          dispersion_lower_limit, dispersion_upper_limit]
                                     cur.execute(query, data)
         return(cur)
+
+    def reported_events_func(self, results_xml, cur):
+
+        def events_query(overall_events_xml, event_type, time_frame, description, table_name, cur):
+            xml_dict_query = [["ctgov_group_code", "group_id", False, "%s"],
+                              ["subjects_affected", "subjects_affected", False, "%d"],
+                              ["subjects_at_risk", "subjects_at_risk", False, "%d"],
+                              ["event_count", "events", False, "%d"]
+                              ]
+            xmldb_queries = [["default_assessment", "default_assessment", False, "%s"],
+                             ["default_vocab", "default_vocab", False, "%s"],
+                             ["frequency_threshold", "frequency_threshold", False, "%f"]
+                             ]
+            tmp_col_names, tmp_data = simple_query_list(overall_events_xml, xmldb_queries)
+            category_list_xml = xml_find(overall_events_xml, "category_list", return_string=False)
+            for category_xml in category_list_xml.findall("./category"):
+                organ_system = xml_find(category_xml, "title", return_string=True)
+                event_list_xml = xml_find(category_xml, "event_list", return_string=False)
+                for event_xml in event_list_xml.findall("./event"):
+                    sub_title_xml = xml_find(event_xml, "sub_title", return_string=False)
+                    adverse_event_term = sub_title_xml.text
+                    vocab = xmldict_query(sub_title_xml, "vocab")
+                    assessment = xml_find(event_xml, "assessment", return_string=True)
+                    for counts_xml in event_xml.findall("./counts"):
+                        counts_col_names, counts_data = xml_attrib_extract(counts_xml, xml_dict_query)
+                        result_group_id = self.ctgov_group_code2result_group_id[counts_data[0]]
+                        col_names = ["nct_id", "result_group_id", "event_type", "time_frame", "description"] + \
+                                    tmp_col_names + ["organ_system", "adverse_event_term", "vocab", "assessment"] + \
+                                     counts_col_names
+                        query = generate_query(table_name, col_names)
+                        data = [self.nct_id, result_group_id, event_type, time_frame, description] + tmp_data + \
+                               [organ_system, adverse_event_term, vocab, assessment] + counts_data
+                        cur.execute(query, data)
+
+        table_name = "reported_events"
+        reported_events_xml = xml_find(results_xml, "reported_events", return_string=False)
+        if reported_events_xml is not None:
+            time_frame = xml_find(reported_events_xml, "time_frame", return_string=True)
+            description = xml_find(reported_events_xml, "desc", return_string=True)
+            serious_events_xml = xml_find(reported_events_xml, "serious_events", return_string=False)
+            if serious_events_xml is not None:
+                event_type = "serious"
+                events_query(serious_events_xml, event_type, time_frame, description, table_name, cur)
+
+            other_events_xml = xml_find(reported_events_xml, "other_events", return_string=False)
+            if other_events_xml is not None:
+                event_type = "other"
+                events_query(other_events_xml, event_type, time_frame, description, table_name, cur)
+
+    def baseline_counts_func(self, results_xml, cur):
+        table_name = "baseline_counts"
+        xmldb_queries = [["units", "units", False, "%s"],
+                         ["scope", "scope", False, "%s"]
+                         ]
+        xml_dict_queries = [["ctgov_group_code", "group_id", False, "%s"],
+                            ["count", "value", False, "%d"]
+                            ]
+
+        baseline_analyzed_list_xml = xml_find(results_xml, "baseline/analyzed_list", return_string=False)
+        if baseline_analyzed_list_xml is not None:
+            for analyzed_xml in baseline_analyzed_list_xml.findall("./analyzed"):
+                tmp_col_names, tmp_data = simple_query_list(analyzed_xml, xmldb_queries)
+                count_list_xml = xml_find(analyzed_xml, "count_list", return_string=False)
+                if count_list_xml is not None:
+                    for count_xml in count_list_xml.findall("./count"):
+                        count_col_names, count_data = xml_attrib_extract(count_xml, xml_dict_queries)
+                        result_group_id = self.ctgov_group_code2result_group_id[count_data[0]]
+                        col_names = ["nct_id", "result_group_id"] + tmp_col_names + count_col_names
+                        query = generate_query(table_name, col_names)
+                        data = [self.nct_id, result_group_id] + tmp_data + count_data
+                        cur.execute(query, data)
+
+    def baseline_measurements_func(self, results_xml, cur):
+        pass
+
+    def milestones_func(self, results_xml, cur):
+        table_name = "milestones"
+        col_names = ["nct_id", "result_group_id", "period", "title", "ctgov_group_code", "description", "count"]
+        query = generate_query(table_name, col_names)
+        xml_dict_query = [["group_id", "group_id", False, "%s"],
+                          ["count", "count", False, "%d"],
+                          ]
+        period_list_xml = xml_find(results_xml, "participant_flow/period_list", return_string=False)
+        if period_list_xml is not None:
+            for period_xml in period_list_xml.findall("./period"):
+                period = xml_find(period_xml, "title", return_string=True)
+
+                self.drop_withdrawals_func(period_xml, cur, period)  # drop_withdraw functions
+
+                milestone_list_xml = xml_find(period_xml, "milestone_list", return_string=False)
+                for milestone_xml in milestone_list_xml.findall("./milestone"):
+                    title = xml_find(milestone_xml, "title", return_string=True)
+                    description = xml_find(milestone_xml, "unknown_kw!!!", return_string=True)  # unknown query kw
+                    participant_list_xml = milestone_xml.find("./participants_list")
+                    for participants_xml in participant_list_xml.findall("./participants"):
+                        _, tmp_data = xml_attrib_extract(participants_xml, xml_dict_query)
+                        ctgov_group_code, count = tmp_data
+                        result_group_id = self.ctgov_group_code2result_group_id[ctgov_group_code]
+                        data = [self.nct_id, result_group_id, period, title, ctgov_group_code, description, count]
+                        cur.execute(query, data)
+
+    def drop_withdrawals_func(self, milestone_period_xml, cur, period):
+        table_name = "drop_withdrawals"
+        xml_dict_query = [["group_id", "group_id", False, "%s"],
+                          ["count", "count", False, "%d"],
+                          ]
+        col_names = ["nct_id", "result_group_id", "period", "reason", "ctgov_group_code", "count"]
+        query = generate_query(table_name, col_names)
+        drop_withdraw_reason_list_xml = xml_find(milestone_period_xml, "drop_withdraw_reason_list", return_string=False)
+        if drop_withdraw_reason_list_xml is not None:
+            for drop_withdraw_reason_xml in drop_withdraw_reason_list_xml.findall("./drop_withdraw_reason"):
+                reason = xml_find(drop_withdraw_reason_xml, "title", return_string=True)
+                participant_list_xml = drop_withdraw_reason_xml.find("./participants_list")
+                for participants_xml in participant_list_xml.findall("./participants"):
+                    _, tmp_data = xml_attrib_extract(participants_xml, xml_dict_query)
+                    ctgov_group_code, count = tmp_data
+                    result_group_id = self.ctgov_group_code2result_group_id[ctgov_group_code]
+                    data = [self.nct_id, result_group_id, period, reason, ctgov_group_code, count]
+                    cur.execute(query, data)
 
 
 

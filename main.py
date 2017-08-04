@@ -26,7 +26,7 @@ acl.debug_xml2db("NCT02274688.xml", test_func=acl.clinical_results2db.result_out
 # convert .xml files into database
 acl.batch_xml2db(zip_filename)
 
-studies_from_db = acl.query_postgresql("SELECT * FROM outcome_measurements;")
+studies_from_db = acl.query_postgresql("SELECT * FROM reported_events;")
 print(len(studies_from_db), studies_from_db)
 
 # 3rd: display xml file in a user-friendly way
