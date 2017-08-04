@@ -555,26 +555,6 @@ commands = (
 # They key for each dictionary stores the name of the table, its value stores the column name and how data are fetched.
 
 
-xml2db_queries = [
-    {"studies": [["nct_id", "id_info/nct_id", False, "%s"],
-                 ["official_title", "official_title", False, "%s"],
-                 ["enrollment", "enrollment", False, "%s"],
-                 ["start_month_year", "start_date", False, "%s"],
-                 ["completion_month_year", "completion_date", False, "%s"],
-                 ["verification_month_year", "verification_date", False, "%s"],
-                 ["study_type", "study_type", False, "%s"]]},
-    {"conditions": [["nct_id", "id_info/nct_id", False, "%s"],
-                    ["name", "conditions", True, "%s"]]},
-    {"eligibilities": [["nct_id", "id_info/nct_id", False, "%s"],
-                       ["gender", "eligibility/gender", False, "%s"],
-                       ["minimum_age", "min_age", False, "%s"],
-                       ["maximum_age", "max_age", False, "%s"],
-                       ["age_groups", "age_groups", True, "%s"]]},
-    {"links": [["nct_id", "id_info/nct_id", False, "%s"],
-               ["url", "required_header/url", False, "%s"]]}
-]
-
-
 
 
 
