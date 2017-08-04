@@ -815,88 +815,6 @@ def id_information2db(study_xml, cur):
     return (cur)
 
 
-### functions that are partial done
-def countries2db(study_xml, cur):
-    table_name = "countries"
-    col_names = ["nct_id", "name", "removed"]
-    query = generate_query(table_name, col_names)
-    nct_id = study_xml.find("./id_info/nct_id").text
-    countries_xml = xml_find(study_xml, "location_countries", return_string=False)
-    if countries_xml is not None:
-        country_list = xml_findall(countries_xml, "country")
-        removed = None  # unknown query kw !!
-        for country in country_list:
-            data = [nct_id, country, removed]
-            cur.execute(query, data)
-        return(cur)
-
-
-def central_contacts2db(study_xml, cur):
-    "missing example data"
-    table_name = "central_contacts"
-    nct_id = study_xml.find("./id_info/nct_id").text
-    pass
-
-
-def responsible_parties2db(study_xml, cur):
-    table_name = "responsible_parties"
-    nct_id = study_xml.find("./id_info/nct_id").text
-    main_kw = "responsible_party"
-    sub_query_list = [["responsible_party_type", "responsible_party_type", False, "%s"],
-                      ["name", "name", False, "%s"],
-                      ["title", "title", False, "%s"],
-                      ["organization", "organization", False, "%s"],
-                      ["affiliation", "affiliation", False, "%s"]
-                      ]
-    col_names, data = hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True)
-    col_names = ["nct_id"] + col_names
-    query = generate_query(table_name, col_names)
-    for tmp_data in data:
-        tmp_data = [nct_id] + tmp_data
-        cur.execute(query, tmp_data)
-    return(cur)
-
-
-def designs2db(study_xml, cur):
-    table_name = "designs"
-    nct_id = study_xml.find("./id_info/nct_id").text
-    study_design_info_xml = study_xml.find("./study_design_info")
-    if study_design_info_xml is not None:
-        xmldb_queries = [["allocation", "allocation", False, "%s"],
-                         ["intervention_model", "intervention_model", False, "%s"],
-                         ["primary_purpose", "primary_purpose", False, "%s"],
-                         ["masking", "masking", False, "%s"],
-                         ["time_perspective", "time_perspective", False, "%s"],
-                         ["intervention_model_description", "intervention_model_description", False, "%s"],
-                         ["masking_description", "masking_description", False, "%s"],
-                         ["observational_model", "observational_model", False, "%s"]  # unknown query kw and content
-                         ]
-        col_names, data = simple_query_list(study_design_info_xml, xmldb_queries)
-        col_names = ["nct_id"] + col_names
-        query = generate_query(table_name, col_names)
-        data = [nct_id] + data
-        cur.execute(query, data)
-        return(cur)
-
-def result_agreements2db(study_xml, cur):
-    table_name = "result_agreements"
-    col_names = ["nct_id", "pi_employee", "agreement"]
-    query = generate_query(table_name, col_names)
-    certain_agreement_xml = xml_find(study_xml, "clinical_results/certain_agreements", return_string=False)
-    nct_id = study_xml.find("./id_info/nct_id").text
-    if certain_agreement_xml is not None:
-        xmldb_queries = [["pi_employee", "pi_employee", False, "%s"],
-                         ["agreement", "restrictive_agreement", False, "%s"]]
-        _, data = simple_query_list(certain_agreement_xml, xmldb_queries)
-        data = [nct_id] + data
-        cur.execute(query, data)
-
-
-### functions to finish
-# to refer to AACT database
-
-
-
 class Clinical_Results(object):
 
     def __init__(self):
@@ -941,6 +859,7 @@ class Clinical_Results(object):
         self.milestones_func(results_xml, cur)
         self.reported_events_func(results_xml, cur)
         self.baseline_counts_func(results_xml, cur)
+        self.baseline_measurements_func(results_xml, cur)
         # print(outcome_data)
 
     def results_group_func(self, results_xml, cur):
@@ -1279,7 +1198,46 @@ class Clinical_Results(object):
                         cur.execute(query, data)
 
     def baseline_measurements_func(self, results_xml, cur):
-        pass
+        table_name = "baseline_measurements"
+        xml_db_queries = [["units", "units", False, "%s"],
+                          ["title", "title", False, "%s"],
+                          ["description", "description", False, "%s"],
+                          ["param_type", "param", False, "%s"],
+                          ["dispersion_type", "dispersion", False, "%s"],
+                          ["explanation_of_na", "unknown_kw", False, "%s"]
+                          ]
+        xml_dict_queries = [["ctgov_group_code", "group_id", False, "%s"],
+                            ["param_value", "value", False, "%s"],
+                            ["param_value_num", "value", False, "%f"],
+                            ["dispersion_value", "spread", False, "%s"],
+                            ["dispersion_value_num", "spread", False, "%f"],
+                            ["dispersion_lower_limit", "lower_limit", False, "%f"],
+                            ["dispersion_upper_limit", "upper_limit", False, "%f"]
+                            ]
+        baseline_measure_list_xml = xml_find(results_xml, "baseline/measure_list", return_string=False)
+        if baseline_measure_list_xml is not None:
+            for measure_xml in baseline_measure_list_xml.findall("./measure"):
+                basic_col_names, basic_data = simple_query_list(measure_xml, xml_db_queries)
+                class_list_xml = xml_find(measure_xml, "class_list", return_string=False)
+                if class_list_xml is not None:
+                    for class_xml in class_list_xml.findall("./class"):
+                        classification = xml_find(class_xml, "title", return_string=True)
+                        category_list_xml = xml_find(class_xml, "category_list", return_string=False)
+                        if category_list_xml is not None:
+                            for category_xml in category_list_xml.findall("./category"):
+                                category = xml_find(category_xml, "sub_title", return_string=True)
+                                measurement_list_xml = xml_find(category_xml, "measurement_list", return_string=False)
+                                if measurement_list_xml is not None:
+                                    for tmp_measurement_xml in measurement_list_xml.findall("./measurement"):
+                                        measurement_col_names, measurement_data = xml_attrib_extract(tmp_measurement_xml,
+                                                                                                     xml_dict_queries)
+                                        result_group_id = self.ctgov_group_code2result_group_id[measurement_data[0]]
+                                        col_names = ["nct_id", "result_group_id", "classification", "category"] + \
+                                                    basic_col_names + measurement_col_names
+                                        data = [self.nct_id, result_group_id, classification, category] + \
+                                               basic_data + measurement_data
+                                        query = generate_query(table_name, col_names)
+                                        cur.execute(query, data)
 
     def milestones_func(self, results_xml, cur):
         table_name = "milestones"
@@ -1326,46 +1284,146 @@ class Clinical_Results(object):
                     data = [self.nct_id, result_group_id, period, reason, ctgov_group_code, count]
                     cur.execute(query, data)
 
-
-
 clinical_results2db = Clinical_Results()
+
+
+### functions that are partial done
+def countries2db(study_xml, cur):
+    table_name = "countries"
+    col_names = ["nct_id", "name", "removed"]
+    query = generate_query(table_name, col_names)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    countries_xml = xml_find(study_xml, "location_countries", return_string=False)
+    if countries_xml is not None:
+        country_list = xml_findall(countries_xml, "country")
+        removed = None  # unknown query kw !!
+        for country in country_list:
+            data = [nct_id, country, removed]
+            cur.execute(query, data)
+        return(cur)
+
+
+def central_contacts2db(study_xml, cur):
+    table_name = "central_contacts"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    col_names = ["nct_id", "contact_type", "name", "phone", "email"]
+    query = generate_query(table_name, col_names)
+
+    contact_type_list = [["overall_contact", "regular"],
+                         ["overall_contact_backup", "backup"]]
+    xmldb_queries = [["name", "name_or_title", False, "%s"],
+                     ["phone", "phone", False, "%s"],
+                     ["email", "email", False, "%s"]]
+
+    for item in contact_type_list:
+        contact_query_kw = item[0]
+        contact_type = item[1]
+        contact_xml = xml_find(study_xml, contact_query_kw, return_string=False)
+        if contact_xml is not None:
+            _, contact_data = simple_query_list(contact_xml, xmldb_queries)
+            data = [nct_id, contact_type] + contact_data
+            cur.execute(query, data)
+    return(cur)
+
+
+def responsible_parties2db(study_xml, cur):
+    table_name = "responsible_parties"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    main_kw = "responsible_party"
+    sub_query_list = [["responsible_party_type", "responsible_party_type", False, "%s"],
+                      ["name", "name", False, "%s"],
+                      ["title", "title", False, "%s"],
+                      ["organization", "organization", False, "%s"],
+                      ["affiliation", "affiliation", False, "%s"]
+                      ]
+    col_names, data = hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True)
+    col_names = ["nct_id"] + col_names
+    query = generate_query(table_name, col_names)
+    for tmp_data in data:
+        tmp_data = [nct_id] + tmp_data
+        cur.execute(query, tmp_data)
+    return(cur)
+
+
+def designs2db(study_xml, cur):
+    table_name = "designs"
+    nct_id = study_xml.find("./id_info/nct_id").text
+    study_design_info_xml = study_xml.find("./study_design_info")
+    if study_design_info_xml is not None:
+        xmldb_queries = [["allocation", "allocation", False, "%s"],
+                         ["intervention_model", "intervention_model", False, "%s"],
+                         ["primary_purpose", "primary_purpose", False, "%s"],
+                         ["masking", "masking", False, "%s"],
+                         ["time_perspective", "time_perspective", False, "%s"],
+                         ["intervention_model_description", "intervention_model_description", False, "%s"],
+                         ["masking_description", "masking_description", False, "%s"],
+                         ["observational_model", "observational_model", False, "%s"]  # unknown query kw and content
+                         ]
+        col_names, data = simple_query_list(study_design_info_xml, xmldb_queries)
+        col_names = ["nct_id"] + col_names
+        query = generate_query(table_name, col_names)
+        data = [nct_id] + data
+        cur.execute(query, data)
+        return(cur)
+
+
+def result_agreements2db(study_xml, cur):
+    table_name = "result_agreements"
+    col_names = ["nct_id", "pi_employee", "agreement"]
+    query = generate_query(table_name, col_names)
+    certain_agreement_xml = xml_find(study_xml, "clinical_results/certain_agreements", return_string=False)
+    nct_id = study_xml.find("./id_info/nct_id").text
+    if certain_agreement_xml is not None:
+        xmldb_queries = [["pi_employee", "pi_employee", False, "%s"],
+                         ["agreement", "restrictive_agreement", False, "%s"]]
+        _, data = simple_query_list(certain_agreement_xml, xmldb_queries)
+        data = [nct_id] + data
+        cur.execute(query, data)
+
+
+### functions to add later
+def calculated_values2db(study_xml, cur):
+    pass
+
+class Facilities(object):
+
+    def __init__(self):
+        pass
+
+    def facilities_func(self):
+        pass
+
+    def facility_investigators(self):
+        pass
+
+    def facility_contacts(self):
+        pass
+
+
+# to refer to AACT database
 
 
 table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db,
                interventions2db.main_func, keywords2db, clinical_results2db.result_outcome_main,
                designs2db, study_references2db, browse_conditions2db, browse_inerventions2db,
                detailed_descriptions2db, participant_flows2db, result_agreements2db, result_contacts2db,
-               overall_officials2db, responsible_parties2db, sponsors2db, countries2db, id_information2db]
+               overall_officials2db, responsible_parties2db, sponsors2db, countries2db, id_information2db,
+               central_contacts2db]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
     conn = None
     conn = psycopg2.connect(acl_db_parameters)
     cur = conn.cursor()
-
-    # for debugging:
-    # study_xml = ET.parse("NCT01937130.xml").getroot()
-    # query, data = conditions2db(study_xml)
-    # if type(data) is list:
-    #     for tmp_data in data:
-    #         cur.execute(query, tmp_data)
-    # else:
-    #     cur.execute(query, data)
-
     for tmp_func in table_funcs:
         tmp_func(study_xml, cur)
-
     conn.commit()
     conn.close()
     return(None)
 
 
 def debug_xml2db(xml_filename, test_func, acl_db_parameters=parameters.acl_db_params):
-    # study_xml = ET.parse(xml_filename).getroot()
-
-
     study_xml = ET.parse(xml_filename).getroot()
-
     conn = None
     conn = psycopg2.connect(acl_db_parameters)
     cur = conn.cursor()
@@ -1374,95 +1432,10 @@ def debug_xml2db(xml_filename, test_func, acl_db_parameters=parameters.acl_db_pa
 
 
 
-### Reference Backup only
-# xml2db_schema = [
-#     {"studies": [["nct_id", "CHARACTER(11)", "NOT NULL PRIMARY KEY", "nct_id", False, "%s"],
-#                  ["official_title", "TEXT", "NOT NULL", "title", False, "%s"],
-#                  ["enrollment_type", "VARCHAR(255)", "", "enrollment", False, "%s"],
-#                  ["start_month_year", "VARCHAR(255)", "", "start_date", False, "%s"],
-#                  ["completion_month_year", "VARCHAR(255)", "", "completion_date", False, "%s"]
-#                  ]},
-#     {"conditions": [["nct_id", "CHARACTER(11)", "NOT NULL", "nct_id", False, "%s"],
-#                     ["id", "SERIAL", "NOT NULL", "NO_KW", False, ""]
-#                    ]}
-# ]
-#
+
 
 
 ### !!!!!!!!!!!!!!!!!!!!! obsolete functions: to delete !!!!!!!!!!!!!!!!!!!!!
-def get_xml_string(search_url):
-    """
-    get the search results (.xml) as a string
-    :param search_url: url used for search
-    :return:
-    """
-    index = search_url.find(parameters.search_url_separating_kw)
-    kw_length = len(parameters.search_url_separating_kw)
-    cut_index = index + kw_length
-    base_url = search_url[:cut_index]
-    search_specification = search_url[cut_index:]
-    search_string = base_url + parameters.download_kw + search_specification + parameters.download_specification
-    response = urllib2.urlopen(search_string)
-    xml_string = response.read()
-    return(xml_string)
-
-
-def download_xml_file(search_url, xml_filename=parameters.xml_file_name):
-    """
-    write the string as a .xml file
-    :param search_url:
-    :return:
-    """
-    xml_string = get_xml_string(search_url)
-    with open(xml_filename, "wb") as thefile:
-        thefile.write(xml_string)
-    return(None)
-
-
-def create_individual_study_xml_url(nct_id, individual_study_xml_url=parameters.individual_study_xml_url):
-    return(individual_study_xml_url[0] + nct_id + individual_study_xml_url[1])
-
-
-
-def study_xml2db(study_xml, xml2db_queries=parameters.xml2db_queries, acl_db_parameters=parameters.acl_db_params):
-    pass
-    conn = None
-    conn = psycopg2.connect(acl_db_parameters)
-    cur = conn.cursor()
-    for table_dict in xml2db_queries:
-        table_name = table_dict.keys()[0]
-        table_cols = table_dict.values()[0]
-        col_names = ""
-        col_insert_params = ""
-        data = []
-        list_idx = [] # indexes of the queries that return a list
-        for idx, col in enumerate(table_cols):
-            col_names = col_names + col[0] + ", "
-            col_insert_params = col_insert_params + col[-1] + ", "
-            if not col[2]: # if the queried result from .xml is not a list, obtain its value directly
-                tmp_data = study_xml.find("./" + col[1])
-                if tmp_data is not None:
-                    tmp_data = tmp_data.text
-            else:
-                list_idx.append(idx)
-                tmp_data = study_xml.findall("./" + col[1])
-                if tmp_data is not None:
-                    tmp_data = [item.text for item in tmp_data]
-            data.append(tmp_data)
-        query = "INSERT INTO " + table_name + " (" + col_names[:-2] + ") " + " VALUES " + \
-                "(" + col_insert_params[:-2] + ");"
-        if len(list_idx) == 0:
-            cur.execute(query, data)
-        else:
-            augmented_data = augment_data(data, list_idx)
-            for data in augmented_data:
-                cur.execute(query, data)
-
-    conn.commit()
-    conn.close()
-    return(None)
-
-
 
 def example_write_to_db(study_list, acl_db_parameters):
     """
