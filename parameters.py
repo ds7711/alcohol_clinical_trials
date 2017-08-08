@@ -11,15 +11,6 @@ zip_download_affix = "https://clinicaltrials.gov/ct2/download_studies?"
 search_url_separating_kw = "results"
 zip_filename = "acl_results.zip"
 
-# old website
-main_site = "https://clinicaltrials.gov/beta/"
-download_specification = "&down_flds=all&down_fmt=xml"
-download_kw = "/download_fields"
-xml_file_name = "acl_db.xml"
-individual_study_xml_url = ["https://clinicaltrials.gov/ct2/show/", "?displayxml=true"] # used to create the
-# download_keys = ["down_flds=all", "down_fmt=xml"]
-# seprator = "&"
-
 
 # parameters for the acl_database
 db_created = False
@@ -27,13 +18,17 @@ postgresql_params = "dbname=postgres user=postgres host=localhost password=7711"
 acl_db_name = "acl_database"
 _acl_db_password = 7711
 _acl_db_username = "postgres"
+
+
 # following string is used to connect to the database
 acl_db_params = "dbname=" + acl_db_name + " " + "user=" + _acl_db_username + " " + "password=" + str(_acl_db_password)
 # acl_db_params = "dbname=acl_database user=postgres password=7711" # parameters used to connect to the database
 
 
 
-# aact_schema
+# aact_schema: the schema used to create the database
+# each string in the tuple defines a table in the database
+# each table has a corresponding function that converts data from .XML to database (see alcohol_clinicaltrials_lib)
 commands = (
     """
     CREATE TABLE studies (
@@ -49,7 +44,7 @@ commands = (
         primary_completion_date DATE,
         last_changed_date DATE,
         study_type VARCHAR(255),
-        acronym VARCHAR(255),
+        acronym VARCHAR(14),
         baseline_population TEXT,
         overall_status VARCHAR(255),
         last_known_status VARCHAR(255),
@@ -60,8 +55,8 @@ commands = (
         number_of_arms INT,
         number_of_groups INT,
         limitations_and_caveats VARCHAR(255),
-        brief_title VARCHAR(255),
-        why_stopped VARCHAR(255), 
+        brief_title VARCHAR(300),
+        why_stopped VARCHAR(200), 
         has_expanded_access_type VARCHAR(25), 
         has_expanded_access BOOLEAN,
         PRIMARY KEY (nct_id)
@@ -90,7 +85,6 @@ commands = (
             population TEXT,
             gender_description TEXT,
             criteria TEXT,
-            age_groups VARCHAR(255),
             PRIMARY KEY (id)
         )
     """
@@ -143,8 +137,8 @@ commands = (
         (
             nct_id CHARACTER(11) NOT NULL,
             id INTEGER,
-            group_type VARCHAR(255),
-            title VARCHAR(255),
+            group_type VARCHAR(50),
+            title VARCHAR(100),
             description TEXT,
             PRIMARY KEY (id)
         )
@@ -298,7 +292,7 @@ commands = (
             nct_id CHARACTER(11) NOT NULL,
             id SERIAL,
             name VARCHAR(255),
-            removed VARCHAR(255),
+            removed BOOLEAN,
             PRIMARY KEY (id)
         )
     """
@@ -309,7 +303,7 @@ commands = (
             id SERIAL,
             allocation VARCHAR(255),
             intervention_model VARCHAR(255),
-            intervention_model_description VARCHAR(255),
+            intervention_model_description VARCHAR(1000),
             primary_purpose VARCHAR(255),
             description VARCHAR(255),
             observational_model VARCHAR(255),
@@ -325,7 +319,7 @@ commands = (
             nct_id CHARACTER(11) NOT NULL,
             id SERIAL,
             id_type VARCHAR(255),
-            id_value VARCHAR(55),
+            id_value VARCHAR(50),
             PRIMARY KEY (id)
         )
     """
@@ -544,32 +538,3 @@ commands = (
 )
 
 
-
-
-
-
-
-
-# Queries used to fetch data from .xml file
-# Each dictionary stores information for one table.
-# They key for each dictionary stores the name of the table, its value stores the column name and how data are fetched.
-
-
-
-
-
-# .xml to AACT schema-like database
-# columns in the np.array:
-#   1st: column name of the database table
-#   2nd: data type of the column
-#   3rd: extra specification for the column (e.g., NOT NULL or PRIMARY KEY)
-#   4th: keywords to query results from .xml for the column
-#   5th: is returned result a list? False / True
-#   6th: data type for insert entries (e.g., %s )
-
-
-
-
-
-
-# Perhaps two separate tables are better

@@ -39,8 +39,6 @@ PRODUCTS = {
 def home():
     return render_template('home.html', products=PRODUCTS)
 
-# def home():
-#     return render_template('acl_index_static.html')
 
 
 @app.route('/study/<key>')
@@ -50,5 +48,9 @@ def product(key):
         abort(404)
     return render_template('product.html', product=product)
 
+
 if __name__ == '__main__':
+    import webbrowser
+    url = "http://127.0.0.1:5000/"
+    webbrowser.open_new(url)
     app.run()

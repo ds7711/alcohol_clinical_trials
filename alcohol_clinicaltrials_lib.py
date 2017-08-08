@@ -14,7 +14,7 @@ import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
-# 1st: input search url and create download url to get the NCT_ID list
+### 1st: input search url and create download url to get the NCT_ID list
 def separate_search_url(search_url, separating_kw):
     """
     parse the search url to extract search conditions that can be used for downloading results in .xml format
@@ -50,8 +50,7 @@ def download_all_studies(search_url, zip_filename=parameters.zip_filename):
     return(zip_filename)
 
 
-
-# Create and delete database, add new relational table in the database
+### 2nd: Create and delete database, add new relational table in the database
 def create_tables(acl_db_parameters, commands):
     """
     create tables in the PostgreSQL database
@@ -144,7 +143,8 @@ def aact_query(command_string):
     return(records)
 
 
-### helper function
+### 3rd: convert xml to database
+# helper function
 
 def xml2db_log(nct_id, error_message, log_name=parameters.log_filename):
     """
@@ -450,25 +450,6 @@ def simple_query_list(study_xml, query_lists):
     return(col_names, data)
 
 
-def multiple_return_queries(study_xml, query_list):
-    """
-    single query, multiple simple returns. e.g., condition
-    :param study_xml:
-    :param query_list:
-    :return:
-    """
-    col_name = query_list[0]
-    col_type = query_list[-1]
-    query_kw = query_list[1]
-    query_kw = "./" + query_kw
-    query_results = study_xml.findall(query_kw)
-    query_results = [item.text for item in query_results]
-    if query_results is not None:
-        return([col_name, col_type, query_results])
-    else:
-        return(None)
-
-
 def hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True):
     """
     query a slight complex xml object
@@ -510,8 +491,6 @@ def batch_xml2db(zip_filename, acl_db_parameters=parameters.acl_db_params):
     for idx, xml_filename in enumerate(studies_zip.namelist()):
         with studies_zip.open(xml_filename) as xml_file:
             xml_string = xml_file.read()
-        if idx > 100:
-            break
         study_xml = ET.fromstring(xml_string)
         print("%dth study: %s" % (idx+1, xml_filename[:-4]))
         print("\n")
@@ -583,7 +562,6 @@ def eligibilities2db(study_xml, cur):
                      ["population", "study_pop/textblock", False, "%s"],
                      ["maximum_age_type", "maximum_age", False, "%s"],
                      ["healthy_volunteers", "healthy_volunteers", False, "%s"],
-                     ["age_groups", "age_groups", False, "%s"],  #unknown query kw
                      ["criteria", "criteria/textblock", False, "%s"]
                     ]
     col_names, data = hierarchical_query(study_xml, main_kw, xmldb_queries, multiple_returns=False)
@@ -596,11 +574,16 @@ def eligibilities2db(study_xml, cur):
 
 
 def conditions2db(study_xml, cur):
+    """
+    extract conditions data
+    :param study_xml:
+    :param cur:
+    :return:
+    """
     table_name = "conditions"
     col_names = ["nct_id", "name"]
     nct_id = study_xml.find("./id_info/nct_id").text
-    condition_list = study_xml.findall("./condition")
-    conditions = [item.text for item in condition_list]
+    conditions = xml_findall(study_xml, "condition", return_string=True)
     query = generate_query(table_name, col_names)
     data = augment_data([nct_id, conditions], [1])
     for tmp_data in data:
@@ -609,6 +592,12 @@ def conditions2db(study_xml, cur):
 
 
 def keywords2db(study_xml, cur):
+    """
+    extract keywords
+    :param study_xml:
+    :param cur:
+    :return:
+    """
     table_name = "keywords"
     col_names = ["nct_id", "name"]
     nct_id = study_xml.find("./id_info/nct_id").text
@@ -622,15 +611,20 @@ def keywords2db(study_xml, cur):
 
 
 def brief_summaries2db(study_xml, cur):
+    """
+    brief summary of the study
+    :param study_xml:
+    :param cur:
+    :return:
+    """
     table_name = "brief_summaries"
-    query_entry = ["brief_summaries", "brief_summary/textblock", False, "%s"]
     nct_id = study_xml.find("./id_info/nct_id").text
     col_names = ["nct_id", "description"]
-    _, _, brief_summaries = multiple_return_queries(study_xml, query_entry)
+    brief_summaries = xml_findall(study_xml, "brief_summary/textblock", return_string=True)
     query = generate_query(table_name, col_names)
-    data = augment_data([nct_id, brief_summaries], [1])
-    for tmp_data in data:
-        cur.execute(query, tmp_data)
+    for brief_sum in brief_summaries:
+        data = [nct_id, brief_sum]
+        cur.execute(query, data)
     return(cur)
 
 
@@ -701,14 +695,12 @@ class Intervention2DB_Obj(object):
             if intervention_description == []:
                 tmp_data = [nct_id, self.intervention_detailed_id, intervention_type, intervention_name, None]
                 cur.execute(query, tmp_data)
-                # self.intervention_other_names(xml_item, cur=cur)  # complete the other funcitons
                 self.intervention_detailed_id += 1
             else:
                 for item in intervention_description:
                     tmp_data = [nct_id, self.intervention_detailed_id, intervention_type, intervention_name,
                                 item.text]
                     cur.execute(query, tmp_data)
-                    # self.intervention_other_names(xml_item, cur=cur)  # complete the other funcitons
                     self.intervention_detailed_id += 1
         return(cur)
 
@@ -731,6 +723,7 @@ class Intervention2DB_Obj(object):
             intervention_details = xml_item.findall("./arm_group_label")
             tmp_data = [nct_id, self.intervention_id, intervention_type, intervention_name, intervention_description]
             cur.execute(query, tmp_data)
+
             self.intervention_other_names(xml_item, cur=cur)  # complete the other funcitons
 
             if intervention_details != []:
@@ -749,9 +742,6 @@ class Intervention2DB_Obj(object):
             try:
                 intervention_id = intervention_design_group_dict[intervention_group_key]
             except:
-                # print(self.nct_id)
-                # print(intervention_design_group_dict)
-                # print(design_group_data)
                 intervention_id = None
             data = [self.nct_id, design_group_id, intervention_id]
             cur.execute(query, data)
@@ -771,7 +761,7 @@ def links2db(study_xml, cur):
     table_name = "links"
     xmldb_queries = [["nct_id", "id_info/nct_id", False, "%s"],
                      ["url", "required_header/url", False, "%s"],
-                     ["description", "required_header/download_date", False, "%s"]  # unknown query kw and content
+                     ["description", "required_header/description", False, "%s"]
                     ]
     col_names, data = simple_query_list(study_xml, xmldb_queries)
     query = generate_query(table_name, col_names)
@@ -781,19 +771,25 @@ def links2db(study_xml, cur):
 
 
 def study_references2db(study_xml, cur):
+    """
+    references
+    :param study_xml:
+    :param cur:
+    :return:
+    """
     table_name = "study_references"
     nct_id = study_xml.find("./id_info/nct_id").text
-    main_kw = "reference"
+    main_kw_list = ["reference", "results_reference"]
     sub_query_list = [["citation", "citation", False, "%s"],
                       ["pmid", "PMID", False, "%s"],
-                      ["reference_type", "unknown_kw???", False, "%s"]
                       ]
-    col_names, data = hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True)
-    col_names = ["nct_id"] + col_names
-    query = generate_query(table_name, col_names)
-    for tmp_data in data:
-        tmp_data = [nct_id] + tmp_data
-        cur.execute(query, tmp_data)
+    for main_kw in main_kw_list:
+        col_names, data = hierarchical_query(study_xml, main_kw, sub_query_list, multiple_returns=True)
+        col_names = ["nct_id", "reference_type"] + col_names
+        query = generate_query(table_name, col_names)
+        for tmp_data in data:
+            tmp_data = [nct_id, main_kw] + tmp_data
+            cur.execute(query, tmp_data)
 
 
 def browse_conditions2db(study_xml, cur):
@@ -899,9 +895,7 @@ def sponsors2db(study_xml, cur):
         if collaborator_sponsor_xml is not None:
             lead_or_collaborator = "collaborator"
             _, tmp_data = simple_query_list(collaborator_sponsor_xml, xmldb_queries)
-            # print(tmp_data)
             data = [nct_id, lead_or_collaborator] + tmp_data
-            # print(data)
             cur.execute(query, data)
         return(cur)
 
@@ -974,11 +968,9 @@ class Clinical_Results(object):
         # print(outcome_data)
 
     def results_group_func(self, results_xml, cur):
-
         table_name = "result_groups"
         col_names = ["nct_id", "id", "result_type", "ctgov_group_code", "title", "description"]
         query = generate_query(table_name, col_names)
-
         def group_info_func(group_xml):
             xmldb_queries = [["title", "title", False, "%s"],
                              ["description", "description", False, "%s"],
@@ -1399,23 +1391,29 @@ class Clinical_Results(object):
                     data = [self.nct_id, result_group_id, period, reason, ctgov_group_code, count]
                     cur.execute(query, data)
 
+
 clinical_results2db = Clinical_Results()
 
 
-### functions that are partial done
 def countries2db(study_xml, cur):
     table_name = "countries"
     col_names = ["nct_id", "name", "removed"]
     query = generate_query(table_name, col_names)
     nct_id = study_xml.find("./id_info/nct_id").text
-    countries_xml = xml_find(study_xml, "location_countries", return_string=False)
-    if countries_xml is not None:
-        country_list = xml_findall(countries_xml, "country", return_string=True)
-        removed = None  # unknown query kw !!
-        for country in country_list:
-            data = [nct_id, country, removed]
-            cur.execute(query, data)
-        return(cur)
+    countries_kw_list = ["location_countries", "removed_countries"]
+    removed = False
+    for countries_kw in countries_kw_list:
+        if countries_kw == "location_countries":
+            removed = False
+        if countries_kw == "removed_countries":
+            removed = True
+        countries_xml = xml_find(study_xml, countries_kw, return_string=False)
+        if countries_xml is not None:
+            country_list = xml_findall(countries_xml, "country", return_string=True)
+            for country in country_list:
+                data = [nct_id, country, removed]
+                cur.execute(query, data)
+    return(cur)
 
 
 def central_contacts2db(study_xml, cur):
@@ -1472,7 +1470,7 @@ def designs2db(study_xml, cur):
                          ["time_perspective", "time_perspective", False, "%s"],
                          ["intervention_model_description", "intervention_model_description", False, "%s"],
                          ["masking_description", "masking_description", False, "%s"],
-                         ["observational_model", "observational_model", False, "%s"]  # unknown query kw and content
+                         ["observational_model", "observational_model", False, "%s"]
                          ]
         col_names, data = simple_query_list(study_design_info_xml, xmldb_queries)
         col_names = ["nct_id"] + col_names
@@ -1505,6 +1503,9 @@ class Facilities(object):
     def __init__(self):
         pass
 
+    def main_func(self, study_xml, cur):
+        pass
+
     def facilities_func(self):
         pass
 
@@ -1514,8 +1515,7 @@ class Facilities(object):
     def facility_contacts(self):
         pass
 
-
-# to refer to AACT database
+facilities2db = Facilities()
 
 
 table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db,
@@ -1523,7 +1523,7 @@ table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summ
                designs2db, study_references2db, browse_conditions2db, browse_inerventions2db,
                detailed_descriptions2db, participant_flows2db, result_agreements2db, result_contacts2db,
                overall_officials2db, responsible_parties2db, sponsors2db, countries2db, id_information2db,
-               central_contacts2db]
+               central_contacts2db, calculated_values2db, facilities2db.main_func]
 
 
 def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
@@ -1552,20 +1552,42 @@ def debug_xml2db(xml_filename, test_func, acl_db_parameters=parameters.acl_db_pa
 
 ### !!!!!!!!!!!!!!!!!!!!! obsolete functions: to delete !!!!!!!!!!!!!!!!!!!!!
 
-def example_write_to_db(study_list, acl_db_parameters):
-    """
-    write records in study_list into acl_db_parameters (filename specified by acl_db_parameters)
-    :param study_list:
-    :param acl_db_parameters:
-    :return:
-    """
-    conn = None
-    conn = psycopg2.connect(acl_db_parameters)
-    cur = conn.cursor()
-    for study in study_list:
-        query = "INSERT INTO studies (nct_id, official_title) VALUES (%s, %s);"
-        data = (study.nct_id, study.official_title)
-        cur.execute(query, data)
-    conn.commit()
-    conn.close()
-    return(None)
+# def example_write_to_db(study_list, acl_db_parameters):
+#     """
+#     write records in study_list into acl_db_parameters (filename specified by acl_db_parameters)
+#     :param study_list:
+#     :param acl_db_parameters:
+#     :return:
+#     """
+#     conn = None
+#     conn = psycopg2.connect(acl_db_parameters)
+#     cur = conn.cursor()
+#     for study in study_list:
+#         query = "INSERT INTO studies (nct_id, official_title) VALUES (%s, %s);"
+#         data = (study.nct_id, study.official_title)
+#         cur.execute(query, data)
+#     conn.commit()
+#     conn.close()
+#     return(None)
+
+
+# def multiple_return_queries(study_xml, query_list):
+#     """
+#     single query, multiple simple returns. e.g., condition
+#     :param study_xml:
+#     :param query_list:
+#     :return:
+#     """
+#     col_name = query_list[0]
+#     col_type = query_list[-1]
+#     query_kw = query_list[1]
+#     query_kw = "./" + query_kw
+#     query_results = study_xml.findall(query_kw)
+#     query_results = [item.text for item in query_results]
+#     if query_results is not None:
+#         return([col_name, col_type, query_results])
+#     else:
+#         return(None)
+
+
+### 4th: database to display/website
