@@ -109,7 +109,7 @@ def delete_postgresql_db(acl_db_name, admin_params):
     conn.close()
 
 
-def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params):
+def query_postgresql(command_string, fetchall, db_conn_parameters=parameters.acl_db_params):
     """
     query from the established database
     :param command_string: string used to query
@@ -120,7 +120,10 @@ def query_postgresql(command_string, db_conn_parameters=parameters.acl_db_params
     conn = psycopg2.connect(db_conn_parameters)
     cur = conn.cursor()
     cur.execute(command_string)
-    records = cur.fetchall()
+    if fetchall:
+        records = cur.fetchall()
+    else:
+        records = cur.fetchone()
     cur.close()
     conn.close()
     return(records)
@@ -1544,50 +1547,3 @@ def debug_xml2db(xml_filename, test_func, acl_db_parameters=parameters.acl_db_pa
     cur = conn.cursor()
     test_func(study_xml, cur)
 
-
-
-
-
-
-
-### !!!!!!!!!!!!!!!!!!!!! obsolete functions: to delete !!!!!!!!!!!!!!!!!!!!!
-
-# def example_write_to_db(study_list, acl_db_parameters):
-#     """
-#     write records in study_list into acl_db_parameters (filename specified by acl_db_parameters)
-#     :param study_list:
-#     :param acl_db_parameters:
-#     :return:
-#     """
-#     conn = None
-#     conn = psycopg2.connect(acl_db_parameters)
-#     cur = conn.cursor()
-#     for study in study_list:
-#         query = "INSERT INTO studies (nct_id, official_title) VALUES (%s, %s);"
-#         data = (study.nct_id, study.official_title)
-#         cur.execute(query, data)
-#     conn.commit()
-#     conn.close()
-#     return(None)
-
-
-# def multiple_return_queries(study_xml, query_list):
-#     """
-#     single query, multiple simple returns. e.g., condition
-#     :param study_xml:
-#     :param query_list:
-#     :return:
-#     """
-#     col_name = query_list[0]
-#     col_type = query_list[-1]
-#     query_kw = query_list[1]
-#     query_kw = "./" + query_kw
-#     query_results = study_xml.findall(query_kw)
-#     query_results = [item.text for item in query_results]
-#     if query_results is not None:
-#         return([col_name, col_type, query_results])
-#     else:
-#         return(None)
-
-
-### 4th: database to display/website

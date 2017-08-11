@@ -21,31 +21,6 @@ records = acl.query_postgresql("select * from studies where nct_id = " + nct_id)
 
 
 
-# 4th: use FLASK for display
-from flask import Flask, render_template, abort
-# example data
-study_name = "alcohol study"
-app = Flask(__name__)
-# PRODUCTS = study_dict
-
-
-@app.route('/')
-@app.route('/home')
-def home():
-    return render_template('home.html', study_dict=STUDY_DICT)
-
-@app.route('/study/<key>')
-def product(key):
-    study = STUDY_DICT.get(key)
-    if not product:
-        abort(404)
-    return render_template('product.html', study=study)
-
-if __name__ == '__main__':
-    import webbrowser
-    url = "http://127.0.0.1:5000/"
-    webbrowser.open_new(url)
-    app.run()
 
 
 # 4th: additional functionalities (search, visualization)
