@@ -26,10 +26,10 @@ def main():
 
 @app.route('/study_list/<string:nct_id>')
 def display_study(nct_id):
-    table_name = "studies"
-    command = "select * from " + table_name + " where nct_id='%s';" % (nct_id)
-    basic_info = acl.query_postgresql(command, fetchall=False)
-    studies_colnames = dbl.get_table_colnames(table_name)
+    studies = dbl.db2table_dict("studies", nct_id, fetchall=False)
+    design_outcomes = dbl.db2table_dict("design_outcomes", nct_id, fetchall=True)
+    brief_summaries = dbl.db2table_dict("brief_summaries", nct_id, fetchall=False)
+    detailed_descriptions = dbl.db2table_dict("detailed_descriptions", nct_id, fetchall=False)
     return(render_template("study.html", **locals()))
 
 

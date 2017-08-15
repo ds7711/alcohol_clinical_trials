@@ -550,6 +550,24 @@ def studies2db(study_xml, cur):
     return(cur)
 
 
+def design_outcomes2db(study_xml, cur):
+    table_name = "design_outcomes"
+    col_names = ["nct_id", "outcome_type", "measure", "population", "time_frame", "description"]
+    nct_id = study_xml.find("./id_info/nct_id").text
+    query = generate_query(table_name, col_names)
+    main_kw_list = ["primary_outcome", "secondary_outcome"]
+    xmldb_queries = [["measure", "measure", False, "%s"],
+                     ["population", "unknown_kw", False, "%s"],  # unknown kw
+                     ["time_frame", "time_frame", False, "%s"],
+                     ["description", "description", False, "%s"]]
+    for main_kw in main_kw_list:
+        _, data = hierarchical_query(study_xml, main_kw, xmldb_queries, multiple_returns=True)
+        outcome_type = main_kw
+        for tmp_data in data:
+            tmp_data = [nct_id, outcome_type] + tmp_data
+            cur.execute(query, tmp_data)
+
+
 def eligibilities2db(study_xml, cur):
     """
     extract data and write to eligibilities table, detail see studies2db
@@ -1521,7 +1539,7 @@ class Facilities(object):
 facilities2db = Facilities()
 
 
-table_funcs = [studies2db, eligibilities2db, conditions2db, links2db, brief_summaries2db,
+table_funcs = [studies2db, design_outcomes2db, eligibilities2db, conditions2db, links2db, brief_summaries2db,
                interventions2db.main_func, keywords2db, clinical_results2db.result_outcome_main,
                designs2db, study_references2db, browse_conditions2db, browse_inerventions2db,
                detailed_descriptions2db, participant_flows2db, result_agreements2db, result_contacts2db,

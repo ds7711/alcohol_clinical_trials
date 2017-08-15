@@ -10,13 +10,13 @@ import parameters # cutomized parameters for the script, for editing
 
 nct_id = "NCT00130923"
 
-records = acl.query_postgresql("select * from studies where nct_id = " + nct_id)
+records = acl.query_postgresql("select * from studies where nct_id = '" + nct_id +"'", fetchall=True)
 
 # possible search/filter modality here
 # e.g., select only a subset of entries from the database
 # one could use database syntax and customized python function
 
-
+# acl.debug_xml2db("./data/NCT02274688.xml", test_func=acl.design_outcomes2db)
 
 
 

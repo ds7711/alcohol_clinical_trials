@@ -1,4 +1,104 @@
 {% extends 'base.html' %}
 {% block body %}
-  <h1> Information about {{nct_id}} to be added. </h1>
+
+<!--Title of the study-->
+<h3 class="text-center"> {{studies["official_title"]}} </h3>
+
+<!--basic study information-->
+<div class="container">
+    <table class="table">
+    <tr>
+        <th>NCT ID</th>
+        <th>First received</th>
+        <th>Last updated</th>
+        <th>Last verified</th>
+        <th>Overall Status</th>
+        <th>Phase</th>
+        <th>Study Type</th>
+        <th>Enrollment</th>
+    </tr>
+    <tr>
+        <td>{{studies["nct_id"]}}</td>
+        <td>{{studies["start_month_year"]}}</td>
+        <td>{{studies["last_changed_date"]}}</td>
+        <td>{{studies["verification_month_year"]}}</td>
+        <td>{{studies["overall_status"]}}</td>
+        <td>{{studies["phase"]}}</td>
+        <td>{{studies["study_type"]}}</td>
+        <td>{{studies["enrollment"]}}</td>
+    </tr>
+    </table>
+</div>
+
+<h4> Tracking Information </h4>
+<!--outcome measure information-->
+<div class="container">
+
+    <table class="table">
+        <tr>
+          <th>Outcome Type</th>
+          <th>Measurement</th>
+        </tr>
+        {% for item in design_outcomes["outcome_type"] %}
+        <tr>
+            <td>{{item}}</td>
+            <td>{{design_outcomes["measure"][loop.index0]}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+<h4> Descriptive Information </h4>
+<div class="container">
+    <table class="table">
+    <tr>
+        <th>Brief Title</th>
+        <td>{{studies["brief_title"]}}</td>
+    </tr>
+    <tr>
+        <th>Official Title</th>
+        <td>{{studies["official_title"]}}</td>
+    </tr>
+    <tr>
+        <th>Brief Summary</th>
+        <td>{{brief_summaries["description"]}}</td>
+    </tr>
+    <tr>
+        <th>Detailed Description</th>
+        <td>{{detailed_descriptions["description"]}}</td>
+    </tr>
+        <!--to continue-->
+    <tr>
+        <th>Study Design</th>
+        <td></td>
+    </tr>
+    <tr>
+        <th>Condition</th>
+        <td></td>
+    </tr>
+    </table>
+</div>
+
+<h4>Recruitment Information</h4>
+
+
+<h4>Administrative Information</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

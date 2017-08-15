@@ -63,6 +63,19 @@ commands = (
     )
     """
     ,
+    """ CREATE TABLE design_outcomes
+    (
+        nct_id CHARACTER(11) NOT NULL,
+        id SERIAL,
+        outcome_type VARCHAR(255),
+        population VARCHAR(255),
+        measure TEXT,
+        time_frame TEXT,
+        description TEXT,
+        PRIMARY KEY (id)
+    )
+    """
+    ,
     """ CREATE TABLE conditions
     (
         nct_id CHARACTER(11) NOT NULL,
