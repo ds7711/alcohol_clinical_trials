@@ -25,6 +25,7 @@ def extract_unique_design_outcomes(design_outcomes_dict):
 
 
 def get_table_colnames(table_name, cur=None, acl_db_parameters=parameters.acl_db_params):
+    """extract the column names of a table"""
     conn = psycopg2.connect(acl_db_parameters)
     cur = conn.cursor()
     tmp_cmd = "SELECT * FROM " + table_name + " LIMIT 0"
@@ -34,6 +35,12 @@ def get_table_colnames(table_name, cur=None, acl_db_parameters=parameters.acl_db
 
 
 def list2dict(key_list, value_list):
+    """
+    convert two lists to a dictionary
+    :param key_list:
+    :param value_list:
+    :return:
+    """
     my_dict = {}
     for key, value in zip(key_list, value_list):
         my_dict[key] = value
@@ -41,6 +48,11 @@ def list2dict(key_list, value_list):
 
 
 def vstack_list(list_of_lists):
+    """
+    stack list of lists [[1, 2, 3], [a, b, c]] into [[1, a], [2, b], [3, c]]
+    :param list_of_lists:
+    :return:
+    """
     stacked_list = [[] for _ in xrange(len(list_of_lists[0]))]
     for tmp_list in list_of_lists:
         for idx, item in enumerate(tmp_list):
@@ -49,6 +61,13 @@ def vstack_list(list_of_lists):
 
 
 def db2table_dict(table_name, nct_id, fetchall):
+    """
+    convert the returned information from database into a dictionary
+    :param table_name:
+    :param nct_id:
+    :param fetchall:
+    :return:
+    """
     command = "select * from " + table_name + " where nct_id='%s';" % (nct_id)
     if fetchall:
         basic_info = acl.query_postgresql(command, fetchall=True)
@@ -56,6 +75,7 @@ def db2table_dict(table_name, nct_id, fetchall):
     else:
         basic_info = acl.query_postgresql(command, fetchall=False)
     return(list2dict(get_table_colnames(table_name), basic_info))
+
 
 ### no use in html
 def get_dict_data(my_dict, key):
