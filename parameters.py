@@ -10,7 +10,7 @@ search_url = "https://clinicaltrials.gov/ct2/results?term=college&cond=Alcoholic
 zip_download_affix = "https://clinicaltrials.gov/ct2/download_studies?"
 search_url_separating_kw = "results"
 zip_filename = "acl_results.zip"
-
+original_study_link_prefix = "https://clinicaltrials.gov/ct2/show/record/"
 
 # parameters for the acl_database
 db_created = False

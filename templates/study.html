@@ -68,14 +68,24 @@
         <th>Detailed Description</th>
         <td>{{detailed_descriptions["description"]}}</td>
     </tr>
-        <!--to continue-->
     <tr>
         <th>Study Design</th>
-        <td></td>
+        <td>
+            <p> {{study_design_model_type}}: {{study_design_model}} </p>
+            <p> Masking: {{designs["masking"]}} </p>
+            <p> Primary purpose: {{designs["primary_purpose"]}} </p>
+            <!--<p> designs["oberventional_model"] </p>-->
+            <!--<p> designs["masking"] </p>-->
+            <!--<p> designs["primary_purpose"] </p>-->
+        </td>
     </tr>
     <tr>
         <th>Condition</th>
-        <td></td>
+        <td>
+        {% for item in conditions["name"] %}
+            <p>{{item}}</p>
+        {% endfor %}
+        </td>
     </tr>
     </table>
 </div>

@@ -2,7 +2,7 @@ import psycopg2
 import parameters
 import alcohol_clinicaltrials_lib as acl
 
-
+# helper functions
 def generate_study_link(nct_id, prefix=None):
     """
     generate the link to the orignal study page on clinicaltrials.gov
@@ -13,27 +13,6 @@ def generate_study_link(nct_id, prefix=None):
     if prefix is None:
         prefix = "https://clinicaltrials.gov/show/"
     return(prefix+nct_id)
-
-
-def extract_unique_design_outcomes(design_outcomes_dict):
-    """
-    extract the unique pair of design outcomes
-    :param design_outcomes_dict:
-    :return:
-    """
-    unique_design_outcomes = {"outcome_type":[], "measure": []}
-    _combined_pairs = []
-    for idx in xrange(len(design_outcomes_dict["outcome_type"])):
-        outcome_type = design_outcomes_dict["outcome_type"][idx]
-        measurement = design_outcomes_dict["measure"][idx]
-        tmp_combined_pair = outcome_type + measurement
-        if tmp_combined_pair in _combined_pairs:
-            continue
-        else:
-            unique_design_outcomes["outcome_type"].append(outcome_type)
-            unique_design_outcomes["measure"].append(measurement)
-            _combined_pairs.append(tmp_combined_pair)
-    return(unique_design_outcomes)
 
 
 def get_table_colnames(table_name, cur=None, acl_db_parameters=parameters.acl_db_params):
@@ -87,6 +66,35 @@ def db2table_dict(table_name, nct_id, fetchall):
     else:
         basic_info = acl.query_postgresql(command, fetchall=False)
     return(list2dict(get_table_colnames(table_name), basic_info))
+
+
+# information specific functions
+def extract_unique_design_outcomes(design_outcomes_dict):
+    """
+    extract the unique pair of design outcomes
+    :param design_outcomes_dict:
+    :return:
+    """
+    unique_design_outcomes = {"outcome_type":[], "measure": []}
+    _combined_pairs = []
+    for idx in xrange(len(design_outcomes_dict["outcome_type"])):
+        outcome_type = design_outcomes_dict["outcome_type"][idx]
+        measurement = design_outcomes_dict["measure"][idx]
+        tmp_combined_pair = outcome_type + measurement
+        if tmp_combined_pair in _combined_pairs:
+            continue
+        else:
+            unique_design_outcomes["outcome_type"].append(outcome_type)
+            unique_design_outcomes["measure"].append(measurement)
+            _combined_pairs.append(tmp_combined_pair)
+    return(unique_design_outcomes)
+
+
+def extract_study_design_tracking_information(designs_dict):
+    study_design_model_type = "intervention_model"
+    if designs_dict[study_design_model_type] == None:
+        study_design_model_type = "observentional_model"
+    return(study_design_model_type)
 
 
 ### no use in html
