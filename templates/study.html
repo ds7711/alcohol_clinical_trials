@@ -87,6 +87,26 @@
         {% endfor %}
         </td>
     </tr>
+    <tr>
+        <th>Intervention</th>
+        <td>
+            <ul>
+                {% for item in interventions["intervention_type"]%}
+                <li>
+                    <p>{{item}}: {{interventions["name"][loop.index0]}}</p>
+                    <p>{{interventions["description"][loop.index0]}}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Study Arms</th>
+    </tr>
+    <tr>
+        <th>Publications*</th>
+    </tr>
+
     </table>
 </div>
 
