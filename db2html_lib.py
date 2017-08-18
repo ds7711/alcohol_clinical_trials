@@ -3,6 +3,18 @@ import parameters
 import alcohol_clinicaltrials_lib as acl
 
 
+def generate_study_link(nct_id, prefix=None):
+    """
+    generate the link to the orignal study page on clinicaltrials.gov
+    :param nct_id:
+    :param prefix:
+    :return:
+    """
+    if prefix is None:
+        prefix = "https://clinicaltrials.gov/show/"
+    return(prefix+nct_id)
+
+
 def extract_unique_design_outcomes(design_outcomes_dict):
     """
     extract the unique pair of design outcomes
