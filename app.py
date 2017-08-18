@@ -28,6 +28,7 @@ def main():
 def display_study(nct_id):
     studies = dbl.db2table_dict("studies", nct_id, fetchall=False)
     design_outcomes = dbl.db2table_dict("design_outcomes", nct_id, fetchall=True)
+    unique_design_outcomes = dbl.extract_unique_design_outcomes(design_outcomes)
     brief_summaries = dbl.db2table_dict("brief_summaries", nct_id, fetchall=False)
     detailed_descriptions = dbl.db2table_dict("detailed_descriptions", nct_id, fetchall=False)
     return(render_template("study.html", **locals()))

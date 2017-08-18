@@ -39,10 +39,10 @@
           <th>Outcome Type</th>
           <th>Measurement</th>
         </tr>
-        {% for item in design_outcomes["outcome_type"] %}
+        {% for item in unique_design_outcomes["outcome_type"] %}
         <tr>
             <td>{{item}}</td>
-            <td>{{design_outcomes["measure"][loop.index0]}}</td>
+            <td>{{unique_design_outcomes["measure"][loop.index0]}}</td>
         </tr>
         {% endfor %}
 
