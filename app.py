@@ -58,9 +58,12 @@ def display_study(nct_id):
     design_groups_combined = dbl.combine_design_group_interventions(design_groups,
                                                                     design_group_interventions,
                                                                     interventions_list_dict)
-
     # Publications
     study_references = dbl.db2table_list_dict("study_references", nct_id, fetchall=True)
+
+    ### Recruitment Information
+    # eligibilities
+    eligibilities = dbl.db2table_dict_list("eligibilities", nct_id, fetchall=False)
 
     ### render the html page
     return(render_template("study.html", **locals()))

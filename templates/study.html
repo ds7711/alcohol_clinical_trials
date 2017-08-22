@@ -141,6 +141,42 @@
 </div>
 
 <h4>Recruitment Information</h4>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>
+                Eligibility Criteria
+            </th>
+            <td>
+                {{eligibilities['criteria']}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Sex/Gender
+            </th>
+            <td>
+                Sexes Eligible for Study: {{eligibilities['gender']}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Ages
+            </th>
+            <td>
+                {{eligibilities['minimum_age_type']}} to {{eligibilities['maximum_age_type']}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Accepts Healthy Volunteers
+            </th>
+            <td>
+                {{eligibilities['healthy_volunteers']}}
+            </td>
+        </tr>
+    </table>
+</div>
 
 
 <h4>Administrative Information</h4>
