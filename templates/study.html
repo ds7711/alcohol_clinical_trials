@@ -42,7 +42,9 @@
         {% for item in unique_design_outcomes["outcome_type"] %}
         <tr>
             <td>{{item}}</td>
-            <td>{{unique_design_outcomes["measure"][loop.index0]}}</td>
+            <td><p>{{unique_design_outcomes["measure"][loop.index0]}} [{{unique_design_outcomes["time_frame"][loop.index0]}}]</p>
+                <p>{{unique_design_outcomes["description"][loop.index0]}}</p>
+            </td>
         </tr>
         {% endfor %}
 
@@ -74,9 +76,6 @@
             <p> {{study_design_model_type}}: {{study_design_model}} </p>
             <p> Masking: {{designs["masking"]}} </p>
             <p> Primary purpose: {{designs["primary_purpose"]}} </p>
-            <!--<p> designs["oberventional_model"] </p>-->
-            <!--<p> designs["masking"] </p>-->
-            <!--<p> designs["primary_purpose"] </p>-->
         </td>
     </tr>
     <tr>
@@ -95,6 +94,17 @@
                 <li>
                     <p>{{item}}: {{interventions["name"][loop.index0]}}</p>
                     <p>{{interventions["description"][loop.index0]}}</p>
+                    {% if interventions["other_names"] != [] %}
+                        <p> Other names: </p>
+                        <ul>
+                            {% for tmp in interventions["other_names"][loop.index0] %}
+                            <li>
+                                {{tmp}}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <p></p>
                 </li>
                 {% endfor %}
             </ul>

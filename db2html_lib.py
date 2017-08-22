@@ -60,12 +60,17 @@ def db2table_dict(table_name, nct_id, fetchall):
     :return:
     """
     command = "select * from " + table_name + " where nct_id='%s';" % (nct_id)
+    col_names = get_table_colnames(table_name)
+    basic_info = acl.query_postgresql(command, fetchall=fetchall)
     if fetchall:
-        basic_info = acl.query_postgresql(command, fetchall=True)
-        basic_info = vstack_list(basic_info)
+        if basic_info != []:
+            basic_info = vstack_list(basic_info)
+        else:
+            basic_info = [[] for _ in xrange(len(col_names))]
     else:
-        basic_info = acl.query_postgresql(command, fetchall=False)
-    return(list2dict(get_table_colnames(table_name), basic_info))
+        if basic_info is None:
+            basic_info = [[] for _ in xrange(len(col_names))]
+    return(list2dict(col_names, basic_info))
 
 
 # information specific functions
@@ -75,17 +80,21 @@ def extract_unique_design_outcomes(design_outcomes_dict):
     :param design_outcomes_dict:
     :return:
     """
-    unique_design_outcomes = {"outcome_type":[], "measure": []}
+    unique_design_outcomes = {"outcome_type":[], "measure": [], "time_frame": [], "description": []}
     _combined_pairs = []
     for idx in xrange(len(design_outcomes_dict["outcome_type"])):
         outcome_type = design_outcomes_dict["outcome_type"][idx]
         measurement = design_outcomes_dict["measure"][idx]
+        time_frame = design_outcomes_dict["time_frame"][idx]
+        description = design_outcomes_dict["description"][idx]
         tmp_combined_pair = outcome_type + measurement
         if tmp_combined_pair in _combined_pairs:
             continue
         else:
             unique_design_outcomes["outcome_type"].append(outcome_type)
             unique_design_outcomes["measure"].append(measurement)
+            unique_design_outcomes["time_frame"].append(time_frame)
+            unique_design_outcomes["description"].append(description)
             _combined_pairs.append(tmp_combined_pair)
     return(unique_design_outcomes)
 
@@ -93,8 +102,34 @@ def extract_unique_design_outcomes(design_outcomes_dict):
 def extract_study_design_tracking_information(designs_dict):
     study_design_model_type = "intervention_model"
     if designs_dict[study_design_model_type] == None:
-        study_design_model_type = "observentional_model"
+        study_design_model_type = "observational_model"
     return(study_design_model_type)
+
+
+def combine_intervention_other_names(interventions, intervention_other_names):
+    """
+    add intervention other names information to iterventions dictionary
+    :param interventions:
+    :param intervention_other_names:
+    :return:
+    """
+    interventions["other_names"] = []
+    if intervention_other_names["id"] == []:
+        return (interventions)
+    combined_dict = {}
+    for idx, intervention_id in enumerate(intervention_other_names["intervention_id"]):
+        if intervention_id not in combined_dict.keys():
+            combined_dict[intervention_id] = [intervention_other_names["name"][idx]]
+        else:
+            combined_dict[intervention_id].append(intervention_other_names["name"][idx])
+    for idx, intervention_id in enumerate(interventions["id"]):
+        if intervention_id in combined_dict.keys():
+            interventions["other_names"].append(combined_dict[intervention_id])
+        else:
+            interventions["other_names"].append([])
+    return(interventions)
+
+
 
 
 ### no use in html

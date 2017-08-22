@@ -16,7 +16,7 @@ num_studies = 100
 command = "select nct_id, official_title from studies limit %d;" % (num_studies)
 nct_id_title_list = acl.query_postgresql(command, fetchall=True)
 nct_id = nct_id_title_list[-1][0]
-nct_id = "NCT01289561"
+nct_id = "NCT02315885"  # NCT02315885
 
 
 app = Flask(__name__)
@@ -46,6 +46,7 @@ def display_study(nct_id):
     # intervention group
     interventions = dbl.db2table_dict("interventions", nct_id, fetchall=True)
     intervention_other_names = dbl.db2table_dict("intervention_other_names", nct_id, fetchall=True)
+    interventions = dbl.combine_intervention_other_names(interventions, intervention_other_names)
     # to add intervention other names
     ###
     return(render_template("study.html", **locals()))
