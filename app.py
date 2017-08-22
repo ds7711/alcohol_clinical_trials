@@ -16,7 +16,7 @@ num_studies = 100
 command = "select nct_id, official_title from studies limit %d;" % (num_studies)
 nct_id_title_list = acl.query_postgresql(command, fetchall=True)
 nct_id = nct_id_title_list[-1][0]
-nct_id = "NCT02315885"  # NCT02315885
+nct_id = "NCT02634476"
 
 
 app = Flask(__name__)
@@ -28,27 +28,41 @@ def main():
 
 @app.route('/study_list/<string:nct_id>')
 def display_study(nct_id):
+
+    # the first part uses dbl.db2table_dict_list function whereas the 2nd part uses dbl.db2table_list_dict
     ### basic study information
-    studies = dbl.db2table_dict("studies", nct_id, fetchall=False)
+    studies = dbl.db2table_dict_list("studies", nct_id, fetchall=False)
     original_study_link = dbl.generate_study_link(nct_id, prefix=parameters.original_study_link_prefix)
 
     ### design outcome information --> Tracking Information
-    design_outcomes = dbl.db2table_dict("design_outcomes", nct_id, fetchall=True)
+    design_outcomes = dbl.db2table_dict_list("design_outcomes", nct_id, fetchall=True)
     unique_design_outcomes = dbl.extract_unique_design_outcomes(design_outcomes)
 
     ### descriptive information
-    brief_summaries = dbl.db2table_dict("brief_summaries", nct_id, fetchall=False)
-    detailed_descriptions = dbl.db2table_dict("detailed_descriptions", nct_id, fetchall=False)
-    designs = dbl.db2table_dict("designs", nct_id, fetchall=False)
+    brief_summaries = dbl.db2table_dict_list("brief_summaries", nct_id, fetchall=False)
+    detailed_descriptions = dbl.db2table_dict_list("detailed_descriptions", nct_id, fetchall=False)
+    designs = dbl.db2table_dict_list("designs", nct_id, fetchall=False)
     study_design_model_type = dbl.extract_study_design_tracking_information(designs)
     study_design_model = designs[study_design_model_type]
-    conditions = dbl.db2table_dict("conditions", nct_id, fetchall=True)
+    conditions = dbl.db2table_dict_list("conditions", nct_id, fetchall=True)
     # intervention group
-    interventions = dbl.db2table_dict("interventions", nct_id, fetchall=True)
-    intervention_other_names = dbl.db2table_dict("intervention_other_names", nct_id, fetchall=True)
+    interventions = dbl.db2table_dict_list("interventions", nct_id, fetchall=True)
+    intervention_other_names = dbl.db2table_dict_list("intervention_other_names", nct_id, fetchall=True)
     interventions = dbl.combine_intervention_other_names(interventions, intervention_other_names)
-    # to add intervention other names
-    ###
+    # the first part uses dbl.db2table_dict_list function whereas the 2nd part uses dbl.db2table_list_dict
+
+    # study arms
+    design_groups = dbl.db2table_list_dict("design_groups", nct_id, fetchall=True)
+    design_group_interventions = dbl.db2table_list_dict("design_group_interventions", nct_id, fetchall=True)
+    interventions_list_dict = dbl.db2table_list_dict("interventions", nct_id, fetchall=True)
+    design_groups_combined = dbl.combine_design_group_interventions(design_groups,
+                                                                    design_group_interventions,
+                                                                    interventions_list_dict)
+
+    # Publications
+    study_references = dbl.db2table_list_dict("study_references", nct_id, fetchall=True)
+
+    ### render the html page
     return(render_template("study.html", **locals()))
 
 

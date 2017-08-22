@@ -112,9 +112,29 @@
     </tr>
     <tr>
         <th>Study Arms</th>
+        <td>
+            <ul>
+                {% for item in design_groups_combined %}
+                    <li>
+                        <p>{{item["group_type"]}}: {{item["title"]}}</p>
+                        <p>{{item["description"]}}</p>
+                        <p> Intervention: {{item["interventions"]}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </td>
     </tr>
     <tr>
         <th>Publications*</th>
+        <td>
+            <ul>
+                {% for item in study_references %}
+                    <li>
+                        <a href="{{'https://www.ncbi.nlm.nih.gov/pubmed/' + item['pmid'] + '?dopt=Abstract'}}"> {{item["citation"]}} </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </td>
     </tr>
 
     </table>

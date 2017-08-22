@@ -1,4 +1,5 @@
 import psycopg2
+import copy
 import parameters
 import alcohol_clinicaltrials_lib as acl
 
@@ -51,7 +52,7 @@ def vstack_list(list_of_lists):
     return(stacked_list)
 
 
-def db2table_dict(table_name, nct_id, fetchall):
+def db2table_dict_list(table_name, nct_id, fetchall):
     """
     convert the returned information from database into a dictionary
     :param table_name:
@@ -71,6 +72,17 @@ def db2table_dict(table_name, nct_id, fetchall):
         if basic_info is None:
             basic_info = [[] for _ in xrange(len(col_names))]
     return(list2dict(col_names, basic_info))
+
+
+def db2table_list_dict(table_name, nct_id, fetchall):
+    command = "select * from " + table_name + " where nct_id='%s';" % (nct_id)
+    col_names = get_table_colnames(table_name)
+    basic_info = acl.query_postgresql(command, fetchall=fetchall)
+    list_dict = []
+    for item in basic_info:
+        tmp_dict = list2dict(col_names, item)
+        list_dict.append(tmp_dict)
+    return(list_dict)
 
 
 # information specific functions
@@ -130,11 +142,30 @@ def combine_intervention_other_names(interventions, intervention_other_names):
     return(interventions)
 
 
+def _get_intervention(design_group_id, design_group_interventions, interventions_list_dict):
+    intervention_id_list = []
+    for item in design_group_interventions:
+        tmp_design_group_id = item["design_group_id"]
+        if tmp_design_group_id == design_group_id:
+            intervention_id_list.append(item["intervention_id"])
+    intervention_list = []
+    for intervention in interventions_list_dict:
+        tmp_intervention_id = intervention["id"]
+        if tmp_intervention_id in intervention_id_list:
+            intervention_list.append(intervention["intervention_type"] + ": " + intervention["name"])
+    return("\n".join(intervention_list))
+    # if len(intervention_list) == 1:
+    #     return(intervention_list[0])
+    # else:
+    #     return(intervention_list)
 
 
-### no use in html
-def get_dict_data(my_dict, key):
-    if key in my_dict.keys():
-        return(my_dict[key])
-    else:
-        return(None)
+
+def combine_design_group_interventions(design_groups, design_group_interventions, interventions_list_dict):
+    design_groups_combined = copy.deepcopy(design_groups)
+    for idx in xrange(len(design_groups)):
+        design_group_id = design_groups[idx]["id"]
+        design_groups_combined[idx]["interventions"] = _get_intervention(design_group_id, design_group_interventions,
+                                                                         interventions_list_dict)
+    return(design_groups_combined)
+
