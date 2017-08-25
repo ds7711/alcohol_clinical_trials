@@ -59,6 +59,7 @@ commands = (
         why_stopped VARCHAR(200), 
         has_expanded_access_type VARCHAR(25), 
         has_expanded_access BOOLEAN,
+        first_received_results_date VARCHAR(50),
         PRIMARY KEY (nct_id)
     )
     """

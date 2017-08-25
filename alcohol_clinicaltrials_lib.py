@@ -542,7 +542,8 @@ def studies2db(study_xml, cur):
                      ["brief_title", "brief_title", False, "%s"],
                      ["why_stopped", "why_stopped", False, "%s"],
                      ["has_expanded_access_type", "has_expanded_access", False, "%s"],
-                     ["has_expanded_access", "has_expanded_access", False, "%bool"]
+                     ["has_expanded_access", "has_expanded_access", False, "%bool"],
+                     ["first_received_results_date", "firstreceived_results_date", False, "%s"]
                     ]
     col_names, data = simple_query_list(study_xml, xmldb_queries)
     query = generate_query(table_name, col_names)  # query string used by cursor object (psycopg2) to write to the database
