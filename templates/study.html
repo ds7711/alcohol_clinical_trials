@@ -201,7 +201,45 @@
     <h3 class="text-center"> Results Section <small> First received data: {{studies["first_received_results_date"]}} </small></h3>
     <h4>Participant Flow</h4>
     <div class="container">
-        <h5></h5>
+        <h5>Recruitment Details</h5>
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>Key information relevant to the recruitment process for the overall study, such as dates of the recruitment period and locations</th>
+                </tr>
+                <tr>
+                    <td>{{participant_flows["recruitment_details"]}}</td>
+                </tr>
+            </table>
+        </div>
+        <h5>Pre-Assignment Details</h5>
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>Significant events and approaches for the overall study following participant enrollment, but prior to group assignment</th>
+                </tr>
+                <tr>
+                    <td>{{participant_flows["pre_assignment_details"]}}</td>
+                </tr>
+            </table>
+        </div>
+        <h5>Reporting Groups</h5>
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>Group</th>
+                    <th>Description</th>
+                </tr>
+                {% for item in result_groups %}
+                {% if item["result_type"] == "participant_flow" %}
+                <tr>
+                    <th>{{item["title"]}}</th>
+                    <td>{{item["description"]}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
     </div>
     <h4>Baseline Characteristics</h4>
     <h4>Outcome Measures</h4>

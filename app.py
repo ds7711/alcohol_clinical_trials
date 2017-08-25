@@ -12,11 +12,16 @@ sys.setdefaultencoding('utf8')
 from flask import Flask, render_template, abort, url_for, redirect
 
 # get some basic data for display
-num_studies = 100
-command = "select nct_id, official_title from studies limit %d;" % (num_studies)
+num_studies = 1000
+command = "select nct_id, official_title, first_received_results_date from studies limit %d;" % (num_studies)
 nct_id_title_list = acl.query_postgresql(command, fetchall=True)
+tmp_nct_id_list = []
+for item in nct_id_title_list:
+    if item[2] is not None:
+        tmp_nct_id_list.append(item)
+nct_id_title_list = tmp_nct_id_list
 nct_id = nct_id_title_list[-1][0]
-nct_id = "NCT01289561"
+nct_id = "NCT00630955"
 
 
 app = Flask(__name__)
@@ -75,7 +80,8 @@ def display_study(nct_id):
         ### render the html page
         return(render_template("study.html", **locals()))
     else:
-
+        participant_flows = dbl.db2table_dict_list("participant_flows", nct_id, fetchall=False)
+        result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
         ### render the html page
         return (render_template("study.html", **locals()))
 
