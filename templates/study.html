@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
 
+
+
+<div class="container">
 <!--Title of the study-->
 <h3 class="text-center"> <a href={{original_study_link}}>  {{studies["official_title"]}} </a> </h3>
 
@@ -180,7 +183,8 @@
 
 
 <h4>Administrative Information</h4>
-<p>To be added</p>
+<p>Can be added</p>
+</div>
 
 {% endblock %}
 
@@ -196,6 +200,9 @@
 <div class="container">
     <h3 class="text-center"> Results Section <small> First received data: {{studies["first_received_results_date"]}} </small></h3>
     <h4>Participant Flow</h4>
+    <div class="container">
+        <h5></h5>
+    </div>
     <h4>Baseline Characteristics</h4>
     <h4>Outcome Measures</h4>
     <h4>Serious Adverse Events</h4>
