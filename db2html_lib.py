@@ -2,8 +2,23 @@ import psycopg2
 import copy
 import parameters
 import alcohol_clinicaltrials_lib as acl
+import pandas as pd
+import numpy as np
 
 # helper functions
+def generate_pairs(list_a, list_b):
+    pair_list_dict = {}
+    empty_list = []
+    for i, a in enumerate(list_a):
+        tmp_list = []
+        for j, b in enumerate(list_b):
+            tmp_list.append(None)
+            key = str(a) + str(b)
+            pair_list_dict[key] = [i+1, j+1]
+        empty_list.append(tmp_list)
+    return(pair_list_dict, empty_list)
+
+
 def generate_study_link(nct_id, prefix=None):
     """
     generate the link to the orignal study page on clinicaltrials.gov
@@ -85,6 +100,23 @@ def db2table_list_dict(table_name, nct_id, fetchall):
     return(list_dict)
 
 
+def list_dict2dict_list(list_dict):
+    """
+    convert list of dicts into a dictionary whose values are list
+    :param list_dict:
+    :return:
+    """
+    keys = list_dict[0].keys()
+    dict_list = {}
+    for key in keys:
+        dict_list[key] = []
+    for dict in list_dict:
+        for key in keys:
+            dict_list[key].append(dict[key])
+    return(dict_list)
+
+
+
 # information specific functions
 def extract_unique_design_outcomes(design_outcomes_dict):
     """
@@ -160,7 +192,6 @@ def _get_intervention(design_group_id, design_group_interventions, interventions
     #     return(intervention_list)
 
 
-
 def combine_design_group_interventions(design_groups, design_group_interventions, interventions_list_dict):
     design_groups_combined = copy.deepcopy(design_groups)
     for idx in xrange(len(design_groups)):
@@ -169,3 +200,32 @@ def combine_design_group_interventions(design_groups, design_group_interventions
                                                                          interventions_list_dict)
     return(design_groups_combined)
 
+
+def generate_period_table(data_df, result_groups_dict):
+    stages = np.unique(data_df["title"])
+    stages = stages[[2, 0, 1]]
+    group_ids = np.unique(data_df["result_group_id"])
+    stage_group_id_pairs, empty_list = generate_pairs(stages, group_ids)
+    data_list = []
+    for _, value in data_df.iterrows():
+        key = value.result_group_id
+        group = result_groups_dict[key]
+        index = stage_group_id_pairs[str(value.title) + str(key)]
+        empty_list[index[0]][index[1]] = value.count
+        print key, index, group
+
+
+def extract_milestone_groups(milestones, result_groups):
+    result_groups = list_dict2dict_list(result_groups)
+    result_groups_dict = list2dict(result_groups["id"], result_groups["title"])
+    milestones_df = list_dict2dict_list(milestones)
+    periods = np.unique(milestones_df["period"])
+    milestones_df = pd.DataFrame(milestones_df)
+    milestones_df = milestones_df.sort_values(by=["period", "id", "ctgov_group_code"])
+    data_list = []
+    for period in periods:
+        data_list.append(period)
+        period_df = milestones_df.loc[milestones_df.period == period][["result_group_id", "title", "count"]]
+
+        pairs =
+    pass

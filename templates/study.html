@@ -240,15 +240,98 @@
                 {% endfor %}
             </table>
         </div>
+        <h5>Participant Flow:   Overall Study</h5>
+        <p> to finish </p>
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th> </th>
+                </tr>
+            </table>
+        </div>
     </div>
     <h4>Baseline Characteristics</h4>
+    <div class="container">
+        <h5>Population Description</h5>
+        <div class="container">
+            To find an example
+        </div>
+        <h5>Reporting Groups</h5>
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>Group</th>
+                    <th>Description</th>
+                </tr>
+                {% for item in result_groups %}
+                {% if item["result_type"] == "baseline" %}
+                <tr>
+                    <th>{{item["title"]}}</th>
+                    <td>{{item["description"]}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+        <h5>Baseline Measures</h5>
+        <div class="container">
+            to be added
+        </div>
+    </div>
     <h4>Outcome Measures</h4>
+    <div class="container">
+        <h5>to be added</h5>
+    </div>
     <h4>Serious Adverse Events</h4>
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Time Frame</th>
+                <td>to be added</td>
+            </tr>
+            <tr>
+                <th>Additional Description</th>
+                <td>to be added</td>
+            </tr>
+        </table>
+        <h5>Reporting Groups</h5>
+        <div class="container">
+            <table class="container">
+                <tr>
+                    <th> </th>
+                    <th> Description </th>
+                </tr>
+                <tr>
+                    to be added
+                </tr>
+            </table>
+        </div>
+        <h5>Serious Adverse Events</h5>
+        <p>to be added</p>
+    </div>
     <h4>Other Adverse Events</h4>
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Time Frame</th>
+                <td>to be added</td>
+            </tr>
+            <tr>
+                <th>Additional Description</th>
+                <td>to be added</td>
+            </tr>
+        </table>
+        <h5>Frequency Threshold</h5>
+        Threshold above which other adverse events are reported: to be added
+        <h5>Reporting Groups</h5>
+        to be added
+        <h5>Other Adverse Events</h5>
+    </div>
     <h4>Limitations and Caveats</h4>
     <h4>More Information</h4>
 </div>
 
+<!--Display if no results are available-->
 {% else %}
     <h3 class="text-center">No study results posted.</h3>
 {% endif %}
