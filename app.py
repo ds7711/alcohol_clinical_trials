@@ -16,7 +16,7 @@ num_studies = 100
 command = "select nct_id, official_title from studies limit %d;" % (num_studies)
 nct_id_title_list = acl.query_postgresql(command, fetchall=True)
 nct_id = nct_id_title_list[-1][0]
-nct_id = "NCT02634476"
+nct_id = "NCT01289561"
 
 
 app = Flask(__name__)
@@ -65,8 +65,19 @@ def display_study(nct_id):
     # eligibilities
     eligibilities = dbl.db2table_dict_list("eligibilities", nct_id, fetchall=False)
 
-    ### render the html page
-    return(render_template("study.html", **locals()))
+    kenny = {}
+    kenny["sick"] = False
+    kenny["dead"] = False
+
+    ### display study results if available
+    if studies["first_received_results_date"] is None:
+        studies["first_received_results_date"] = False
+        ### render the html page
+        return(render_template("study.html", **locals()))
+    else:
+
+        ### render the html page
+        return (render_template("study.html", **locals()))
 
 
 if __name__ == '__main__':
