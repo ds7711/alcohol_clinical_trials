@@ -94,6 +94,8 @@ def db2table_list_dict(table_name, nct_id, fetchall):
     command = "select * from " + table_name + " where nct_id='%s';" % (nct_id)
     col_names = get_table_colnames(table_name)
     basic_info = acl.query_postgresql(command, fetchall=fetchall)
+    if not fetchall:
+        return(list2dict(col_names, basic_info))
     list_dict = []
     for item in basic_info:
         tmp_dict = list2dict(col_names, item)
@@ -244,3 +246,17 @@ def extract_milestone_groups(milestones, result_groups):
         tmp_data_list = generate_period_table(tmp_df, result_groups_dict)
         data_list.append({"period": period, "data":tmp_data_list})
     return(data_list)
+
+
+def extract_baseline_measurements(baseline_measurements):
+    bm_df = pd.DataFrame(baseline_measurements)
+    categories = np.unique(baseline_measurements["title"])
+    category_data_list = []
+    for cat in categories:
+        tmp_df = bm_df.loc[bm_df["title"]==cat]
+        group_names = list(tmp_df["classification"].values)
+        group_values = list(tmp_df["param_value"].values)
+        tmp_data = {"title": cat, "category": group_names, "value": group_values}
+        category_data_list.append(tmp_data)
+    return(category_data_list)
+

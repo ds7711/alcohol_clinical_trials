@@ -281,7 +281,36 @@
         </div>
         <h5>Baseline Measures</h5>
         <div class="container">
-            to be added
+            <table class="table table-bordered">
+                <tr>
+                    <th> </th>
+                    <th> Overall Study </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong> {{baseline_counts["scope"]}} {{baseline_counts["units"]}} Analyzed </strong></p>
+                        <p>[Units: {{baseline_counts["units"]}}]</p>
+                    </td>
+                    <td>
+                        {{baseline_counts["count"]}}
+                    </td>
+                </tr>
+            </table>
+
+            {% for category_data in baseline_measurements_group %}
+                <table class="table table-bordered">
+                    <tr>
+                        <td><p><strong>{{category_data["title"]}}</strong></p></td>
+                        <td></td>
+                    </tr>
+                    {% for value in category_data["value"] %}
+                        <tr>
+                            <td>{{category_data["category"][loop.index0]}}</td>
+                            <td>{{value}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
         </div>
     </div>
     <h4>Outcome Measures</h4>

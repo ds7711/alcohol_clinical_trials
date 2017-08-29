@@ -1354,7 +1354,7 @@ class Clinical_Results(object):
                         category_list_xml = xml_find(class_xml, "category_list", return_string=False)
                         if category_list_xml is not None:
                             for category_xml in category_list_xml.findall("./category"):
-                                category = xml_find(category_xml, "sub_title", return_string=True)
+                                category = xml_find(category_xml, "title", return_string=True)
                                 measurement_list_xml = xml_find(category_xml, "measurement_list", return_string=False)
                                 if measurement_list_xml is not None:
                                     for tmp_measurement_xml in measurement_list_xml.findall("./measurement"):
