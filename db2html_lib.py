@@ -203,6 +203,13 @@ def combine_design_group_interventions(design_groups, design_group_interventions
 
 
 def generate_period_table(data_df, result_groups_dict):
+    """
+    generate a list of empty cells based on the row and column indexes;
+    used for participant flow table.
+    :param data_df:
+    :param result_groups_dict:
+    :return:
+    """
     stages = np.unique(data_df["title"])[::-1]
     group_ids = np.unique(data_df["result_group_id"])
     group_names = [result_groups_dict[id] for id in group_ids]
@@ -220,6 +227,12 @@ def generate_period_table(data_df, result_groups_dict):
 
 
 def extract_milestone_groups(milestones, result_groups):
+    """
+    extract data to form fill in the participant flow results: how many participants started, completed, and withdrawed
+    :param milestones:
+    :param result_groups:
+    :return:
+    """
     result_groups = list_dict2dict_list(result_groups)
     result_groups_dict = list2dict(result_groups["id"], result_groups["title"])
     milestones_df = list_dict2dict_list(milestones)

@@ -29,10 +29,7 @@ nct_id = "NCT00511836"
 participant_flows = dbl.db2table_dict_list("participant_flows", nct_id, fetchall=False)
 result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
 milestones = dbl.db2table_list_dict("milestones", nct_id, fetchall=True)
-
-# to complete
 milestone_groups = dbl.extract_milestone_groups(milestones, result_groups)
-# to complete
 
 # for debugging
 
@@ -95,10 +92,13 @@ def display_study(nct_id):
         ### render the html page
         return(render_template("study.html", **locals()))
     else:
+        # participant flow section
         participant_flows = dbl.db2table_dict_list("participant_flows", nct_id, fetchall=False)
         result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
         milestones = dbl.db2table_list_dict("milestones", nct_id, fetchall=True)
         milestone_groups = dbl.extract_milestone_groups(milestones, result_groups)
+
+        # baseline
 
         ### render the html page
         return (render_template("study.html", **locals()))
