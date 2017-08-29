@@ -240,14 +240,20 @@
                 {% endfor %}
             </table>
         </div>
-        <h5>Participant Flow:   Overall Study</h5>
-        <p> to finish </p>
+        <h5>Participant Flow</h5>
         <div class="container">
-            <table class="table">
-                <tr>
-                    <th> </th>
-                </tr>
-            </table>
+            {% for period_group in milestone_groups %}
+                <strong>Period: {{period_group["period"]}}</strong>
+                <table class="table table-bordered table-sm">
+                    {% for row in period_group["data"] %}
+                    <tr>
+                        {% for cell in row %}
+                            <td> {{cell}} </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
         </div>
     </div>
     <h4>Baseline Characteristics</h4>

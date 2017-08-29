@@ -14,7 +14,8 @@ def generate_pairs(list_a, list_b):
         for j, b in enumerate(list_b):
             tmp_list.append(None)
             key = str(a) + str(b)
-            pair_list_dict[key] = [i+1, j+1]
+            # pair_list_dict[key] = [i+1, j+1]
+            pair_list_dict[key] = [i, j]
         empty_list.append(tmp_list)
     return(pair_list_dict, empty_list)
 
@@ -202,30 +203,31 @@ def combine_design_group_interventions(design_groups, design_group_interventions
 
 
 def generate_period_table(data_df, result_groups_dict):
-    stages = np.unique(data_df["title"])
-    stages = stages[[2, 0, 1]]
+    stages = np.unique(data_df["title"])[::-1]
     group_ids = np.unique(data_df["result_group_id"])
+    group_names = [result_groups_dict[id] for id in group_ids]
     stage_group_id_pairs, empty_list = generate_pairs(stages, group_ids)
-    data_list = []
     for _, value in data_df.iterrows():
         key = value.result_group_id
-        group = result_groups_dict[key]
         index = stage_group_id_pairs[str(value.title) + str(key)]
-        empty_list[index[0]][index[1]] = value.count
-        print key, index, group
+        empty_list[index[0]][index[1]] = value["count"]
+        # print key, index, group
+    data_list = [[" "] + group_names]
+    for idx in xrange(len(empty_list)):
+        tmp_row = [stages[idx]] + empty_list[idx]
+        data_list.append(tmp_row)
+    return(data_list)
 
 
 def extract_milestone_groups(milestones, result_groups):
     result_groups = list_dict2dict_list(result_groups)
     result_groups_dict = list2dict(result_groups["id"], result_groups["title"])
     milestones_df = list_dict2dict_list(milestones)
-    periods = np.unique(milestones_df["period"])
     milestones_df = pd.DataFrame(milestones_df)
-    milestones_df = milestones_df.sort_values(by=["period", "id", "ctgov_group_code"])
+    period_list = np.unique(milestones_df["period"])
     data_list = []
-    for period in periods:
-        data_list.append(period)
-        period_df = milestones_df.loc[milestones_df.period == period][["result_group_id", "title", "count"]]
-
-        pairs =
-    pass
+    for period in period_list:
+        tmp_df = milestones_df.loc[milestones_df["period"]==period]
+        tmp_data_list = generate_period_table(tmp_df, result_groups_dict)
+        data_list.append({"period": period, "data":tmp_data_list})
+    return(data_list)

@@ -21,7 +21,22 @@ for item in nct_id_title_list:
         tmp_nct_id_list.append(item)
 nct_id_title_list = tmp_nct_id_list
 nct_id = nct_id_title_list[-1][0]
+
+
+# for debugging
 nct_id = "NCT00511836"
+
+participant_flows = dbl.db2table_dict_list("participant_flows", nct_id, fetchall=False)
+result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
+milestones = dbl.db2table_list_dict("milestones", nct_id, fetchall=True)
+
+# to complete
+milestone_groups = dbl.extract_milestone_groups(milestones, result_groups)
+# to complete
+
+# for debugging
+
+
 
 
 app = Flask(__name__)
@@ -83,11 +98,7 @@ def display_study(nct_id):
         participant_flows = dbl.db2table_dict_list("participant_flows", nct_id, fetchall=False)
         result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
         milestones = dbl.db2table_list_dict("milestones", nct_id, fetchall=True)
-
-        # to complete
         milestone_groups = dbl.extract_milestone_groups(milestones, result_groups)
-        # to complete
-
 
         ### render the html page
         return (render_template("study.html", **locals()))
