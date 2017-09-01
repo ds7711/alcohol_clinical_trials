@@ -8,7 +8,7 @@ import parameters # cutomized parameters for the script, for editing
 #   b. content pages that display each study as a webpage
 #   c. extract data from XML file and fill the data into a template and display it in a webpage
 
-nct_id = "NCT00130923"
+nct_id = "NCT00630955"
 
 records = acl.query_postgresql("select * from studies where nct_id = '" + nct_id +"'", fetchall=True)
 
@@ -16,8 +16,19 @@ records = acl.query_postgresql("select * from studies where nct_id = '" + nct_id
 # e.g., select only a subset of entries from the database
 # one could use database syntax and customized python function
 
-# acl.debug_xml2db("./data/NCT02274688.xml", test_func=acl.design_outcomes2db)
 
+# 1st: create the relational database
+debug = True
+if debug:
+    try:
+        acl.delete_postgresql_db(parameters.acl_db_debug, parameters.postgresql_params)
+    except:
+        pass
+    if not parameters.db_created:  # if database doesn't exist, create the db
+        acl.create_postgresql_db(parameters.acl_db_debug, parameters.postgresql_params)
+        acl.create_tables(parameters.acl_db_debug_params, parameters.commands)
+    # acl.debug_xml2db("./data/NCT02274688.xml", test_func=acl.design_outcomes2db)
+    acl.debug_xml2db("NCT00630955_bm.xml", test_func=acl.clinical_results2db.result_outcome_main)
 
 
 
@@ -71,7 +82,7 @@ if test_xml2db:
     zip_filename = acl.download_all_studies(search_url, zip_filename=parameters.zip_filename)
 
     ### debug
-    # acl.debug_xml2db("NCT01937130_results.xml", test_func=acl.clinical_results2db.result_outcome_main)
+    acl.debug_xml2db("NCT00630955_bm.xml", test_func=acl.clinical_results2db.result_outcome_main)
     # acl.debug_xml2db("./data/NCT02274688.xml", test_func=acl.eligibilities2db)
 
     # convert .xml files into database

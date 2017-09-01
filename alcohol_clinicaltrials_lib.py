@@ -1559,7 +1559,7 @@ def individual_xml2db(study_xml, acl_db_parameters=parameters.acl_db_params):
     return(None)
 
 
-def debug_xml2db(xml_filename, test_func, acl_db_parameters=parameters.acl_db_params):
+def debug_xml2db(xml_filename, test_func, acl_db_parameters=parameters.acl_db_debug_params):
     study_xml = ET.parse(xml_filename).getroot()
     conn = None
     conn = psycopg2.connect(acl_db_parameters)

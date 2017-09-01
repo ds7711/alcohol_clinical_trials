@@ -16,12 +16,14 @@ original_study_link_prefix = "https://clinicaltrials.gov/ct2/show/record/"
 db_created = False
 postgresql_params = "dbname=postgres user=postgres host=localhost password=7711"
 acl_db_name = "acl_database"
+acl_db_debug = acl_db_name + "_debug"
 _acl_db_password = 7711
 _acl_db_username = "postgres"
 
 
 # following string is used to connect to the database
 acl_db_params = "dbname=" + acl_db_name + " " + "user=" + _acl_db_username + " " + "password=" + str(_acl_db_password)
+acl_db_debug_params = "dbname=" +acl_db_debug + " " + "user=" + _acl_db_username + " " + "password=" + str(_acl_db_password)
 # acl_db_params = "dbname=acl_database user=postgres password=7711" # parameters used to connect to the database
 
 

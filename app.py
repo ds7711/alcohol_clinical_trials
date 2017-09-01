@@ -2,6 +2,8 @@ import alcohol_clinicaltrials_lib as acl
 import webbrowser
 import db2html_lib as dbl
 import parameters
+import pandas as pd
+import numpy as np
 
 # sovle the encoding problem
 import sys
@@ -24,9 +26,15 @@ nct_id = nct_id_title_list[-1][0]
 
 
 # for debugging
-nct_id = "NCT01211769"
+nct_id = "NCT00630955"
+nct_id = "NCT00695500"
 
 baseline_measurements = dbl.db2table_dict_list("baseline_measurements", nct_id, fetchall=True)
+result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
+data = dbl.extract_baseline_measurements(baseline_measurements, result_groups)
+baseline_measurements["category"]
+baseline_measurements["classification"]
+
 # data = dbl.extract_baseline_measurements(baseline_measurements)
 # for debugging
 
@@ -79,10 +87,6 @@ def display_study(nct_id):
     # eligibilities
     eligibilities = dbl.db2table_dict_list("eligibilities", nct_id, fetchall=False)
 
-    kenny = {}
-    kenny["sick"] = False
-    kenny["dead"] = False
-
     ### display study results if available
     if studies["first_received_results_date"] is None:
         studies["first_received_results_date"] = False
@@ -102,7 +106,7 @@ def display_study(nct_id):
         baseline_measurements_group = dbl.extract_baseline_measurements(baseline_measurements, result_groups)
 
         # outcome
-        outcomes = dbl.db2table_dict_list("outcomes", nct_id, fetchall=True)
+        outcomes = dbl.db2table_list_dict("outcomes", nct_id, fetchall=True)
         outcome_counts = dbl.db2table_dict_list("outcome_counts", nct_id, fetchall=True)
         outcome_measurements = dbl.db2table_dict_list("outcome_measurements", nct_id, fetchall=True)
 

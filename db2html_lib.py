@@ -307,6 +307,21 @@ def extract_baseline_counts(baseline_counts, result_groups):
     return(category_data_list)
 
 
+def combine_category_classification(df, kws):
+    title_list = []
+    for idx in xrange(len(df)):
+        flag = True
+        for keyword in kws:
+            value = df[keyword].iloc[idx]
+            if value != None:
+                title_list.append(value)
+                flag = False
+        if flag:
+            title_list.append("Unknown_" + str(idx))
+    df["unique_category"] = title_list
+    return(df)
+
+
 def extract_baseline_measurements(baseline_measurements, result_groups):
     """
     structure baseline_measurement data for display
@@ -316,6 +331,7 @@ def extract_baseline_measurements(baseline_measurements, result_groups):
     """
     bm_df = pd.DataFrame(baseline_measurements)
     bm_df = result_group_id2name(bm_df, result_groups)
+    bm_df = combine_category_classification(bm_df, ["category", "classification"])
     categories = np.unique(baseline_measurements["title"])
     units = np.unique(baseline_measurements["units"])
     category_data_list = []
@@ -323,8 +339,8 @@ def extract_baseline_measurements(baseline_measurements, result_groups):
         for tmp_unit in units:
             logidx = np.logical_and(bm_df["title"]==cat, bm_df["units"]==tmp_unit)
             if np.any(logidx):
-                tmp_df = bm_df.loc[logidx][["classification", "param_value", "result_group_title"]]
-                tmp_df = tmp_df.pivot(index="classification", columns="result_group_title", values="param_value")
+                tmp_df = bm_df.loc[logidx][["unique_category", "param_value", "result_group_title"]]
+                tmp_df = tmp_df.pivot(index="unique_category", columns="result_group_title", values="param_value")
                 tmp_data = {"title": cat, "units": tmp_unit,
                             "data": df2list_of_lists(tmp_df)}
                 category_data_list.append(tmp_data)
