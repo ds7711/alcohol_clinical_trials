@@ -331,7 +331,13 @@
         <h5>Outcome List</h5>
         <ol>
             {% for item in outcomes %}
-                <p><strong>{{loop.index0}}. {{item["outcome_type"]}}: {{item["title"]}}</strong>   Time Frame: {{item["time_frame"]}}</p>
+                <p><strong>{{loop.index1}}. {{item["outcome_type"]}}: {{item["title"]}}</strong>   Time Frame: {{item["time_frame"]}}</p>
+                <div class="container">
+                    Description: {{item["description"]}}
+                    <strong>Measured Values</strong>
+                    <table class="table table-bordered">
+                    </table>
+                </div>
             {% endfor %}
         </ol>
     </div>

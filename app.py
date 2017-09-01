@@ -28,12 +28,12 @@ nct_id = nct_id_title_list[-1][0]
 # for debugging
 nct_id = "NCT00630955"
 nct_id = "NCT00695500"
+nct_id = "NCT01211769"
 
-baseline_measurements = dbl.db2table_dict_list("baseline_measurements", nct_id, fetchall=True)
+
 result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
-data = dbl.extract_baseline_measurements(baseline_measurements, result_groups)
-baseline_measurements["category"]
-baseline_measurements["classification"]
+outcome_measurements = dbl.db2table_dict_list("outcome_measurements", nct_id, fetchall=True)
+outcome_measurements_group = dbl.extract_outcome_measurements(outcome_measurements, result_groups)
 
 # data = dbl.extract_baseline_measurements(baseline_measurements)
 # for debugging
@@ -109,7 +109,11 @@ def display_study(nct_id):
         outcomes = dbl.db2table_list_dict("outcomes", nct_id, fetchall=True)
         outcome_counts = dbl.db2table_dict_list("outcome_counts", nct_id, fetchall=True)
         outcome_measurements = dbl.db2table_dict_list("outcome_measurements", nct_id, fetchall=True)
+        outcome_measurements_group = dbl.extract_outcome_measurements(outcome_measurements, nct_id, fetchall=True)
 
+        # to combine outcome and outcome measurements
+
+        
         # to add dropwithdraw list
 
         ### render the html page

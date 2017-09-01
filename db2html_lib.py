@@ -307,7 +307,13 @@ def extract_baseline_counts(baseline_counts, result_groups):
     return(category_data_list)
 
 
-def combine_category_classification(df, kws):
+def combine_category_classification(df, kws, new_kw="unique_category"):
+    """
+    combine several columns for a single index if one doesn't know which column has None
+    :param df:
+    :param kws:
+    :return:
+    """
     title_list = []
     for idx in xrange(len(df)):
         flag = True
@@ -318,7 +324,7 @@ def combine_category_classification(df, kws):
                 flag = False
         if flag:
             title_list.append("Unknown_" + str(idx))
-    df["unique_category"] = title_list
+    df[new_kw] = title_list
     return(df)
 
 
@@ -345,6 +351,47 @@ def extract_baseline_measurements(baseline_measurements, result_groups):
                             "data": df2list_of_lists(tmp_df)}
                 category_data_list.append(tmp_data)
     return(category_data_list)
+
+
+def combine_value_dispersion(df, value_kw="param_value", dispersion_kw="dispersion_value", new_kw="value_dispsersion"):
+    value_dispersion_list = []
+    for idx in xrange(len(df)):
+        value = df[value_kw].iloc[idx]
+        dispersion = df[dispersion_kw].iloc[idx]
+        vd = str(value) + " (" + str(dispersion) + ")"
+        value_dispersion_list.append(vd)
+    df[new_kw] = value_dispersion_list
+    return(df)
+
+
+def extract_outcome_measurements(outcome_measurements, result_groups):
+    om_df = pd.DataFrame(outcome_measurements)
+    om_df = result_group_id2name(om_df, result_groups)
+    om_df = combine_category_classification(om_df, ["classification", "category"])
+    categories = np.unique(om_df["title"])
+    outcome_ids = np.unique(outcome_measurements["outcome_id"])
+    units = np.unique(om_df["units"])
+    data_list = []
+    for id in outcome_ids:
+        # category_data_list = []
+        category_df = om_df.loc[om_df["outcome_id"]==id]
+        for cat in categories:
+            for tmp_unit in units:
+                logidx = np.logical_and(category_df["title"]==cat, category_df["units"]==tmp_unit)
+                if np.any(logidx):
+                    tmp_df = category_df.loc[logidx]
+                    tmp_df = combine_value_dispersion(tmp_df)
+                    param_type = tmp_df["param_type"].values[0]
+                    dispersion_type = tmp_df["dispersion_type"].values[0]
+                    tmp_value_df = tmp_df[["unique_category", "value_dispsersion", "result_group_title"]]
+                    tmp_value_df = tmp_value_df.pivot(index="unique_category", columns="result_group_title",
+                                                      values="value_dispsersion")
+                    tmp_data = {"units": tmp_unit, "param_type": param_type, "dispersion_type": dispersion_type,
+                                "value": df2list_of_lists(tmp_value_df)}
+                    # category_data_list.append(tmp_data)
+                    data_list.append(tmp_data)
+        # data_list.append(category_data_list)
+    return(data_list)
 
 
 
