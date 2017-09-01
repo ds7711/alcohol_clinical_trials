@@ -7,6 +7,12 @@ import numpy as np
 
 # helper functions
 def generate_pairs(list_a, list_b):
+    """
+    generate pairs to create a list of lists
+    :param list_a:
+    :param list_b:
+    :return:
+    """
     pair_list_dict = {}
     empty_list = []
     for i, a in enumerate(list_a):
@@ -18,6 +24,21 @@ def generate_pairs(list_a, list_b):
             pair_list_dict[key] = [i, j]
         empty_list.append(tmp_list)
     return(pair_list_dict, empty_list)
+
+
+def df2list_of_lists(data_frame):
+    """
+    convert a dataframe with column and row headers (index) to a list of lists for display
+    :param data_frame:
+    :return:
+    """
+    first_row = [""] + list(data_frame.columns.values)
+    row_headers = list(data_frame.index.values)
+    data = data_frame.values
+    list_of_lists = [first_row]
+    for idx in xrange(len(row_headers)):
+        list_of_lists.append([row_headers[idx]] + list(data[idx]))
+    return(list_of_lists)
 
 
 def generate_study_link(nct_id, prefix=None):
@@ -248,15 +269,34 @@ def extract_milestone_groups(milestones, result_groups):
     return(data_list)
 
 
-def extract_baseline_measurements(baseline_measurements):
+def result_group_id2name(df_with_result_group_id, result_groups):
+    dict = {}
+    for item in result_groups:
+        key = item["id"]
+        value = item["title"]
+        dict[key] = value
+    result_group_titles = []
+    for id in df_with_result_group_id["result_group_id"].values:
+        tmp_title = dict[id]
+        result_group_titles.append(tmp_title)
+    df_with_result_group_id["result_group_title"] = result_group_titles
+    return(df_with_result_group_id)
+
+
+def extract_baseline_measurements(baseline_measurements, result_groups):
     bm_df = pd.DataFrame(baseline_measurements)
+    bm_df = result_group_id2name(bm_df, result_groups)
     categories = np.unique(baseline_measurements["title"])
+    units = np.unique(baseline_measurements["units"])
     category_data_list = []
     for cat in categories:
-        tmp_df = bm_df.loc[bm_df["title"]==cat]
-        group_names = list(tmp_df["classification"].values)
-        group_values = list(tmp_df["param_value"].values)
-        tmp_data = {"title": cat, "category": group_names, "value": group_values}
-        category_data_list.append(tmp_data)
+        for tmp_unit in units:
+            logidx = np.logical_and(bm_df["title"]==cat, bm_df["units"]==tmp_unit)
+            if np.any(logidx):
+                tmp_df = bm_df.loc[logidx][["classification", "param_value", "result_group_title"]]
+                tmp_df = tmp_df.pivot(index="classification", columns="result_group_title", values="param_value")
+                tmp_data = {"title": cat, "units": tmp_unit,
+                            "data": df2list_of_lists(tmp_df)}
+                category_data_list.append(tmp_data)
     return(category_data_list)
 

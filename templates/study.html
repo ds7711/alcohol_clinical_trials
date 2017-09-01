@@ -264,7 +264,7 @@
         </div>
         <h5>Reporting Groups</h5>
         <div class="container">
-            <table class="table">
+            <table class="table table-bordered">
                 <tr>
                     <th>Group</th>
                     <th>Description</th>
@@ -299,14 +299,12 @@
 
             {% for category_data in baseline_measurements_group %}
                 <table class="table table-bordered">
-                    <tr>
-                        <td><p><strong>{{category_data["title"]}}</strong></p></td>
-                        <td></td>
-                    </tr>
-                    {% for value in category_data["value"] %}
+                    <p><strong>{{category_data["title"]}}</strong>, Units: {{category_data["units"]}} </p>
+                    {% for row in category_data["data"] %}
                         <tr>
-                            <td>{{category_data["category"][loop.index0]}}</td>
-                            <td>{{value}}</td>
+                            {% for item in row %}
+                                <td>{{item}}</td>
+                            {% endfor %}
                         </tr>
                     {% endfor %}
                 </table>

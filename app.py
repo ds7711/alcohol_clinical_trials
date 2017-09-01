@@ -27,7 +27,7 @@ nct_id = nct_id_title_list[-1][0]
 nct_id = "NCT01211769"
 
 baseline_measurements = dbl.db2table_dict_list("baseline_measurements", nct_id, fetchall=True)
-data = dbl.extract_baseline_measurements(baseline_measurements)
+# data = dbl.extract_baseline_measurements(baseline_measurements)
 # for debugging
 
 
@@ -100,7 +100,7 @@ def display_study(nct_id):
 
         # to add baseline measurements
         baseline_measurements = dbl.db2table_dict_list("baseline_measurements", nct_id, fetchall=True)
-        baseline_measurements_group = dbl.extract_baseline_measurements(baseline_measurements)
+        baseline_measurements_group = dbl.extract_baseline_measurements(baseline_measurements, result_groups)
 
         # to add dropwithdraw list
 
