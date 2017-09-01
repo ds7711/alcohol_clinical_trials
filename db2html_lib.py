@@ -270,6 +270,12 @@ def extract_milestone_groups(milestones, result_groups):
 
 
 def result_group_id2name(df_with_result_group_id, result_groups):
+    """
+    add result group name to the first dataframe
+    :param df_with_result_group_id:
+    :param result_groups:
+    :return:
+    """
     dict = {}
     for item in result_groups:
         key = item["id"]
@@ -283,7 +289,31 @@ def result_group_id2name(df_with_result_group_id, result_groups):
     return(df_with_result_group_id)
 
 
+def extract_baseline_counts(baseline_counts, result_groups):
+    bm_df = pd.DataFrame(baseline_counts)
+    bm_df = result_group_id2name(bm_df, result_groups)
+    categories = np.unique(bm_df["scope"])
+    units = np.unique(bm_df["units"])
+    category_data_list = []
+    for cat in categories:
+        for tmp_unit in units:
+            logidx = np.logical_and(bm_df["scope"]==cat, bm_df["units"]==tmp_unit)
+            if np.any(logidx):
+                tmp_df = bm_df.loc[logidx][["scope", "count", "result_group_title"]]
+                tmp_df = tmp_df.pivot(index="scope", columns="result_group_title", values="count")
+                tmp_data = {"title": cat, "units": tmp_unit,
+                            "data": df2list_of_lists(tmp_df)}
+                category_data_list.append(tmp_data)
+    return(category_data_list)
+
+
 def extract_baseline_measurements(baseline_measurements, result_groups):
+    """
+    structure baseline_measurement data for display
+    :param baseline_measurements:
+    :param result_groups:
+    :return:
+    """
     bm_df = pd.DataFrame(baseline_measurements)
     bm_df = result_group_id2name(bm_df, result_groups)
     categories = np.unique(baseline_measurements["title"])
@@ -299,4 +329,6 @@ def extract_baseline_measurements(baseline_measurements, result_groups):
                             "data": df2list_of_lists(tmp_df)}
                 category_data_list.append(tmp_data)
     return(category_data_list)
+
+
 

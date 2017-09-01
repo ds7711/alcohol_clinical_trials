@@ -96,11 +96,15 @@ def display_study(nct_id):
         milestone_groups = dbl.extract_milestone_groups(milestones, result_groups)
 
         # baseline
-        baseline_counts = dbl.db2table_list_dict("baseline_counts", nct_id, fetchall=False)
-
-        # to add baseline measurements
+        baseline_counts = dbl.db2table_dict_list("baseline_counts", nct_id, fetchall=True)
+        baseline_counts_group = dbl.extract_baseline_counts(baseline_counts, result_groups)
         baseline_measurements = dbl.db2table_dict_list("baseline_measurements", nct_id, fetchall=True)
         baseline_measurements_group = dbl.extract_baseline_measurements(baseline_measurements, result_groups)
+
+        # outcome
+        outcomes = dbl.db2table_dict_list("outcomes", nct_id, fetchall=True)
+        outcome_counts = dbl.db2table_dict_list("outcome_counts", nct_id, fetchall=True)
+        outcome_measurements = dbl.db2table_dict_list("outcome_measurements", nct_id, fetchall=True)
 
         # to add dropwithdraw list
 

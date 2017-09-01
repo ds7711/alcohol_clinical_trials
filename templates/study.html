@@ -281,21 +281,18 @@
         </div>
         <h5>Baseline Measures</h5>
         <div class="container">
-            <table class="table table-bordered">
-                <tr>
-                    <th> </th>
-                    <th> Overall Study </th>
-                </tr>
-                <tr>
-                    <td>
-                        <p><strong> {{baseline_counts["scope"]}} {{baseline_counts["units"]}} Analyzed </strong></p>
-                        <p>[Units: {{baseline_counts["units"]}}]</p>
-                    </td>
-                    <td>
-                        {{baseline_counts["count"]}}
-                    </td>
-                </tr>
-            </table>
+            {% for category_data in baseline_counts_group %}
+                <table class="table table-bordered">
+                    <p><strong>{{category_data["title"]}}</strong>, Units: {{category_data["units"]}} </p>
+                    {% for row in category_data["data"] %}
+                        <tr>
+                            {% for item in row %}
+                                <td>{{item}}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
 
             {% for category_data in baseline_measurements_group %}
                 <table class="table table-bordered">
@@ -313,6 +310,23 @@
     </div>
     <h4>Outcome Measures</h4>
     <div class="container">
+        <h5>Reporting Groups</h5>
+        <div class="container">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Group</th>
+                    <th>Description</th>
+                </tr>
+                {% for item in result_groups %}
+                {% if item["result_type"] == "outcome" %}
+                <tr>
+                    <th>{{item["title"]}}</th>
+                    <td>{{item["description"]}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
         <h5>to be added</h5>
     </div>
     <h4>Serious Adverse Events</h4>
