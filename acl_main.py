@@ -82,7 +82,7 @@ if test_xml2db:
     zip_filename = acl.download_all_studies(search_url, zip_filename=parameters.zip_filename)
 
     ### debug
-    acl.debug_xml2db("NCT00630955_bm.xml", test_func=acl.clinical_results2db.result_outcome_main)
+    # acl.debug_xml2db("NCT00630955_bm.xml", test_func=acl.clinical_results2db.result_outcome_main)
     # acl.debug_xml2db("./data/NCT02274688.xml", test_func=acl.eligibilities2db)
 
     # convert .xml files into database

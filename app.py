@@ -29,11 +29,16 @@ nct_id = nct_id_title_list[-1][0]
 nct_id = "NCT00630955"
 nct_id = "NCT00695500"
 nct_id = "NCT01211769"
-
+nct_id = "NCT00695500"
 
 result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
+outcomes = dbl.db2table_list_dict("outcomes", nct_id, fetchall=True)
+outcome_counts = dbl.db2table_dict_list("outcome_counts", nct_id, fetchall=True)
+outcome_counts_group = dbl.extract_outcome_counts(outcome_counts, result_groups)
+
 outcome_measurements = dbl.db2table_dict_list("outcome_measurements", nct_id, fetchall=True)
 outcome_measurements_group = dbl.extract_outcome_measurements(outcome_measurements, result_groups)
+outcome_combined = dbl.combine_outcome_data(outcomes, outcome_measurements_group)
 
 # data = dbl.extract_baseline_measurements(baseline_measurements)
 # for debugging
@@ -108,8 +113,15 @@ def display_study(nct_id):
         # outcome
         outcomes = dbl.db2table_list_dict("outcomes", nct_id, fetchall=True)
         outcome_counts = dbl.db2table_dict_list("outcome_counts", nct_id, fetchall=True)
+
+
+
+        # to complete: extract outcome counts
+
+        outcome_counts_group = dbl.extract_outcome_counts(outcome_counts, result_groups)
         outcome_measurements = dbl.db2table_dict_list("outcome_measurements", nct_id, fetchall=True)
-        outcome_measurements_group = dbl.extract_outcome_measurements(outcome_measurements, nct_id, fetchall=True)
+        outcome_measurements_group = dbl.extract_outcome_measurements(outcome_measurements, result_groups)
+        outcome_combined = dbl.combine_outcome_data(outcomes, outcome_measurements_group)
 
         # to combine outcome and outcome measurements
 

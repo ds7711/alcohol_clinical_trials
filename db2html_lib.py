@@ -323,7 +323,11 @@ def combine_category_classification(df, kws, new_kw="unique_category"):
                 title_list.append(value)
                 flag = False
         if flag:
-            title_list.append("Unknown_" + str(idx))
+            title =df["title"].iloc[idx]
+            if title is None:
+                title_list.append("Unknown_" + str(idx))
+            else:
+                title_list.append(title)
     df[new_kw] = title_list
     return(df)
 
@@ -351,6 +355,22 @@ def extract_baseline_measurements(baseline_measurements, result_groups):
                             "data": df2list_of_lists(tmp_df)}
                 category_data_list.append(tmp_data)
     return(category_data_list)
+
+
+def extract_outcome_counts(outcome_counts, result_groups):
+    om_df = pd.DataFrame(outcome_counts)
+    om_df = result_group_id2name(om_df, result_groups)
+    # om_df = combine_category_classification(om_df, ["classification", "category"])
+    unit = om_df.units.values[0]
+
+    data_df = om_df[["result_group_title", "outcome_id", "count"]]
+    data_df = data_df.pivot(index="outcome_id", columns="result_group_title", values="count")
+    categories = np.unique(om_df["title"])
+    outcome_ids = np.unique(outcome_counts["outcome_id"])
+    units = np.unique(om_df["units"])
+    ### to continuous
+    data = {"units": unit, "value": df2list_of_lists(data_df)}
+    return(data)
 
 
 def combine_value_dispersion(df, value_kw="param_value", dispersion_kw="dispersion_value", new_kw="value_dispsersion"):
@@ -392,6 +412,16 @@ def extract_outcome_measurements(outcome_measurements, result_groups):
                     data_list.append(tmp_data)
         # data_list.append(category_data_list)
     return(data_list)
+
+
+
+def combine_outcome_data(outcomes, outcome_measurements_group):
+    num_items = min([len(outcomes), len(outcome_measurements_group)])
+    combined_list = []
+    for idx in xrange(num_items):
+        tmp_dict = {"outcome": outcomes[idx], "outcome_measurements_group": outcome_measurements_group[idx]}
+        combined_list.append(tmp_dict)
+    return(combined_list)
 
 
 

@@ -330,16 +330,37 @@
         </div>
         <h5>Outcome List</h5>
         <ol>
-            {% for item in outcomes %}
-                <p><strong>{{loop.index1}}. {{item["outcome_type"]}}: {{item["title"]}}</strong>   Time Frame: {{item["time_frame"]}}</p>
+            {% for item in outcome_combined %}
+                <p><strong>{{loop.index1}}. {{item["outcome"]["outcome_type"]}}: {{item["outcome"]["title"]}}</strong>   Time Frame: {{item["outcome"]["time_frame"]}}</p>
                 <div class="container">
-                    Description: {{item["description"]}}
-                    <strong>Measured Values</strong>
+                    Description: {{item["outcome"]["description"]}}
+                    <p></p>
+                    <p><strong>Measured Values: </strong></p>
                     <table class="table table-bordered">
+                        {% for subitem in item["outcome_measurements_group"]["value"] %}
+                            <tr>
+                                {% for subsubitem in subitem %}
+                                    <td>
+                                        {{subsubitem}}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
                     </table>
                 </div>
             {% endfor %}
         </ol>
+        <!--<ol>-->
+            <!--{% for item in outcomes %}-->
+                <!--<p><strong>{{loop.index1}}. {{item["outcome_type"]}}: {{item["title"]}}</strong>   Time Frame: {{item["time_frame"]}}</p>-->
+                <!--<div class="container">-->
+                    <!--Description: {{item["description"]}}-->
+                    <!--<strong>Measured Values</strong>-->
+                    <!--<table class="table table-bordered">-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--{% endfor %}-->
+        <!--</ol>-->
     </div>
     <h4>Serious Adverse Events</h4>
     <div class="container">
