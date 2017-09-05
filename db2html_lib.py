@@ -365,11 +365,9 @@ def extract_outcome_counts(outcome_counts, result_groups):
 
     data_df = om_df[["result_group_title", "outcome_id", "count"]]
     data_df = data_df.pivot(index="outcome_id", columns="result_group_title", values="count")
-    categories = np.unique(om_df["title"])
-    outcome_ids = np.unique(outcome_counts["outcome_id"])
     units = np.unique(om_df["units"])
     ### to continuous
-    data = {"units": unit, "value": df2list_of_lists(data_df)}
+    data = {"units": unit, "value": data_df}
     return(data)
 
 
@@ -415,11 +413,18 @@ def extract_outcome_measurements(outcome_measurements, result_groups):
 
 
 
-def combine_outcome_data(outcomes, outcome_measurements_group):
+def combine_outcome_data(outcomes, outcome_counts_group, outcome_measurements_group):
     num_items = min([len(outcomes), len(outcome_measurements_group)])
+    outcome_counts_unit = outcome_counts_group["units"]
     combined_list = []
     for idx in xrange(num_items):
-        tmp_dict = {"outcome": outcomes[idx], "outcome_measurements_group": outcome_measurements_group[idx]}
+        tmp_outcome = outcomes[idx]
+        tmp_omg = outcome_measurements_group[idx]
+        tmp_outcome_id = tmp_outcome["id"]
+        tmp_df = outcome_counts_group["value"].loc[outcome_counts_group["value"].index.values == tmp_outcome_id]
+        outcome_counts_list = df2list_of_lists(tmp_df)
+        tmp_outcome_counts = {"units": outcome_counts_unit, "value": outcome_counts_list}
+        tmp_dict = {"outcome": tmp_outcome, "outcome_measurements_group": tmp_omg, "outcome_counts_group": tmp_outcome_counts}
         combined_list.append(tmp_dict)
     return(combined_list)
 

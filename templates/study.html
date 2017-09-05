@@ -329,12 +329,26 @@
             </table>
         </div>
         <h5>Outcome List</h5>
-        <ol>
+        <ul>
             {% for item in outcome_combined %}
-                <p><strong>{{loop.index1}}. {{item["outcome"]["outcome_type"]}}: {{item["outcome"]["title"]}}</strong>   Time Frame: {{item["outcome"]["time_frame"]}}</p>
+                <strong> {{item["outcome"]["outcome_type"]}}: {{item["outcome"]["title"]}}</strong>.
+                <p>[Time Frame: {{item["outcome"]["time_frame"]}}]</p>
                 <div class="container">
                     Description: {{item["outcome"]["description"]}}
                     <p></p>
+
+                    <strong>{{item["outcome_counts_group"]["units"]}} Analyazed: </strong>
+                    <div class="container">
+                        <table class="table table-bordered">
+                            {% for subitem in item["outcome_counts_group"]["value"] %}
+                            <tr>
+                                {% for subsubitem in subitem %}
+                                    <td>{{subsubitem}}</td>
+                                {% endfor %}
+                            {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
                     <p><strong>Measured Values: </strong></p>
                     <table class="table table-bordered">
                         {% for subitem in item["outcome_measurements_group"]["value"] %}
@@ -349,7 +363,7 @@
                     </table>
                 </div>
             {% endfor %}
-        </ol>
+        </ul>
         <!--<ol>-->
             <!--{% for item in outcomes %}-->
                 <!--<p><strong>{{loop.index1}}. {{item["outcome_type"]}}: {{item["title"]}}</strong>   Time Frame: {{item["time_frame"]}}</p>-->
