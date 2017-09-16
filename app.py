@@ -2,8 +2,6 @@ import alcohol_clinicaltrials_lib as acl
 import webbrowser
 import db2html_lib as dbl
 import parameters
-import pandas as pd
-import numpy as np
 
 # sovle the encoding problem
 import sys
@@ -13,7 +11,10 @@ sys.setdefaultencoding('utf8')
 # 4th: use FLASK for display
 from flask import Flask, render_template, abort, url_for, redirect
 
-# get some basic data for display
+
+
+############### filtering criterion goes here #############################
+# subset studies, can use Python function or SQL commands
 num_studies = 1000
 command = "select nct_id, official_title, first_received_results_date from studies limit %d;" % (num_studies)
 nct_id_title_list = acl.query_postgresql(command, fetchall=True)
@@ -24,20 +25,7 @@ for item in nct_id_title_list:
 nct_id_title_list = tmp_nct_id_list
 nct_id = nct_id_title_list[-1][0]
 
-
-# for debugging
-nct_id = "NCT00630955"
-nct_id = "NCT00695500"
-nct_id = "NCT01211769"
-nct_id = "NCT00695500"
-
-result_groups = dbl.db2table_list_dict("result_groups", nct_id, fetchall=True)
-
-
-# data = dbl.extract_baseline_measurements(baseline_measurements)
-# for debugging
-
-
+############### filtering criterion goes here #############################
 
 
 app = Flask(__name__)
@@ -127,6 +115,5 @@ if __name__ == '__main__':
     url = "http://127.0.0.1:5000/study_list/"
     webbrowser.open_new(url)
     app.run()
-
 
 

@@ -6,7 +6,10 @@ suffix = str(current_time)[:-16] + "-" + str(current_time)[-15:-13]
 log_filename = "xml2db_log_" + suffix + ".txt"
 
 # parameters for downloading .xml data from clinicaltrials.org
-search_url = "https://clinicaltrials.gov/ct2/results?term=college&cond=Alcoholic+OR+alcoholism+OR+alcohol&cntry1=NA%3AUS&age_v=&gndr=&type=&rslt=With&Search=Apply"
+search_url = """
+https://clinicaltrials.gov/ct2/results?term=alcohol&age_v=&age=1&gndr=&type=&rslt=&Search=Apply
+"""
+
 zip_download_affix = "https://clinicaltrials.gov/ct2/download_studies?"
 search_url_separating_kw = "results"
 zip_filename = "acl_results.zip"
@@ -24,7 +27,6 @@ _acl_db_username = "postgres"
 # following string is used to connect to the database
 acl_db_params = "dbname=" + acl_db_name + " " + "user=" + _acl_db_username + " " + "password=" + str(_acl_db_password)
 acl_db_debug_params = "dbname=" +acl_db_debug + " " + "user=" + _acl_db_username + " " + "password=" + str(_acl_db_password)
-# acl_db_params = "dbname=acl_database user=postgres password=7711" # parameters used to connect to the database
 
 
 
